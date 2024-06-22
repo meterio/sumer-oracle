@@ -95,20 +95,6 @@ const config: HardhatUserConfig = {
       chainId: 31337,
       live: false,
     },
-    bsctestnet: {
-      url: process.env.ARCHIVE_NODE_bsctestnet || "https://data-seed-prebsc-1-s1.binance.org:8545",
-      chainId: 97,
-      live: true,
-      gasPrice: 20000000000,
-      accounts: process.env.DEPLOYER_PRIVATE_KEY ? [`0x${process.env.DEPLOYER_PRIVATE_KEY}`] : [],
-    },
-    // Mainnet deployments are done through Frame wallet RPC
-    bscmainnet: {
-      url: process.env.ARCHIVE_NODE_bscmainnet || "https://bsc-dataseed.binance.org/",
-      chainId: 56,
-      live: true,
-      timeout: 1200000, // 20 minutes
-    },
     sepolia: {
       url: process.env.ARCHIVE_NODE_sepolia || "https://ethereum-sepolia.blockpi.network/v1/rpc/public",
       chainId: 11155111,
@@ -121,26 +107,8 @@ const config: HardhatUserConfig = {
       live: true,
       accounts: process.env.DEPLOYER_PRIVATE_KEY ? [`0x${process.env.DEPLOYER_PRIVATE_KEY}`] : [],
     },
-    opbnbtestnet: {
-      url: process.env.ARCHIVE_NODE_opbnbtestnet || "https://opbnb-testnet-rpc.bnbchain.org",
-      chainId: 5611,
-      live: true,
-      accounts: process.env.DEPLOYER_PRIVATE_KEY ? [`0x${process.env.DEPLOYER_PRIVATE_KEY}`] : [],
-    },
-    opbnbmainnet: {
-      url: process.env.ARCHIVE_NODE_opbnbmainnet || "https://opbnb-mainnet-rpc.bnbchain.org",
-      chainId: 204,
-      live: true,
-      accounts: process.env.DEPLOYER_PRIVATE_KEY ? [`0x${process.env.DEPLOYER_PRIVATE_KEY}`] : [],
-    },
-    arbitrumsepolia: {
-      url: process.env.ARCHIVE_NODE_arbitrumsepolia || "https://sepolia-rollup.arbitrum.io/rpc",
-      chainId: 421614,
-      live: true,
-      accounts: process.env.DEPLOYER_PRIVATE_KEY ? [`0x${process.env.DEPLOYER_PRIVATE_KEY}`] : [],
-    },
-    arbitrumone: {
-      url: process.env.ARCHIVE_NODE_arbitrumone || "https://arb1.arbitrum.io/rpc",
+    arbitrum: {
+      url: process.env.ARCHIVE_NODE_arbitrum || "https://arb1.arbitrum.io/rpc",
       chainId: 42161,
       live: true,
       accounts: process.env.DEPLOYER_PRIVATE_KEY ? [`0x${process.env.DEPLOYER_PRIVATE_KEY}`] : [],
@@ -152,32 +120,11 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
-      bscmainnet: process.env.ETHERSCAN_API_KEY || "ETHERSCAN_API_KEY",
-      bsctestnet: process.env.ETHERSCAN_API_KEY || "ETHERSCAN_API_KEY",
       sepolia: process.env.ETHERSCAN_API_KEY || "ETHERSCAN_API_KEY",
       ethereum: process.env.ETHERSCAN_API_KEY || "ETHERSCAN_API_KEY",
-      opbnbtestnet: process.env.ETHERSCAN_API_KEY || "ETHERSCAN_API_KEY",
-      opbnbmainnet: process.env.ETHERSCAN_API_KEY || "ETHERSCAN_API_KEY",
-      arbitrumsepolia: process.env.ETHERSCAN_API_KEY || "ETHERSCAN_API_KEY",
-      arbitrumone: process.env.ETHERSCAN_API_KEY || "ETHERSCAN_API_KEY",
+      arbitrum: process.env.ARBISCAN_API_KEY || "ARBISCAN_API_KEY",
     },
     customChains: [
-      {
-        network: "bscmainnet",
-        chainId: 56,
-        urls: {
-          apiURL: "https://api.bscscan.com/api",
-          browserURL: "https://bscscan.com",
-        },
-      },
-      {
-        network: "bsctestnet",
-        chainId: 97,
-        urls: {
-          apiURL: "https://api-testnet.bscscan.com/api",
-          browserURL: "https://testnet.bscscan.com",
-        },
-      },
       {
         network: "sepolia",
         chainId: 11155111,
@@ -195,31 +142,7 @@ const config: HardhatUserConfig = {
         },
       },
       {
-        network: "opbnbtestnet",
-        chainId: 5611,
-        urls: {
-          apiURL: `https://open-platform.nodereal.io/${process.env.ETHERSCAN_API_KEY}/op-bnb-testnet/contract/`,
-          browserURL: "https://testnet.opbnbscan.com/",
-        },
-      },
-      {
-        network: "opbnbmainnet",
-        chainId: 204,
-        urls: {
-          apiURL: `https://open-platform.nodereal.io/${process.env.ETHERSCAN_API_KEY}/op-bnb-mainnet/contract/`,
-          browserURL: "https://opbnbscan.com/",
-        },
-      },
-      {
-        network: "arbitrumsepolia",
-        chainId: 421614,
-        urls: {
-          apiURL: `https://api-sepolia.arbiscan.io/api`,
-          browserURL: "https://sepolia.arbiscan.io/",
-        },
-      },
-      {
-        network: "arbitrumone",
+        network: "arbitrum",
         chainId: 42161,
         urls: {
           apiURL: `https://api.arbiscan.io/api/`,

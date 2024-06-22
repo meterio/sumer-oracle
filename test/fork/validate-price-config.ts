@@ -3,8 +3,6 @@ import type { SignerWithAddress } from "@nomiclabs/hardhat-ethers/dist/src/signe
 import { Contract } from "ethers";
 import { ethers } from "hardhat";
 
-import { contracts as bscmainnet } from "../../deployments/bscmainnet.json";
-import { contracts as bsctestnet } from "../../deployments/bsctestnet.json";
 import { contracts as sepolia } from "../../deployments/sepolia.json";
 import { assets } from "../../helpers/deploymentConfig";
 import { forking } from "./utils";
@@ -15,9 +13,7 @@ const FORK: boolean = process.env.FORK === "true";
 const FORKED_NETWORK: string = process.env.FORKED_NETWORK || "";
 
 const oracleAddress = {
-  bsctestnet: bsctestnet.ResilientOracle.address,
   sepolia: sepolia.ResilientOracle.address,
-  bscmainnet: bscmainnet.ResilientOracle.address,
 };
 
 type FakeVtokenInfo = {
@@ -36,8 +32,6 @@ type BlockConfig = {
 };
 
 const blockNumberPerNetwork: BlockConfig = {
-  bscmainnet: 27541139,
-  bsctestnet: 29044518,
   sepolia: 4744320,
 };
 

@@ -2,8 +2,371 @@
   "name": "sepolia",
   "chainId": "11155111",
   "contracts": {
+    "AccessControlManager": {
+      "address": "0xbcbda48712A075fa7B50b4B6f8C42D40D4505F8B",
+      "abi": [
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "contractAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "functionSig",
+              "type": "string"
+            }
+          ],
+          "name": "PermissionGranted",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "contractAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "functionSig",
+              "type": "string"
+            }
+          ],
+          "name": "PermissionRevoked",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "role",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "previousAdminRole",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "newAdminRole",
+              "type": "bytes32"
+            }
+          ],
+          "name": "RoleAdminChanged",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "role",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "sender",
+              "type": "address"
+            }
+          ],
+          "name": "RoleGranted",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "role",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "sender",
+              "type": "address"
+            }
+          ],
+          "name": "RoleRevoked",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "DEFAULT_ADMIN_ROLE",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "role",
+              "type": "bytes32"
+            }
+          ],
+          "name": "getRoleAdmin",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "contractAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "functionSig",
+              "type": "string"
+            },
+            {
+              "internalType": "address",
+              "name": "accountToPermit",
+              "type": "address"
+            }
+          ],
+          "name": "giveCallPermission",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "role",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "grantRole",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "contractAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "functionSig",
+              "type": "string"
+            }
+          ],
+          "name": "hasPermission",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "role",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "hasRole",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "functionSig",
+              "type": "string"
+            }
+          ],
+          "name": "isAllowedToCall",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "role",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "renounceRole",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "contractAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "functionSig",
+              "type": "string"
+            },
+            {
+              "internalType": "address",
+              "name": "accountToRevoke",
+              "type": "address"
+            }
+          ],
+          "name": "revokeCallPermission",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "role",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "revokeRole",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes4",
+              "name": "interfaceId",
+              "type": "bytes4"
+            }
+          ],
+          "name": "supportsInterface",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
     "BoundValidator": {
-      "address": "0x60c4Aa92eEb6884a76b309Dd8B3731ad514d6f9B",
+      "address": "0xbE531fF6891280deA898f8C94449492BDCF7DAe3",
       "abi": [
         {
           "anonymous": false,
@@ -465,7 +828,7 @@
       ]
     },
     "BoundValidator_Implementation": {
-      "address": "0xcc633492097078Ae590C0d11924e82A23f3Ab3E2",
+      "address": "0x9F0EB399982117D09cb704770c40aEeB7005647F",
       "abi": [
         {
           "inputs": [],
@@ -801,7 +1164,7 @@
       ]
     },
     "BoundValidator_Proxy": {
-      "address": "0x60c4Aa92eEb6884a76b309Dd8B3731ad514d6f9B",
+      "address": "0xbE531fF6891280deA898f8C94449492BDCF7DAe3",
       "abi": [
         {
           "inputs": [
@@ -937,7 +1300,7 @@
       ]
     },
     "ChainlinkOracle": {
-      "address": "0x102F0b714E5d321187A4b6E5993358448f7261cE",
+      "address": "0x3704D4D0EB8fF916e411d2fE602A8cA82786d6f2",
       "abi": [
         {
           "anonymous": false,
@@ -1464,7 +1827,7 @@
       ]
     },
     "ChainlinkOracle_Implementation": {
-      "address": "0x034Cc5097379B13d3Ed5F6c85c8FAf20F48aE480",
+      "address": "0x747E6d9cB23c7E4a5e4fC403ddAF6d223B9C76Eb",
       "abi": [
         {
           "inputs": [],
@@ -1865,7 +2228,7 @@
       ]
     },
     "ChainlinkOracle_Proxy": {
-      "address": "0x102F0b714E5d321187A4b6E5993358448f7261cE",
+      "address": "0x3704D4D0EB8fF916e411d2fE602A8cA82786d6f2",
       "abi": [
         {
           "inputs": [
@@ -2001,7 +2364,7 @@
       ]
     },
     "DefaultProxyAdmin": {
-      "address": "0x01435866babd91311b1355cf3af488cca36db68e",
+      "address": "0x63d69486168b29C88779cECC471DB813E4DF6BBe",
       "abi": [
         {
           "inputs": [
@@ -2166,7 +2529,7 @@
       ]
     },
     "MockEtherFiLiquidityPool": {
-      "address": "0x4634Cc129ec46DbBab6a7E2b5c73c1b991be6cfC",
+      "address": "0x34E174Bfc3Bb3A45eb766f235E407b255439e3d9",
       "abi": [
         {
           "inputs": [],
@@ -2273,7 +2636,7 @@
       ]
     },
     "MockPendlePtOracle": {
-      "address": "0xF5B307640435D38A5A8eE8b6665d24Bb098F11db",
+      "address": "0xa3431BB197fc0c3043c58bF9dd77407F48c76BE0",
       "abi": [
         {
           "inputs": [],
@@ -2440,7 +2803,7 @@
       ]
     },
     "MockSFrax": {
-      "address": "0xd85FfECdB4287587BC53c1934D548bF7480F11C4",
+      "address": "0x7cE7e766fFac9b7CDa15e9929301C8C05A4Db4d3",
       "abi": [
         {
           "inputs": [
@@ -2846,7 +3209,7 @@
       ]
     },
     "MockSfrxEthFraxOracle": {
-      "address": "0x96f7FD1d922Bb6769773BeC88BE6aA615DE77ad1",
+      "address": "0xD08cf252E50113a4a43E9C9357ee8b971AbB7720",
       "abi": [
         {
           "inputs": [],
@@ -2993,7 +3356,7 @@
       ]
     },
     "PendleOracle-PT-weETH-26DEC2024": {
-      "address": "0xAF83f9C9d849B6FF3A33da059Bf14A0E85493eb4",
+      "address": "0x54a594D52549488Caa0aeef2aEc81089068Ec9EC",
       "abi": [
         {
           "anonymous": false,
@@ -3246,7 +3609,7 @@
       ]
     },
     "PendleOracle-PT-weETH-26DEC2024_Implementation": {
-      "address": "0x73b615e88fDAe39fb8ED12d0dFeFBCDF5BA0E312",
+      "address": "0x366022a5F112993F01C49f2Bc377e4eA2474A302",
       "abi": [
         {
           "inputs": [
@@ -3404,7 +3767,7 @@
       ]
     },
     "PendleOracle-PT-weETH-26DEC2024_Proxy": {
-      "address": "0xAF83f9C9d849B6FF3A33da059Bf14A0E85493eb4",
+      "address": "0x54a594D52549488Caa0aeef2aEc81089068Ec9EC",
       "abi": [
         {
           "inputs": [
@@ -3540,7 +3903,7 @@
       ]
     },
     "RedStoneOracle": {
-      "address": "0x4e6269Ef406B4CEE6e67BA5B5197c2FfD15099AE",
+      "address": "0x86fd48CeCa26Fd4D99677d778313Cd48E64Ce3d1",
       "abi": [
         {
           "anonymous": false,
@@ -4067,7 +4430,7 @@
       ]
     },
     "RedStoneOracle_Implementation": {
-      "address": "0x718299912d52c5720c70318B9dF418bc2520fb60",
+      "address": "0x6Cf86150dC56a54Be7982797B5316Fc5D10830D2",
       "abi": [
         {
           "inputs": [],
@@ -4468,7 +4831,7 @@
       ]
     },
     "RedStoneOracle_Proxy": {
-      "address": "0x4e6269Ef406B4CEE6e67BA5B5197c2FfD15099AE",
+      "address": "0x86fd48CeCa26Fd4D99677d778313Cd48E64Ce3d1",
       "abi": [
         {
           "inputs": [
@@ -4604,7 +4967,7 @@
       ]
     },
     "ResilientOracle": {
-      "address": "0x8000eca36201dddf5805Aa4BeFD73d1EB4D23264",
+      "address": "0x0A0855765C9777B44369e7aD65d2279b7F1F66A4",
       "abi": [
         {
           "anonymous": false,
@@ -5357,7 +5720,7 @@
       ]
     },
     "ResilientOracle_Implementation": {
-      "address": "0x86F82bca79774fc04859966917D2291A68b870A9",
+      "address": "0x2eD03f4d8A2ca95C6D1B5E5B7314a4630E63260D",
       "abi": [
         {
           "inputs": [
@@ -6000,7 +6363,7 @@
       ]
     },
     "ResilientOracle_Proxy": {
-      "address": "0x8000eca36201dddf5805Aa4BeFD73d1EB4D23264",
+      "address": "0x0A0855765C9777B44369e7aD65d2279b7F1F66A4",
       "abi": [
         {
           "inputs": [
@@ -6136,7 +6499,7 @@
       ]
     },
     "SFraxOracle": {
-      "address": "0x163cA9Eb6340643154F8691C5DAd3aC844266717",
+      "address": "0x6682aD987eE4E76df1B5148BEf1940cF02dB7B7F",
       "abi": [
         {
           "anonymous": false,
@@ -6340,7 +6703,7 @@
       ]
     },
     "SFraxOracle_Implementation": {
-      "address": "0x2fD256De0E5e783A51d3a661bCD5D04f1aF6E243",
+      "address": "0x4f57c9459ca84217eC5572ff81b6eA4E4FC2F710",
       "abi": [
         {
           "inputs": [
@@ -6434,7 +6797,7 @@
       ]
     },
     "SFraxOracle_Proxy": {
-      "address": "0x163cA9Eb6340643154F8691C5DAd3aC844266717",
+      "address": "0x6682aD987eE4E76df1B5148BEf1940cF02dB7B7F",
       "abi": [
         {
           "inputs": [
@@ -6570,7 +6933,7 @@
       ]
     },
     "SFrxETHOracle": {
-      "address": "0x61EB836afA467677e6b403D504fe69D6940e7996",
+      "address": "0xa468D26C29f7829565db2814EB2BAb898Db1e427",
       "abi": [
         {
           "anonymous": false,
@@ -7009,7 +7372,7 @@
       ]
     },
     "SFrxETHOracle_Implementation": {
-      "address": "0x66f615cCBD737CF2E52ce4e0FFB47CFB5045FD61",
+      "address": "0x7a38872D2aaB5751f87297cadaa9C0ECc11aFB12",
       "abi": [
         {
           "inputs": [
@@ -7333,7 +7696,7 @@
       ]
     },
     "SFrxETHOracle_Proxy": {
-      "address": "0x61EB836afA467677e6b403D504fe69D6940e7996",
+      "address": "0xa468D26C29f7829565db2814EB2BAb898Db1e427",
       "abi": [
         {
           "inputs": [
@@ -7469,7 +7832,7 @@
       ]
     },
     "WeETHOracle": {
-      "address": "0xc7b78b5c1433C81c455CD1e9A68FF18764acbCe1",
+      "address": "0xDd4961F2596F9d4D544bF60D7C38a3481E6D6fe9",
       "abi": [
         {
           "anonymous": false,
@@ -7686,7 +8049,7 @@
       ]
     },
     "WeETHOracle_Implementation": {
-      "address": "0xE4De7A85e2BF39B6f6C1BA235aB33d3Fe2841195",
+      "address": "0xf78fa371d6952331ad5bc9F6dF3C8153d6a3d026",
       "abi": [
         {
           "inputs": [
@@ -7798,7 +8161,7 @@
       ]
     },
     "WeETHOracle_Proxy": {
-      "address": "0xc7b78b5c1433C81c455CD1e9A68FF18764acbCe1",
+      "address": "0xDd4961F2596F9d4D544bF60D7C38a3481E6D6fe9",
       "abi": [
         {
           "inputs": [
@@ -7933,8 +8296,8 @@
         }
       ]
     },
-    "WstETHOracle": {
-      "address": "0x92E7F73B0d57902fDC453E8aef990EdEe827b0BF",
+    "WstETHOracle_Equivalence": {
+      "address": "0x9A80F309A0c48C1ea67c8507234355E2B662B6c1",
       "abi": [
         {
           "anonymous": false,
@@ -8053,6 +8416,19 @@
         },
         {
           "inputs": [],
+          "name": "ASSUME_STETH_ETH_EQUIVALENCE",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
           "name": "RESILIENT_ORACLE",
           "outputs": [
             {
@@ -8145,8 +8521,8 @@
         }
       ]
     },
-    "WstETHOracle_Implementation": {
-      "address": "0xEf0F74FaBC69f32F9b73419726eeFa70F4E8d10F",
+    "WstETHOracle_Equivalence_Implementation": {
+      "address": "0x487342815429814ECa7181b782829Ad4c838ff50",
       "abi": [
         {
           "inputs": [
@@ -8169,6 +8545,11 @@
               "internalType": "address",
               "name": "resilientOracleAddress",
               "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "assumeEquivalence",
+              "type": "bool"
             }
           ],
           "stateMutability": "nonpayable",
@@ -8178,6 +8559,19 @@
           "inputs": [],
           "name": "ZeroAddressNotAllowed",
           "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "ASSUME_STETH_ETH_EQUIVALENCE",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
         },
         {
           "inputs": [],
@@ -8252,8 +8646,494 @@
         }
       ]
     },
-    "WstETHOracle_Proxy": {
-      "address": "0x92E7F73B0d57902fDC453E8aef990EdEe827b0BF",
+    "WstETHOracle_Equivalence_Proxy": {
+      "address": "0x9A80F309A0c48C1ea67c8507234355E2B662B6c1",
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_logic",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "admin_",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes",
+              "name": "_data",
+              "type": "bytes"
+            }
+          ],
+          "stateMutability": "payable",
+          "type": "constructor"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "previousAdmin",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "newAdmin",
+              "type": "address"
+            }
+          ],
+          "name": "AdminChanged",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "beacon",
+              "type": "address"
+            }
+          ],
+          "name": "BeaconUpgraded",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "implementation",
+              "type": "address"
+            }
+          ],
+          "name": "Upgraded",
+          "type": "event"
+        },
+        {
+          "stateMutability": "payable",
+          "type": "fallback"
+        },
+        {
+          "inputs": [],
+          "name": "admin",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "admin_",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "implementation",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "implementation_",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "newImplementation",
+              "type": "address"
+            }
+          ],
+          "name": "upgradeTo",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "newImplementation",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "name": "upgradeToAndCall",
+          "outputs": [],
+          "stateMutability": "payable",
+          "type": "function"
+        },
+        {
+          "stateMutability": "payable",
+          "type": "receive"
+        }
+      ]
+    },
+    "WstETHOracle_NonEquivalence": {
+      "address": "0x7A8Ca2E79D98D71C8a86FfD540eB1C0b0212748B",
+      "abi": [
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "previousAdmin",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "newAdmin",
+              "type": "address"
+            }
+          ],
+          "name": "AdminChanged",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "beacon",
+              "type": "address"
+            }
+          ],
+          "name": "BeaconUpgraded",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "implementation",
+              "type": "address"
+            }
+          ],
+          "name": "Upgraded",
+          "type": "event"
+        },
+        {
+          "stateMutability": "payable",
+          "type": "fallback"
+        },
+        {
+          "inputs": [],
+          "name": "admin",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "admin_",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "implementation",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "implementation_",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "newImplementation",
+              "type": "address"
+            }
+          ],
+          "name": "upgradeTo",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "newImplementation",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "name": "upgradeToAndCall",
+          "outputs": [],
+          "stateMutability": "payable",
+          "type": "function"
+        },
+        {
+          "stateMutability": "payable",
+          "type": "receive"
+        },
+        {
+          "inputs": [],
+          "name": "ZeroAddressNotAllowed",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "ASSUME_STETH_ETH_EQUIVALENCE",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "RESILIENT_ORACLE",
+          "outputs": [
+            {
+              "internalType": "contract OracleInterface",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "STETH",
+          "outputs": [
+            {
+              "internalType": "contract IStETH",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "WETH_ADDRESS",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "WSTETH_ADDRESS",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "asset",
+              "type": "address"
+            }
+          ],
+          "name": "getPrice",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_logic",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "admin_",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes",
+              "name": "_data",
+              "type": "bytes"
+            }
+          ],
+          "stateMutability": "payable",
+          "type": "constructor"
+        }
+      ]
+    },
+    "WstETHOracle_NonEquivalence_Implementation": {
+      "address": "0xF130E07bD8824Cd6a840eB6467f59C2b5AAD5882",
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "wstETHAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "wETHAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "stETHAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "resilientOracleAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "assumeEquivalence",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [],
+          "name": "ZeroAddressNotAllowed",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "ASSUME_STETH_ETH_EQUIVALENCE",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "RESILIENT_ORACLE",
+          "outputs": [
+            {
+              "internalType": "contract OracleInterface",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "STETH",
+          "outputs": [
+            {
+              "internalType": "contract IStETH",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "WETH_ADDRESS",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "WSTETH_ADDRESS",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "asset",
+              "type": "address"
+            }
+          ],
+          "name": "getPrice",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    "WstETHOracle_NonEquivalence_Proxy": {
+      "address": "0x7A8Ca2E79D98D71C8a86FfD540eB1C0b0212748B",
       "abi": [
         {
           "inputs": [
@@ -8389,7 +9269,7 @@
       ]
     },
     "rsETHOneJumpChainlinkOracle": {
-      "address": "0xDAF249b4A937385dB567B73630539BacDBB04342",
+      "address": "0xa9a48A654603a018D9D66bAFd62CdA3D230ab91e",
       "abi": [
         {
           "anonymous": false,
@@ -8606,7 +9486,7 @@
       ]
     },
     "rsETHOneJumpChainlinkOracle_Implementation": {
-      "address": "0x4024F4d7ca04655eF9fc6C0F31419731d1349a40",
+      "address": "0x4166199F5d4ADd1a6E50645a5F0104591aa3be15",
       "abi": [
         {
           "inputs": [
@@ -8718,7 +9598,7 @@
       ]
     },
     "rsETHOneJumpChainlinkOracle_Proxy": {
-      "address": "0xDAF249b4A937385dB567B73630539BacDBB04342",
+      "address": "0xa9a48A654603a018D9D66bAFd62CdA3D230ab91e",
       "abi": [
         {
           "inputs": [
@@ -8854,7 +9734,7 @@
       ]
     },
     "rsETHOneJumpRedStoneOracle": {
-      "address": "0xB15CA4Cd4bA5696FDC1cbBd859588c0421cc1F68",
+      "address": "0xB5bE2771F4DF07326EaC5EFE21bBc6e6EB649ddF",
       "abi": [
         {
           "anonymous": false,
@@ -9071,7 +9951,7 @@
       ]
     },
     "rsETHOneJumpRedStoneOracle_Implementation": {
-      "address": "0x4671E637247C0431AD86774a612f0B1C1c564FAe",
+      "address": "0x0Bf329dE6ff50b520A4Bf48F7735f34f84e15b2B",
       "abi": [
         {
           "inputs": [
@@ -9183,7 +10063,7 @@
       ]
     },
     "rsETHOneJumpRedStoneOracle_Proxy": {
-      "address": "0xB15CA4Cd4bA5696FDC1cbBd859588c0421cc1F68",
+      "address": "0xB5bE2771F4DF07326EaC5EFE21bBc6e6EB649ddF",
       "abi": [
         {
           "inputs": [
