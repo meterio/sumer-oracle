@@ -34,15 +34,13 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
   const redStoneOracle = await hre.ethers.getContract("RedStoneOracle");
   const redStoneOracleOwner = await redStoneOracle.owner();
 
-  if (redStoneOracleOwner === deployer && network.live) {
-    await redStoneOracle.transferOwnership(proxyOwnerAddress);
-    console.log(`Ownership of RedstoneOracle transfered from deployer to Timelock (${proxyOwnerAddress})`);
-  }
+  // if (redStoneOracleOwner === deployer && network.live) {
+  //   await redStoneOracle.transferOwnership(proxyOwnerAddress);
+  //   console.log(`Ownership of RedstoneOracle transfered from deployer to Timelock (${proxyOwnerAddress})`);
+  // }
 };
 
 func.skip = async ({ network }: HardhatRuntimeEnvironment) =>
-  !["hardhat", "bscmainnet", "bsctestnet", "sepolia", "ethereum", "arbitrumone", "arbitrumsepolia"].includes(
-    network.name,
-  );
+  !["hardhat", "sepolia", "ethereum", "arbitrum"].includes(network.name);
 func.tags = ["deploy-redstone"];
 export default func;

@@ -17,14 +17,14 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
 
   let accessControlManager;
   if (!network.live) {
-    await deploy("AccessControlManagerScenario", {
+    await deploy("AccessControlManager", {
       from: deployer,
       args: [],
       log: true,
       autoMine: true,
     });
 
-    accessControlManager = await hre.ethers.getContract("AccessControlManagerScenario");
+    accessControlManager = await hre.ethers.getContract("AccessControlManager");
   }
   const accessControlManagerAddress = network.live ? ADDRESSES[networkName].acm : accessControlManager?.address;
   const proxyOwnerAddress = network.live ? ADDRESSES[networkName].timelock : deployer;
@@ -105,10 +105,10 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
     await accessControlManager?.giveCallPermission(pythOracle.address, "setTokenConfig(TokenConfig)", deployer);
     const pythOracleOwner = await pythOracle.owner();
 
-    if (pythOracleOwner === deployer) {
-      await pythOracle.transferOwnership(ADDRESSES[networkName].timelock);
-      console.log(`Ownership of PythOracle transfered from deployer to Timelock (${ADDRESSES[networkName].timelock})`);
-    }
+    // if (pythOracleOwner === deployer) {
+    //   await pythOracle.transferOwnership(ADDRESSES[networkName].timelock);
+    //   console.log(`Ownership of PythOracle transfered from deployer to Timelock (${ADDRESSES[networkName].timelock})`);
+    // }
   }
 
   const { sidRegistryAddress, feedRegistryAddress } = ADDRESSES[networkName];
@@ -136,12 +136,12 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
       await binanceOracle.setFeedRegistryAddress(feedRegistryAddress);
     }
 
-    if (binanceOracleOwner === deployer) {
-      await binanceOracle.transferOwnership(ADDRESSES[networkName].timelock);
-      console.log(
-        `Ownership of BinanceOracle transfered from deployer to Timelock (${ADDRESSES[networkName].timelock})`,
-      );
-    }
+    // if (binanceOracleOwner === deployer) {
+    //   await binanceOracle.transferOwnership(ADDRESSES[networkName].timelock);
+    //   console.log(
+    //     `Ownership of BinanceOracle transfered from deployer to Timelock (${ADDRESSES[networkName].timelock})`,
+    //   );
+    // }
   }
 
   const resilientOracle = await hre.ethers.getContract("ResilientOracle");
@@ -154,26 +154,26 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
   const chainlinkOracleOwner = await chainlinkOracle.owner();
   const boundValidatorOwner = await boundValidator.owner();
 
-  if (resilientOracleOwner === deployer) {
-    await resilientOracle.transferOwnership(ADDRESSES[networkName].timelock);
-    console.log(
-      `Ownership of ResilientOracle transfered from deployer to Timelock (${ADDRESSES[networkName].timelock})`,
-    );
-  }
+  // if (resilientOracleOwner === deployer) {
+  //   await resilientOracle.transferOwnership(ADDRESSES[networkName].timelock);
+  //   console.log(
+  //     `Ownership of ResilientOracle transfered from deployer to Timelock (${ADDRESSES[networkName].timelock})`,
+  //   );
+  // }
 
-  if (chainlinkOracleOwner === deployer) {
-    await chainlinkOracle.transferOwnership(ADDRESSES[networkName].timelock);
-    console.log(
-      `Ownership of ChainlinkOracle transfered from deployer to Timelock (${ADDRESSES[networkName].timelock})`,
-    );
-  }
+  // if (chainlinkOracleOwner === deployer) {
+  //   await chainlinkOracle.transferOwnership(ADDRESSES[networkName].timelock);
+  //   console.log(
+  //     `Ownership of ChainlinkOracle transfered from deployer to Timelock (${ADDRESSES[networkName].timelock})`,
+  //   );
+  // }
 
-  if (boundValidatorOwner === deployer) {
-    await boundValidator.transferOwnership(ADDRESSES[networkName].timelock);
-    console.log(
-      `Ownership of BoundValidator transfered from deployer to Timelock (${ADDRESSES[networkName].timelock})`,
-    );
-  }
+  // if (boundValidatorOwner === deployer) {
+  //   await boundValidator.transferOwnership(ADDRESSES[networkName].timelock);
+  //   console.log(
+  //     `Ownership of BoundValidator transfered from deployer to Timelock (${ADDRESSES[networkName].timelock})`,
+  //   );
+  // }
 };
 
 export default func;

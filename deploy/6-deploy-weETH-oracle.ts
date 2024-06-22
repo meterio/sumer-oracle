@@ -28,7 +28,7 @@ const func: DeployFunction = async ({ getNamedAccounts, deployments, network }: 
 
     const mockEtherFiLiquidityPool = await ethers.getContract("MockEtherFiLiquidityPool");
     EtherFiLiquidityPool = mockEtherFiLiquidityPool.address;
-    await mockEtherFiLiquidityPool.transferOwnership(proxyOwnerAddress);
+    // await mockEtherFiLiquidityPool.transferOwnership(proxyOwnerAddress);
   }
 
   if (network.name === "sepolia") {

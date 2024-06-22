@@ -28,9 +28,9 @@ const func: DeployFunction = async ({ getNamedAccounts, deployments, network }: 
     const pendleOracleContract = await ethers.getContract("MockPendlePtOracle");
     ptOracleAddress = pendleOracleContract.address;
 
-    if ((await pendleOracleContract.owner()) === deployer) {
-      await pendleOracleContract.transferOwnership(proxyOwnerAddress);
-    }
+    // if ((await pendleOracleContract.owner()) === deployer) {
+    //   await pendleOracleContract.transferOwnership(proxyOwnerAddress);
+    // }
   }
 
   await deploy("PendleOracle-PT-weETH-26DEC2024", {

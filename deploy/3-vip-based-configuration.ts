@@ -116,14 +116,8 @@ const acceptOwnership = async (
   ];
 };
 
-const makeRole = (mainnetBehavior: boolean, targetContract: string, method: string): string => {
-  if (mainnetBehavior && targetContract === ethers.constants.AddressZero) {
-    return ethers.utils.keccak256(
-      ethers.utils.solidityPack(["bytes32", "string"], [ethers.constants.HashZero, method]),
-    );
-  }
-  return ethers.utils.keccak256(ethers.utils.solidityPack(["address", "string"], [targetContract, method]));
-};
+const makeRole = (mainnetBehavior: boolean, targetContract: string, method: string): string =>
+  ethers.utils.keccak256(ethers.utils.solidityPack(["address", "string"], [targetContract, method]));
 
 const hasPermission = async (
   accessControl: AccessControlManager,
@@ -132,7 +126,7 @@ const hasPermission = async (
   caller: string,
   hre: HardhatRuntimeEnvironment,
 ): Promise<boolean> => {
-  const role = makeRole(hre.network.name === "bscmainnet", targetContract, method);
+  const role = makeRole(false, targetContract, method);
   return accessControl.hasRole(role, caller);
 };
 
