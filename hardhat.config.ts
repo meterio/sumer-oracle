@@ -113,6 +113,18 @@ const config: HardhatUserConfig = {
       live: true,
       accounts: process.env.DEPLOYER_PRIVATE_KEY ? [`0x${process.env.DEPLOYER_PRIVATE_KEY}`] : [],
     },
+    metertest: {
+      url: process.env.ARCHIVE_NODE_metertest || "https://rpctest.meter.io",
+      chainId: 83,
+      live: true,
+      accounts: process.env.DEPLOYER_PRIVATE_KEY ? [`0x${process.env.DEPLOYER_PRIVATE_KEY}`] : [],
+    },
+    metermain: {
+      url: process.env.ARCHIVE_NODE_metermain || "https://rpc.meter.io",
+      chainId: 82,
+      live: false,
+      accounts: process.env.DEPLOYER_PRIVATE_KEY ? [`0x${process.env.DEPLOYER_PRIVATE_KEY}`] : [],
+    },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,

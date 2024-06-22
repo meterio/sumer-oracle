@@ -27,7 +27,8 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
     accessControlManager = await hre.ethers.getContract("AccessControlManager");
   }
   const accessControlManagerAddress = network.live ? ADDRESSES[networkName].acm : accessControlManager?.address;
-  const proxyOwnerAddress = network.live ? ADDRESSES[networkName].timelock : deployer;
+  const proxyOwnerAddress = network.live ? ADDRESSES[networkName].timelock || deployer : deployer;
+  console.log("proxyOwnerAddress:", proxyOwnerAddress);
 
   await deploy("BoundValidator", {
     from: deployer,
@@ -85,6 +86,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
 
   // Skip if no pythOracle address in config
   if (pythOracleAddress) {
+    console.log(proxyOwnerAddress, pythOracleAddress, accessControlManager);
     await deploy("PythOracle", {
       contract: network.live ? "PythOracle" : "MockPythOracle",
       from: deployer,
