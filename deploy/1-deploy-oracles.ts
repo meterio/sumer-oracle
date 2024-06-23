@@ -1,21 +1,54 @@
-import hre from "hardhat";
+import hre, { ethers } from "hardhat";
 import { DeployFunction } from "hardhat-deploy/dist/types";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 
 import { ADDRESSES, SEQUENCER } from "../helpers/deploymentConfig";
+import { AccessControlManager } from "../typechain-types";
+
+const makeRole = (mainnetBehavior: boolean, targetContract: string, method: string): string =>
+  ethers.utils.keccak256(ethers.utils.solidityPack(["address", "string"], [targetContract, method]));
+
+const hasPermission = async (
+  accessControl: AccessControlManager,
+  targetContract: string,
+  method: string,
+  caller: string,
+): Promise<boolean> => {
+  const role = makeRole(false, targetContract, method);
+  return accessControl.hasRole(role, caller);
+};
+
+const givePermission = async (
+  accessControl: AccessControlManager,
+  targetContractName: string,
+  method: string,
+  caller: string,
+) => {
+  const targetContract = await hre.ethers.getContractOrNull(targetContractName);
+  if (targetContract) {
+    const has = await hasPermission(accessControl, targetContract.address, method, caller);
+    if (!has) {
+      console.log(`Give permission ${method} on ${targetContractName} ${targetContract.address} to ${caller}`);
+      await (
+        await accessControl.giveCallPermission(targetContract.address, "setTokenConfig(TokenConfig)", caller)
+      ).wait(1);
+    } else {
+      console.log(`Permission checked: ${method} on ${targetContractName} ${targetContract.address} to ${caller}`);
+    }
+  }
+};
 
 const func: DeployFunction = async function ({ getNamedAccounts, deployments, network }: HardhatRuntimeEnvironment) {
   const { deploy } = deployments;
   const { deployer } = await getNamedAccounts();
 
-  const networkName: string = network.name === "hardhat" ? "bsctestnet" : network.name;
+  const networkName: string = network.name === "hardhat" ? "metertest" : network.name;
 
   console.log(`Timelock: ${ADDRESSES[networkName].timelock}`);
 
   const { vBNBAddress } = ADDRESSES[networkName];
   const { VAIAddress } = ADDRESSES[networkName];
 
-  let accessControlManager;
   if (!network.live) {
     await deploy("AccessControlManager", {
       from: deployer,
@@ -23,12 +56,19 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
       log: true,
       autoMine: true,
     });
-
-    accessControlManager = await hre.ethers.getContract("AccessControlManager");
   }
-  const accessControlManagerAddress = network.live ? ADDRESSES[networkName].acm : accessControlManager?.address;
+
+  const accessControlManager = await hre.ethers.getContract("AccessControlManager");
+  if (!accessControlManager) {
+    throw new Error(`AccessControlManager required`);
+  }
+
+  if (accessControlManager.address !== ADDRESSES[networkName].acm) {
+    throw new Error(`AccessControlManager mismach with acm settings`);
+  }
+  const accessControlManagerAddress = accessControlManager.address;
+
   const proxyOwnerAddress = network.live ? ADDRESSES[networkName].timelock || deployer : deployer;
-  console.log("proxyOwnerAddress:", proxyOwnerAddress);
 
   await deploy("BoundValidator", {
     from: deployer,
@@ -82,11 +122,26 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
     },
   });
 
+  await deploy("RedStoneOracle", {
+    contract: network.live ? contractName : "MockChainlinkOracle",
+    from: deployer,
+    log: true,
+    deterministicDeployment: false,
+    args: sequencer ? [sequencer] : [],
+    proxy: {
+      owner: proxyOwnerAddress,
+      proxyContract: "OptimizedTransparentProxy",
+      execute: {
+        methodName: "initialize",
+        args: network.live ? [accessControlManagerAddress] : [],
+      },
+    },
+  });
+
   const { pythOracleAddress } = ADDRESSES[networkName];
 
   // Skip if no pythOracle address in config
   if (pythOracleAddress) {
-    console.log(proxyOwnerAddress, pythOracleAddress, accessControlManager);
     await deploy("PythOracle", {
       contract: network.live ? "PythOracle" : "MockPythOracle",
       from: deployer,
@@ -102,80 +157,42 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
         },
       },
     });
-
-    const pythOracle = await hre.ethers.getContract("PythOracle");
-    await accessControlManager?.giveCallPermission(pythOracle.address, "setTokenConfig(TokenConfig)", deployer);
-    const pythOracleOwner = await pythOracle.owner();
-
-    // if (pythOracleOwner === deployer) {
-    //   await pythOracle.transferOwnership(ADDRESSES[networkName].timelock);
-    //   console.log(`Ownership of PythOracle transfered from deployer to Timelock (${ADDRESSES[networkName].timelock})`);
-    // }
   }
 
-  const { sidRegistryAddress, feedRegistryAddress } = ADDRESSES[networkName];
-  // Skip if no sidRegistryAddress address in config
-  if (sidRegistryAddress) {
-    await deploy("BinanceOracle", {
-      contract: network.live ? "BinanceOracle" : "MockBinanceOracle",
-      from: deployer,
-      log: true,
-      deterministicDeployment: false,
-      args: [],
-      proxy: {
-        owner: proxyOwnerAddress,
-        proxyContract: "OptimizedTransparentProxy",
-        execute: {
-          methodName: "initialize",
-          args: network.live ? [sidRegistryAddress, accessControlManagerAddress] : [],
-        },
-      },
-    });
-    const binanceOracle = await hre.ethers.getContract("BinanceOracle");
-    const binanceOracleOwner = await binanceOracle.owner();
+  await givePermission(
+    accessControlManager as AccessControlManager,
+    "ResilientOracle",
+    "setTokenConfig(TokenConfig)",
+    deployer,
+  );
 
-    if (network.live && sidRegistryAddress === "0x0000000000000000000000000000000000000000") {
-      await binanceOracle.setFeedRegistryAddress(feedRegistryAddress);
-    }
+  await givePermission(
+    accessControlManager as AccessControlManager,
+    contractName,
+    "setTokenConfig(TokenConfig)",
+    deployer,
+  );
 
-    // if (binanceOracleOwner === deployer) {
-    //   await binanceOracle.transferOwnership(ADDRESSES[networkName].timelock);
-    //   console.log(
-    //     `Ownership of BinanceOracle transfered from deployer to Timelock (${ADDRESSES[networkName].timelock})`,
-    //   );
-    // }
-  }
+  await givePermission(
+    accessControlManager as AccessControlManager,
+    contractName,
+    "setDirectPrice(address,uint256)",
+    deployer,
+  );
 
-  const resilientOracle = await hre.ethers.getContract("ResilientOracle");
-  const chainlinkOracle = await hre.ethers.getContract(contractName);
+  await givePermission(
+    accessControlManager as AccessControlManager,
+    "RedStoneOracle",
+    "setTokenConfig(TokenConfig)",
+    deployer,
+  );
 
-  await accessControlManager?.giveCallPermission(chainlinkOracle.address, "setTokenConfig(TokenConfig)", deployer);
-  await accessControlManager?.giveCallPermission(resilientOracle.address, "setTokenConfig(TokenConfig)", deployer);
-
-  const resilientOracleOwner = await resilientOracle.owner();
-  const chainlinkOracleOwner = await chainlinkOracle.owner();
-  const boundValidatorOwner = await boundValidator.owner();
-
-  // if (resilientOracleOwner === deployer) {
-  //   await resilientOracle.transferOwnership(ADDRESSES[networkName].timelock);
-  //   console.log(
-  //     `Ownership of ResilientOracle transfered from deployer to Timelock (${ADDRESSES[networkName].timelock})`,
-  //   );
-  // }
-
-  // if (chainlinkOracleOwner === deployer) {
-  //   await chainlinkOracle.transferOwnership(ADDRESSES[networkName].timelock);
-  //   console.log(
-  //     `Ownership of ChainlinkOracle transfered from deployer to Timelock (${ADDRESSES[networkName].timelock})`,
-  //   );
-  // }
-
-  // if (boundValidatorOwner === deployer) {
-  //   await boundValidator.transferOwnership(ADDRESSES[networkName].timelock);
-  //   console.log(
-  //     `Ownership of BoundValidator transfered from deployer to Timelock (${ADDRESSES[networkName].timelock})`,
-  //   );
-  // }
+  await givePermission(
+    accessControlManager as AccessControlManager,
+    "PythOracle",
+    "setTokenConfig(TokenConfig)",
+    deployer,
+  );
 };
 
 export default func;

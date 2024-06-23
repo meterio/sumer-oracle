@@ -84,8 +84,6 @@ export const ADDRESSES: PreconfiguredAddresses = {
     eETH: "0x0012875a7395a293Adfc9b5cDC2Cfa352C4cDcD3",
     WETH: "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9",
     PTweETH_26DEC2024: "0x56107201d3e4b7Db92dEa0Edb9e0454346AEb8B5",
-    FRAX: "0x10630d59848547c9F59538E2d8963D63B912C075",
-    sfrxETH: "0x14AECeEc177085fd09EA07348B4E1F7Fcc030fA1",
   },
   ethereum: {
     vBNBAddress: ethers.constants.AddressZero,
@@ -95,10 +93,6 @@ export const ADDRESSES: PreconfiguredAddresses = {
     WBNBAddress: ethers.constants.AddressZero,
     stETHAddress: "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
     wstETHAddress: "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
-    sFRAX: "0xA663B02CF0a4b149d2aD41910CB81e23e1c41c32",
-    sfrxETH: "0xac3e018457b222d93114458476f3e3416abbe38f",
-    FRAX: "0x853d955aCEf822Db058eb8505911ED77F175b99e",
-    frxETH: "0x5e8422345238f34275888049021821e8e08caa1f",
     weETH: "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee",
     eETH: "0x35fA164735182de50811E8e2E824cFb9B6118ac2",
     PTweETH_26DEC2024: "0x6ee2b5e19ecba773a352e5b21415dc419a700d1d",
@@ -106,7 +100,6 @@ export const ADDRESSES: PreconfiguredAddresses = {
     PTOracle: "0x66a1096C6366b2529274dF4f5D8247827fe4CEA8",
     EtherFiLiquidityPool: "0x308861A430be4cce5502d0A12724771Fc6DaF216",
     WETH: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-    SfrxEthFraxOracle: "0x3d3D868522b5a4035ADcb67BF0846D61597A6a6F",
   },
   arbitrum: {
     vBNBAddress: ethers.constants.AddressZero,
@@ -131,6 +124,7 @@ export const chainlinkFeed: Config = {
     USDT: "0x3E7d1eAB13ad0104d2750B8863b489D65364e32D",
     USDC: "0x8fFfFfd4AfB6115b954Bd326cbe7B4BA576818f6",
     stETH: "0xCfE54B5cD566aB89272946F602D76Ea879CAb4a8",
+    weETH: "0x5c9C449BbC9a6075A2c061dF312a35fd1E05fF22", // denominated by ETH
   },
   arbitrum: {
     WBTC: "0x6ce185860a4963106506C203335A2910413708e9",
@@ -138,6 +132,9 @@ export const chainlinkFeed: Config = {
     USDT: "0x3f3f5dF88dC9F13eac63DF89EC16ef6e7E25DdE7",
     ARB: "0xb2A824043730FE05F3DA2efaFa1CBbe83fa548D6",
     WETH: "0x639Fe6ab55C921f74e7fac1ee960C0B6293ba612",
+  },
+  base: {
+    weETH: "0xFC1415403EbB0c693f9a7844b92aD2Ff24775C65", // denominated by ETH
   },
 };
 
@@ -147,16 +144,18 @@ export const redstoneFeed: Config = {
   },
   ethereum: {
     XVS: "0xa2a8507DEb233ceE4F5594044C259DD0582339CC",
+    weETH: "0x8751F736E94F6CD167e8C5B97E245680FbD9CC36", // denominated by ETH
+    pufETH: "0x76A495b0bFfb53ef3F0E94ef0763e03cE410835C", // denominated by ETH
+    USDe: "0xbC5FBcf58CeAEa19D523aBc76515b9AEFb5cfd58",
+    sUSDe: "0xb99D174ED06c83588Af997c8859F93E83dD4733f",
   },
   arbitrum: {
     XVS: "0xd9a66Ff1D660aD943F48e9c606D09eA672f312E8",
+    weETH: "0xA736eAe8805dDeFFba40cAB8c99bCB309dEaBd9B", // denominated by ETH
   },
 };
 
 export const pythID: Config = {
-  bsctestnet: {
-    AUTO: "0xd954e9a88c7f97b4645b535869aba8a1e50697270a0afb09891accc031f03880",
-  },
   metertest: {
     WBTC: "0xc9d8b075a5c69303365ae23633d4e085199bf5c520a3b90fed1322a0342ffc33",
     BTC: "0xc9d8b075a5c69303365ae23633d4e085199bf5c520a3b90fed1322a0342ffc33",

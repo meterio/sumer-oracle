@@ -27,10 +27,6 @@ const func: DeployFunction = async ({ getNamedAccounts, deployments, network }: 
 
     const pendleOracleContract = await ethers.getContract("MockPendlePtOracle");
     ptOracleAddress = pendleOracleContract.address;
-
-    // if ((await pendleOracleContract.owner()) === deployer) {
-    //   await pendleOracleContract.transferOwnership(proxyOwnerAddress);
-    // }
   }
 
   await deploy("PendleOracle-PT-weETH-26DEC2024", {
@@ -56,4 +52,5 @@ const func: DeployFunction = async ({ getNamedAccounts, deployments, network }: 
 
 export default func;
 func.tags = ["pendle"];
-func.skip = async (hre: HardhatRuntimeEnvironment) => hre.network.name !== "ethereum" && hre.network.name !== "sepolia";
+func.skip = async (hre: HardhatRuntimeEnvironment) =>
+  !["hardhat", "sepolia", "ethereum", "arbitrum", "base"].includes(hre.network.name);

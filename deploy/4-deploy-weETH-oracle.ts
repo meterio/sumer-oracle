@@ -13,7 +13,7 @@ const func: DeployFunction = async ({ getNamedAccounts, deployments, network }: 
   const proxyOwnerAddress = network.live ? ADDRESSES[network.name].timelock : deployer;
 
   let { EtherFiLiquidityPool } = ADDRESSES[network.name];
-  const { weETH, eETH, WETH } = ADDRESSES[network.name];
+  const { weETH, WETH } = ADDRESSES[network.name];
 
   if (!EtherFiLiquidityPool) {
     // deploy mock liquidity pool
@@ -28,22 +28,10 @@ const func: DeployFunction = async ({ getNamedAccounts, deployments, network }: 
 
     const mockEtherFiLiquidityPool = await ethers.getContract("MockEtherFiLiquidityPool");
     EtherFiLiquidityPool = mockEtherFiLiquidityPool.address;
-    // await mockEtherFiLiquidityPool.transferOwnership(proxyOwnerAddress);
   }
 
-  if (network.name === "sepolia") {
-    await deploy("WeETHOracle", {
-      from: deployer,
-      log: true,
-      deterministicDeployment: false,
-      args: [EtherFiLiquidityPool, weETH, eETH, resilientOracle.address],
-      proxy: {
-        owner: proxyOwnerAddress,
-        proxyContract: "OptimizedTransparentProxy",
-      },
-      skipIfAlreadyDeployed: true,
-    });
-  } else {
+  if (network.name === "sepolia" || network.name === "ethereum") {
+    // deply Equivalence and NonEquivalence on Ethereum
     await deploy("WeETHOracle_Equivalence", {
       contract: "WeETHOracle",
       from: deployer,
@@ -69,9 +57,24 @@ const func: DeployFunction = async ({ getNamedAccounts, deployments, network }: 
       },
       skipIfAlreadyDeployed: true,
     });
+  } else {
+    // deploy NonEquivalence on networks other than Sepolia and Ethereum
+    await deploy("WeETHOracle_NonEquivalence", {
+      contract: "OneJumpOracle",
+      from: deployer,
+      log: true,
+      deterministicDeployment: false,
+      args: [weETH, WETH, resilientOracle.address, chainlinkOracle.address],
+      proxy: {
+        owner: proxyOwnerAddress,
+        proxyContract: "OptimizedTransparentProxy",
+      },
+      skipIfAlreadyDeployed: true,
+    });
   }
 };
 
 export default func;
 func.tags = ["weETH"];
-func.skip = async (hre: HardhatRuntimeEnvironment) => hre.network.name !== "ethereum" && hre.network.name !== "sepolia";
+func.skip = async (hre: HardhatRuntimeEnvironment) =>
+  !["hardhat", "sepolia", "ethereum", "arbitrum", "base"].includes(hre.network.name);

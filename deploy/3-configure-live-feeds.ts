@@ -1,24 +1,7 @@
-import { BigNumberish } from "ethers";
-import { ethers } from "hardhat";
 import { DeployFunction } from "hardhat-deploy/types";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 
-import {
-  ADDRESSES,
-  ANY_CONTRACT,
-  AccessControlEntry,
-  Oracles,
-  assets,
-  getOraclesData,
-} from "../helpers/deploymentConfig";
-import { AccessControlManager } from "../typechain-types";
-
-interface GovernanceCommand {
-  contract: string;
-  signature: string;
-  parameters: any[];
-  value: BigNumberish;
-}
+import { Oracles, assets, getOraclesData } from "../helpers/deploymentConfig";
 
 const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void> => {
   const networkName = hre.network.name;
@@ -32,7 +15,7 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
   for (const asset of assets[networkName]) {
     const { oracle } = asset;
     console.log(`Configuring ${asset.token}`);
-    console.log(`Configure ${oracle} oracle for ${asset.token}`);
+    // console.log(`Configure ${oracle} oracle for ${asset.token}`);
 
     const { getTokenConfig, getDirectPriceConfig } = oraclesData[oracle];
 
@@ -41,23 +24,34 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
       getDirectPriceConfig !== undefined
     ) {
       const assetConfig: any = getDirectPriceConfig(asset);
+      console.log(`Set direct price for ${asset.token} on pythOracle with`, assetConfig.asset, assetConfig.price);
       await (await chainlinkOracle.setDirectPrice(assetConfig.asset, assetConfig.price)).wait(1);
     }
 
     if (oraclesData[oracle].underlyingOracle.address !== binanceOracle?.address && getTokenConfig !== undefined) {
       const tokenConfig: any = getTokenConfig(asset, networkName);
-      console.log(oraclesData[oracle].underlyingOracle.address, tokenConfig);
 
       if (oracle === "pyth") {
         if (pythOracle) {
-          console.log(`calling`, pythOracle.address, `with`, [
-            tokenConfig.pythId,
-            tokenConfig.asset,
-            tokenConfig.maxStalePeriod,
-          ]);
-          await (
-            await pythOracle.setTokenConfig([tokenConfig.pythId, tokenConfig.asset, tokenConfig.maxStalePeriod])
-          ).wait(1);
+          const configOnChain = await pythOracle.tokenConfigs(tokenConfig.asset);
+
+          if (
+            configOnChain.pythId !== tokenConfig.pythId ||
+            configOnChain.asset.toLowerCase() !== tokenConfig.asset.toLowerCase() ||
+            configOnChain.maxStalePeriod.toNumber() !== tokenConfig.maxStalePeriod
+          ) {
+            console.log(
+              `Set token config for ${asset.token} on ${oracle} with`,
+              tokenConfig.pythId,
+              tokenConfig.asset,
+              tokenConfig.maxStalePeriod,
+            );
+            await (
+              await pythOracle.setTokenConfig([tokenConfig.pythId, tokenConfig.asset, tokenConfig.maxStalePeriod])
+            ).wait(1);
+          } else {
+            console.log(`Checked token config ${asset.token} on ${oracle}, nothing changed`);
+          }
         } else {
           console.log(`pythOracle is null!, can not configure`);
         }
@@ -66,134 +60,75 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
           "ResilientOracle",
           oraclesData[oracle].underlyingOracle.address,
         );
-        await (
-          await oracleContract.setTokenConfig([tokenConfig.asset, tokenConfig.feed, tokenConfig.maxStalePeriod])
-        ).wait(1);
+        const configOnChain = await oracleContract.tokenConfigs(tokenConfig.asset);
+
+        if (
+          configOnChain.asset.toLowerCase() !== tokenConfig.asset.toLowerCase() ||
+          configOnChain.feed !== tokenConfig.feed ||
+          configOnChain.maxStalePeriod.toNumber() !== tokenConfig.maxStalePeriod
+        ) {
+          console.log(
+            `Set token config for ${asset.token} on ${oracle} with`,
+            tokenConfig.asset,
+            tokenConfig.feed,
+            tokenConfig.maxStalePeriod,
+          );
+
+          await (
+            await oracleContract.setTokenConfig([tokenConfig.asset, tokenConfig.feed, tokenConfig.maxStalePeriod])
+          ).wait(1);
+        } else {
+          console.log(`Checked token config ${asset.token} on ${oracle}, nothing changed`);
+        }
       }
     }
 
     const { getStalePeriodConfig } = oraclesData[oracle];
     if (oraclesData[oracle].underlyingOracle.address === binanceOracle?.address && getStalePeriodConfig !== undefined) {
       const tokenConfig: any = getStalePeriodConfig(asset);
+      console.log(
+        `Set maxStalePeriod for ${asset.token} on BinanceOracle with`,
+        tokenConfig.pythId,
+        tokenConfig.asset,
+        tokenConfig.maxStalePeriod,
+      );
 
       await (await binanceOracle.setMaxStalePeriod(...tokenConfig)).wait(1);
     }
 
-    console.log(``);
-    console.log(`Configure resilient oracle for ${asset.token}`);
+    const configOnChain = await resilientOracle.getTokenConfig(asset.address);
 
-    await (
-      await resilientOracle.setTokenConfig([
-        asset.address,
-        oraclesData[oracle].oracles,
-        oraclesData[oracle].enableFlagsForOracles,
-      ])
-    ).wait(1);
-  }
-};
+    const oracleMismatch = configOnChain.oracles.some(
+      (o: string, index: number) => o.toLowerCase() !== oraclesData[oracle].oracles[index].toLowerCase(),
+    );
+    const flagsMismatch = configOnChain.enableFlagsForOracles.some(
+      (o: boolean, index: number) => o !== oraclesData[oracle].enableFlagsForOracles[index],
+    );
+    if (
+      configOnChain.asset.toLowerCase() !== asset.address.toLowerCase() ||
+      configOnChain.oracles.length !== oraclesData[oracle].oracles.length ||
+      configOnChain.enableFlagsForOracles.length !== oraclesData[oracle].enableFlagsForOracles.length ||
+      oracleMismatch ||
+      flagsMismatch
+    ) {
+      console.log(``);
+      console.log(`Configure resilient oracle for ${asset.token}`);
 
-const acceptOwnership = async (
-  contractName: string,
-  targetOwner: string,
-  hre: HardhatRuntimeEnvironment,
-): Promise<GovernanceCommand[]> => {
-  if (!hre.network.live) {
-    return [];
-  }
-  const abi = ["function owner() view returns (address)"];
-  let deployment;
-  try {
-    deployment = await hre.deployments.get(contractName);
-  } catch (error: any) {
-    if (error.message.includes("No deployment found for")) {
-      return [];
+      await (
+        await resilientOracle.setTokenConfig([
+          asset.address,
+          oraclesData[oracle].oracles,
+          oraclesData[oracle].enableFlagsForOracles,
+        ])
+      ).wait(1);
+    } else {
+      console.log(`Checked token config ${asset.token} on resilient oracle, nothing changed`);
     }
-    throw error;
   }
-  const contract = await ethers.getContractAt(abi, deployment.address);
-  if ((await contract.owner()) === targetOwner) {
-    return [];
-  }
-  console.log(`Accept the admin rights over ${contractName}`);
-  return [
-    {
-      contract: deployment.address,
-      signature: "acceptOwnership()",
-      parameters: [],
-      value: 0,
-    },
-  ];
-};
-
-const makeRole = (mainnetBehavior: boolean, targetContract: string, method: string): string =>
-  ethers.utils.keccak256(ethers.utils.solidityPack(["address", "string"], [targetContract, method]));
-
-const hasPermission = async (
-  accessControl: AccessControlManager,
-  targetContract: string,
-  method: string,
-  caller: string,
-): Promise<boolean> => {
-  const role = makeRole(false, targetContract, method);
-  return accessControl.hasRole(role, caller);
-};
-
-const timelockOraclePermissions = (timelock: string): AccessControlEntry[] => {
-  const methods = [
-    "pause()",
-    "unpause()",
-    "setOracle(address,address,uint8)",
-    "enableOracle(address,uint8,bool)",
-    "setTokenConfig(TokenConfig)",
-    "setDirectPrice(address,uint256)",
-    "setValidateConfig(ValidateConfig)",
-    "setMaxStalePeriod(string,uint256)",
-    "setSymbolOverride(string,string)",
-    "setUnderlyingPythOracle(address)",
-  ];
-  return methods.map(method => ({
-    caller: timelock,
-    target: ANY_CONTRACT,
-    method,
-  }));
-};
-
-const configureAccessControls = async (hre: HardhatRuntimeEnvironment): Promise<void> => {
-  const networkName = hre.network.name;
-  const accessControlManagerAddress = ADDRESSES[networkName].acm;
-
-  const accessControlConfig: AccessControlEntry[] = timelockOraclePermissions(ADDRESSES[networkName].timelock);
-  const accessControlManager = await ethers.getContractAt<AccessControlManager>(
-    "AccessControlManager",
-    accessControlManagerAddress,
-  );
-
-  await Promise.all(
-    accessControlConfig.map(async (entry: AccessControlEntry) => {
-      const { caller, target, method } = entry;
-      if (await hasPermission(accessControlManager, caller, method, target)) {
-        return [];
-      }
-      await (await accessControlManager.giveCallPermission(target, method, caller)).wait(1);
-      return true;
-    }),
-  );
 };
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
-  const owner = ADDRESSES[hre.network.name].timelock;
-  const { deployer } = await hre.getNamedAccounts();
   if (hre.network.live) {
-    await configureAccessControls(hre);
-    if (owner && owner !== deployer) {
-      await acceptOwnership("ResilientOracle", owner, hre);
-      await acceptOwnership("ChainlinkOracle", owner, hre);
-      await acceptOwnership("RedStoneOracle", owner, hre);
-      await acceptOwnership("BoundValidator", owner, hre);
-      await acceptOwnership("BinanceOracle", owner, hre);
-    } else {
-      console.log(`Timelock is deployer, skip configuring AccessControlManager and calling acceptOwnership`);
-    }
     await configurePriceFeeds(hre);
   } else {
     throw Error("This script is only used for live networks.");
