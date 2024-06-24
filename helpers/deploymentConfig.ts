@@ -15,6 +15,7 @@ export interface Asset {
   oracle: string;
   price?: string;
   stalePeriod?: number;
+  twapDuration?: number;
 }
 
 export interface Assets {
@@ -54,6 +55,7 @@ export const SEQUENCER: Record<string, string> = {
 
 export const addr0000 = "0x0000000000000000000000000000000000000000";
 export const DEFAULT_STALE_PERIOD = 24 * 60 * 60; // 24 hrs
+export const DEFAULT_TWAP_DURATION = 30 * 60; // 30min
 const STALE_PERIOD_100M = 60 * 100; // 100 minutes (for pricefeeds with heartbeat of 1 hr)
 const STALE_PERIOD_26H = 60 * 60 * 26; // 26 hours (pricefeeds with heartbeat of 24 hr)
 export const ANY_CONTRACT = ethers.constants.AddressZero;
@@ -83,7 +85,7 @@ export const ADDRESSES: PreconfiguredAddresses = {
     weETH: "0x3b8b6E96e57f0d1cD366AaCf4CcC68413aF308D0",
     eETH: "0x0012875a7395a293Adfc9b5cDC2Cfa352C4cDcD3",
     WETH: "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9",
-    PTweETH_26DEC2024: "0x56107201d3e4b7Db92dEa0Edb9e0454346AEb8B5",
+    ptOracle: "0x28A59851C1CB12351D7c6aEf98FFE2871d7cF898",
   },
   ethereum: {
     vBNBAddress: ethers.constants.AddressZero,
@@ -97,7 +99,7 @@ export const ADDRESSES: PreconfiguredAddresses = {
     eETH: "0x35fA164735182de50811E8e2E824cFb9B6118ac2",
     PTweETH_26DEC2024: "0x6ee2b5e19ecba773a352e5b21415dc419a700d1d",
     PTweETH_26DEC2024_Market: "0x7d372819240d14fb477f17b964f95f33beb4c704",
-    PTOracle: "0x66a1096C6366b2529274dF4f5D8247827fe4CEA8",
+    ptOracle: "0x66a1096C6366b2529274dF4f5D8247827fe4CEA8",
     EtherFiLiquidityPool: "0x308861A430be4cce5502d0A12724771Fc6DaF216",
     WETH: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
   },
@@ -176,6 +178,13 @@ export const pythID: Config = {
   },
 };
 
+export const pendleMarket: Config = {
+  sepolia: { PTweETH_26DEC2024: "0xB1bE063Ccbc4f67f58293C402aF8D082c0459787" },
+  ethereum: {},
+  arbitrum: {},
+  metertest: {},
+};
+
 export const assets: Assets = {
   metertest: [
     { token: "USDC", address: "0x2b27f5f7f2867ad9d2b7065f81e985c1bd1b7274", oracle: "pyth" },
@@ -211,6 +220,12 @@ export const assets: Assets = {
       token: "XVS",
       address: "0xdb633c11d3f9e6b8d17ac2c972c9e3b05da59bf9",
       oracle: "redstone",
+    },
+    {
+      token: "PTweETH_26DEC2024",
+      address: "0x0F0747Fe5a6B68C1149AeD0A437905b06b77b9Cb",
+      oracle: "pendle",
+      twapDuration: 1800,
     },
   ],
   ethereum: [
@@ -274,6 +289,7 @@ export const getOraclesData = async (): Promise<Oracles> => {
   const redstoneOracle = await ethers.getContractOrNull("RedStoneOracle");
   const binanceOracle = await ethers.getContractOrNull("BinanceOracle");
   const pythOracle = await ethers.getContractOrNull("PythOracle");
+  const pendleOracle = await ethers.getContractOrNull("PendleOracle");
 
   const oraclesData: Oracles = {
     ...(chainlinkOracle
@@ -336,6 +352,20 @@ export const getOraclesData = async (): Promise<Oracles> => {
               pythId: pythID[name][asset.token],
               asset: asset.address,
               maxStalePeriod: asset.stalePeriod ? asset.stalePeriod : DEFAULT_STALE_PERIOD,
+            }),
+          },
+        }
+      : {}),
+    ...(pendleOracle
+      ? {
+          pendle: {
+            oracles: [pendleOracle.address, addr0000, addr0000],
+            enableFlagsForOracles: [true, false, false],
+            underlyingOracle: pendleOracle,
+            getTokenConfig: (asset: Asset, name: string) => ({
+              market: pendleMarket[name][asset.token],
+              asset: asset.address,
+              twapDuration: asset.twapDuration ? asset.twapDuration : DEFAULT_TWAP_DURATION,
             }),
           },
         }
