@@ -77,7 +77,7 @@ export const ADDRESSES: PreconfiguredAddresses = {
     vBNBAddress: ethers.constants.AddressZero,
     VAIAddress: ethers.constants.AddressZero,
     acm: "0xbcbda48712A075fa7B50b4B6f8C42D40D4505F8B",
-    timelock: "", // FIXME: Sepolia Multisig
+    timelock: "0x14b27D8DC12E59a9904DaC6d17D33B8de2E80e66", // FIXME: Sepolia Multisig
     stETHAddress: "0xF5465B70Af90AEb26Aa13b1000a8CbEA53a5f4cf",
     wstETHAddress: "0x9b87ea90fdb55e1a0f17fbeddcf7eb0ac4d50493",
     weETH: "0x3b8b6E96e57f0d1cD366AaCf4CcC68413aF308D0",

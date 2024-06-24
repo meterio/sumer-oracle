@@ -24,7 +24,7 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
       getDirectPriceConfig !== undefined
     ) {
       const assetConfig: any = getDirectPriceConfig(asset);
-      console.log(`Set direct price for ${asset.token} on pythOracle with`, assetConfig.asset, assetConfig.price);
+      console.log(`Set direct price for ${asset.token} on ${oracle} with`, assetConfig.asset, assetConfig.price);
       await (await chainlinkOracle.setDirectPrice(assetConfig.asset, assetConfig.price)).wait(1);
     }
 
@@ -57,7 +57,7 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
         }
       } else {
         const oracleContract = await hre.ethers.getContractAt(
-          "ResilientOracle",
+          "ChainlinkOracle",
           oraclesData[oracle].underlyingOracle.address,
         );
         const configOnChain = await oracleContract.tokenConfigs(tokenConfig.asset);

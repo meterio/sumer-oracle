@@ -29,9 +29,7 @@ const givePermission = async (
     const has = await hasPermission(accessControl, targetContract.address, method, caller);
     if (!has) {
       console.log(`Give permission ${method} on ${targetContractName} ${targetContract.address} to ${caller}`);
-      await (
-        await accessControl.giveCallPermission(targetContract.address, "setTokenConfig(TokenConfig)", caller)
-      ).wait(1);
+      await (await accessControl.giveCallPermission(targetContract.address, method, caller)).wait(1);
     } else {
       console.log(`Permission checked: ${method} on ${targetContractName} ${targetContract.address} to ${caller}`);
     }
