@@ -9,11 +9,11 @@ contract MockPendlePtOracle is IPendlePtOracle, Ownable {
 
     constructor() Ownable() {}
 
-    function setPtToAssetRate(address market, uint32 duration, uint256 rate) external onlyOwner {
+    function setPtToSyRate(address market, uint32 duration, uint256 rate) external onlyOwner {
         ptToAssetRate[market][duration] = rate;
     }
 
-    function getPtToAssetRate(address market, uint32 duration) external view returns (uint256) {
+    function getPtToSyRate(address market, uint32 duration) external view returns (uint256) {
         return ptToAssetRate[market][duration];
     }
 
