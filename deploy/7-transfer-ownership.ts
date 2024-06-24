@@ -24,7 +24,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, network }: Hard
 
   const networkName: string = network.name === "hardhat" ? "metertest" : network.name;
 
-  const proxyOwnerAddress = network.live ? ADDRESSES[networkName].timelock || deployer : deployer;
+  const proxyOwnerAddress = ADDRESSES[networkName].timelock || deployer;
   if (proxyOwnerAddress === "") {
     console.log(`proxyOwner is empty, skip calling transferOwnership`);
   }
@@ -39,6 +39,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, network }: Hard
   await transferOwnership("SequencerChainlinkOracle", deployer, proxyOwnerAddress);
   await transferOwnership("RedStoneOracle", deployer, proxyOwnerAddress);
   await transferOwnership("PythOracle", deployer, proxyOwnerAddress);
+  await transferOwnership("PendleOracle", deployer, proxyOwnerAddress);
   await transferOwnership("MockEtherFiLiquidityPool", deployer, proxyOwnerAddress);
 };
 

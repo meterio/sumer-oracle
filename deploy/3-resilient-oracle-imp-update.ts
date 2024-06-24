@@ -13,7 +13,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
   const { vBNBAddress } = ADDRESSES[networkName];
   const { VAIAddress } = ADDRESSES[networkName];
 
-  const proxyOwnerAddress = network.live ? ADDRESSES[networkName].timelock : deployer;
+  const proxyOwnerAddress = ADDRESSES[networkName].timelock || deployer;
   const boundValidator = await hre.ethers.getContract("BoundValidator");
 
   await catchUnknownSigner(

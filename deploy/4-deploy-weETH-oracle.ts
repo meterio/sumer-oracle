@@ -10,7 +10,7 @@ const func: DeployFunction = async ({ getNamedAccounts, deployments, network }: 
 
   const resilientOracle = await ethers.getContract("ResilientOracle");
   const chainlinkOracle = await ethers.getContract("ChainlinkOracle");
-  const proxyOwnerAddress = network.live ? ADDRESSES[network.name].timelock : deployer;
+  const proxyOwnerAddress = ADDRESSES[network.name].timelock || deployer;
 
   let { EtherFiLiquidityPool } = ADDRESSES[network.name];
   const { weETH, WETH } = ADDRESSES[network.name];

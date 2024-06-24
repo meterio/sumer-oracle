@@ -47,7 +47,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
   const { vBNBAddress } = ADDRESSES[networkName];
   const { VAIAddress } = ADDRESSES[networkName];
 
-  if (!network.live) {
+  if (!ADDRESSES[networkName].acm || ADDRESSES[networkName].acm === ethers.constants.AddressZero) {
     await deploy("AccessControlManager", {
       from: deployer,
       args: [],
@@ -66,7 +66,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
   }
   const accessControlManagerAddress = accessControlManager.address;
 
-  const proxyOwnerAddress = network.live ? ADDRESSES[networkName].timelock || deployer : deployer;
+  const proxyOwnerAddress = ADDRESSES[networkName].timelock || deployer;
 
   await deploy("BoundValidator", {
     from: deployer,
@@ -105,7 +105,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
   if (sequencer !== undefined) contractName = "SequencerChainlinkOracle";
 
   await deploy(contractName, {
-    contract: network.live ? contractName : "MockChainlinkOracle",
+    contract: contractName,
     from: deployer,
     log: true,
     deterministicDeployment: false,
@@ -115,13 +115,13 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
       proxyContract: "OptimizedTransparentProxy",
       execute: {
         methodName: "initialize",
-        args: network.live ? [accessControlManagerAddress] : [],
+        args: [accessControlManagerAddress],
       },
     },
   });
 
   await deploy("RedStoneOracle", {
-    contract: network.live ? contractName : "MockChainlinkOracle",
+    contract: contractName,
     from: deployer,
     log: true,
     deterministicDeployment: false,
@@ -131,7 +131,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
       proxyContract: "OptimizedTransparentProxy",
       execute: {
         methodName: "initialize",
-        args: network.live ? [accessControlManagerAddress] : [],
+        args: [accessControlManagerAddress],
       },
     },
   });
@@ -141,7 +141,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
   // Skip if no pythOracle address in config
   if (pythOracleAddress) {
     await deploy("PythOracle", {
-      contract: network.live ? "PythOracle" : "MockPythOracle",
+      contract: "PythOracle",
       from: deployer,
       log: true,
       deterministicDeployment: false,
@@ -151,7 +151,29 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
         proxyContract: "OptimizedTransparentProxy",
         execute: {
           methodName: "initialize",
-          args: network.live ? [pythOracleAddress, accessControlManagerAddress] : [pythOracleAddress],
+          args: [pythOracleAddress, accessControlManagerAddress],
+        },
+      },
+    });
+  }
+
+  const { ptOracle } = ADDRESSES[networkName];
+  const resilientOracle = await hre.ethers.getContract("ResilientOracle");
+
+  // Skip if no ptOracle address in config
+  if (ptOracle) {
+    await deploy("PendleOracle", {
+      contract: "PendleOracle",
+      from: deployer,
+      log: true,
+      deterministicDeployment: false,
+      args: [],
+      proxy: {
+        owner: proxyOwnerAddress,
+        proxyContract: "OptimizedTransparentProxy",
+        execute: {
+          methodName: "initialize",
+          args: [accessControlManagerAddress, ptOracle, resilientOracle.address],
         },
       },
     });
@@ -188,6 +210,13 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
   await givePermission(
     accessControlManager as AccessControlManager,
     "PythOracle",
+    "setTokenConfig(TokenConfig)",
+    deployer,
+  );
+
+  await givePermission(
+    accessControlManager as AccessControlManager,
+    "PendleOracle",
     "setTokenConfig(TokenConfig)",
     deployer,
   );

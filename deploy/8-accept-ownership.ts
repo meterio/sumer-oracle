@@ -10,9 +10,6 @@ const acceptOwnership = async (
   targetOwner: string,
   hre: HardhatRuntimeEnvironment,
 ): Promise<void> => {
-  if (!hre.network.live) {
-    return;
-  }
   const abi = ["function owner() view returns (address)"];
   let deployment;
   try {
@@ -66,13 +63,16 @@ const timelockOraclePermissions = (timelock: string): AccessControlEntry[] => {
 
 const configureAccessControls = async (hre: HardhatRuntimeEnvironment): Promise<void> => {
   const networkName = hre.network.name;
-  const accessControlManagerAddress = ADDRESSES[networkName].acm;
 
   const accessControlConfig: AccessControlEntry[] = timelockOraclePermissions(ADDRESSES[networkName].timelock);
-  const accessControlManager = await ethers.getContractAt<AccessControlManager>(
-    "AccessControlManager",
-    accessControlManagerAddress,
-  );
+  const accessControlManager = await hre.ethers.getContract<AccessControlManager>("AccessControlManager");
+  if (!accessControlManager) {
+    throw new Error(`AccessControlManager required`);
+  }
+
+  if (accessControlManager.address !== ADDRESSES[networkName].acm) {
+    throw new Error(`AccessControlManager mismach with acm settings`);
+  }
 
   await Promise.all(
     accessControlConfig.map(async (entry: AccessControlEntry) => {
@@ -90,22 +90,18 @@ const configureAccessControls = async (hre: HardhatRuntimeEnvironment): Promise<
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const owner = ADDRESSES[hre.network.name].timelock;
   const { deployer } = await hre.getNamedAccounts();
-  if (hre.network.live) {
-    if (owner && owner !== deployer) {
-      await acceptOwnership("ResilientOracle", owner, hre);
-      await acceptOwnership("ChainlinkOracle", owner, hre);
-      await acceptOwnership("RedStoneOracle", owner, hre);
-      await acceptOwnership("BoundValidator", owner, hre);
-      await configureAccessControls(hre);
-    } else {
-      console.log(`Timelock is deployer, skip configuring AccessControlManager and calling acceptOwnership`);
-    }
+  if (owner && owner !== deployer) {
+    await acceptOwnership("BoundValidator", owner, hre);
+    await acceptOwnership("ResilientOracle", owner, hre);
+    await acceptOwnership("ChainlinkOracle", owner, hre);
+    await acceptOwnership("RedStoneOracle", owner, hre);
+    await acceptOwnership("PendleOracle", owner, hre);
+    await configureAccessControls(hre);
   } else {
-    throw Error("This script is only used for live networks.");
+    console.log(`Timelock is deployer, skip configuring AccessControlManager and calling acceptOwnership`);
   }
 };
 
-func.tags = ["VIP"];
-func.skip = async (hre: HardhatRuntimeEnvironment) => hre.network.name === "hardhat";
+func.tags = ["accept-ownership"];
 
 export default func;
