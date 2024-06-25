@@ -217,6 +217,12 @@ export const assets: Assets = {
       price: "1000000000000000000",
     },
     {
+      token: "weETH",
+      address: "0x3b8b6E96e57f0d1cD366AaCf4CcC68413aF308D0",
+      oracle: "chainlinkFixed",
+      price: "1040000000000000000",
+    }, // denominated by ETH
+    {
       token: "XVS",
       address: "0xdb633c11d3f9e6b8d17ac2c972c9e3b05da59bf9",
       oracle: "redstone",
