@@ -15,22 +15,21 @@ const func: DeployFunction = async ({ getNamedAccounts, deployments, network }: 
   let { EtherFiLiquidityPool } = ADDRESSES[network.name];
   const { weETH, WETH } = ADDRESSES[network.name];
 
-  if (!EtherFiLiquidityPool) {
-    // deploy mock liquidity pool
-    await deploy("MockEtherFiLiquidityPool", {
-      from: deployer,
-      contract: "MockEtherFiLiquidityPool",
-      args: [],
-      log: true,
-      autoMine: true, // speed up deployment on local network (ganache, hardhat), no effect on live networks
-      skipIfAlreadyDeployed: true,
-    });
-
-    const mockEtherFiLiquidityPool = await ethers.getContract("MockEtherFiLiquidityPool");
-    EtherFiLiquidityPool = mockEtherFiLiquidityPool.address;
-  }
-
   if (network.name === "sepolia" || network.name === "ethereum") {
+    if (!EtherFiLiquidityPool) {
+      // deploy mock liquidity pool
+      await deploy("MockEtherFiLiquidityPool", {
+        from: deployer,
+        contract: "MockEtherFiLiquidityPool",
+        args: [],
+        log: true,
+        autoMine: true, // speed up deployment on local network (ganache, hardhat), no effect on live networks
+        skipIfAlreadyDeployed: true,
+      });
+
+      const mockEtherFiLiquidityPool = await ethers.getContract("MockEtherFiLiquidityPool");
+      EtherFiLiquidityPool = mockEtherFiLiquidityPool.address;
+    }
     // deply Equivalence and NonEquivalence on Ethereum
     await deploy("WeETHOracle_Equivalence", {
       contract: "WeETHOracle",
@@ -38,33 +37,6 @@ const func: DeployFunction = async ({ getNamedAccounts, deployments, network }: 
       log: true,
       deterministicDeployment: false,
       args: [EtherFiLiquidityPool, weETH, WETH, resilientOracle.address],
-      proxy: {
-        owner: proxyOwnerAddress,
-        proxyContract: "OptimizedTransparentProxy",
-      },
-      skipIfAlreadyDeployed: true,
-    });
-
-    await deploy("WeETHOracle_NonEquivalence", {
-      contract: "OneJumpOracle",
-      from: deployer,
-      log: true,
-      deterministicDeployment: false,
-      args: [weETH, WETH, resilientOracle.address, chainlinkOracle.address],
-      proxy: {
-        owner: proxyOwnerAddress,
-        proxyContract: "OptimizedTransparentProxy",
-      },
-      skipIfAlreadyDeployed: true,
-    });
-  } else {
-    // deploy NonEquivalence on networks other than Sepolia and Ethereum
-    await deploy("WeETHOracle_NonEquivalence", {
-      contract: "OneJumpOracle",
-      from: deployer,
-      log: true,
-      deterministicDeployment: false,
-      args: [weETH, WETH, resilientOracle.address, chainlinkOracle.address],
       proxy: {
         owner: proxyOwnerAddress,
         proxyContract: "OptimizedTransparentProxy",

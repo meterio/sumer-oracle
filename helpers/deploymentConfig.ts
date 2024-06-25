@@ -16,6 +16,7 @@ export interface Asset {
   price?: string;
   stalePeriod?: number;
   twapDuration?: number;
+  denominatedBy?: string;
 }
 
 export interface Assets {
@@ -66,6 +67,7 @@ export const ADDRESSES: PreconfiguredAddresses = {
     VAIAddress: ethers.constants.AddressZero,
     acm: "0xcB5f549cF00C342Bc3BA74db2d90d4554dd3De0b", // FIXME:
     timelock: "0x14b27D8DC12E59a9904DaC6d17D33B8de2E80e66", // FIXME: Meter Testnet Multisig
+
     pythOracleAddress: "0x5a71C07a0588074443545eE0c08fb0375564c3E4",
   },
   metermain: {
@@ -73,6 +75,7 @@ export const ADDRESSES: PreconfiguredAddresses = {
     VAIAddress: ethers.constants.AddressZero,
     acm: "", // FIXME:
     timelock: "", // FIXME: Meter Mainnet Multisig
+
     pythOracleAddress: "0xbfe3f445653f2136b2fd1e6dddb5676392e3af16",
   },
   sepolia: {
@@ -80,8 +83,7 @@ export const ADDRESSES: PreconfiguredAddresses = {
     VAIAddress: ethers.constants.AddressZero,
     acm: "0xbcbda48712A075fa7B50b4B6f8C42D40D4505F8B",
     timelock: "0x14b27D8DC12E59a9904DaC6d17D33B8de2E80e66", // FIXME: Sepolia Multisig
-    stETHAddress: "0xF5465B70Af90AEb26Aa13b1000a8CbEA53a5f4cf",
-    wstETHAddress: "0x9b87ea90fdb55e1a0f17fbeddcf7eb0ac4d50493",
+
     weETH: "0x3b8b6E96e57f0d1cD366AaCf4CcC68413aF308D0",
     eETH: "0x0012875a7395a293Adfc9b5cDC2Cfa352C4cDcD3",
     WETH: "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9",
@@ -92,13 +94,9 @@ export const ADDRESSES: PreconfiguredAddresses = {
     VAIAddress: ethers.constants.AddressZero,
     acm: ethers.constants.AddressZero, // FIXME: replace this with correct address
     timelock: "", // FIXME: Ethereum Multisig
-    WBNBAddress: ethers.constants.AddressZero,
-    stETHAddress: "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
-    wstETHAddress: "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+
     weETH: "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee",
     eETH: "0x35fA164735182de50811E8e2E824cFb9B6118ac2",
-    PTweETH_26DEC2024: "0x6ee2b5e19ecba773a352e5b21415dc419a700d1d",
-    PTweETH_26DEC2024_Market: "0x7d372819240d14fb477f17b964f95f33beb4c704",
     ptOracle: "0x66a1096C6366b2529274dF4f5D8247827fe4CEA8",
     EtherFiLiquidityPool: "0x308861A430be4cce5502d0A12724771Fc6DaF216",
     WETH: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
@@ -106,9 +104,14 @@ export const ADDRESSES: PreconfiguredAddresses = {
   arbitrum: {
     vBNBAddress: ethers.constants.AddressZero,
     VAIAddress: ethers.constants.AddressZero,
-    acm: ethers.constants.AddressZero, // FIXME: replace this with correct address
+    acm: "", // FIXME: replace this with correct address
     timelock: "", // FIXME: Arbitrum One Multisig
-    WBNBAddress: ethers.constants.AddressZero,
+  },
+  base: {
+    vBNBAddress: ethers.constants.AddressZero,
+    VAIAddress: ethers.constants.AddressZero,
+    acm: "", // FIXME: replace this with correct address
+    timelock: "", // FIXME: Arbitrum One Multisig
   },
 };
 
@@ -126,7 +129,7 @@ export const chainlinkFeed: Config = {
     USDT: "0x3E7d1eAB13ad0104d2750B8863b489D65364e32D",
     USDC: "0x8fFfFfd4AfB6115b954Bd326cbe7B4BA576818f6",
     stETH: "0xCfE54B5cD566aB89272946F602D76Ea879CAb4a8",
-    weETH: "0x5c9C449BbC9a6075A2c061dF312a35fd1E05fF22", // denominated by ETH
+    "weETH/WETH": "0x5c9C449BbC9a6075A2c061dF312a35fd1E05fF22", // denominated by ETH
   },
   arbitrum: {
     WBTC: "0x6ce185860a4963106506C203335A2910413708e9",
@@ -136,7 +139,7 @@ export const chainlinkFeed: Config = {
     WETH: "0x639Fe6ab55C921f74e7fac1ee960C0B6293ba612",
   },
   base: {
-    weETH: "0xFC1415403EbB0c693f9a7844b92aD2Ff24775C65", // denominated by ETH
+    "weETH/WETH": "0xFC1415403EbB0c693f9a7844b92aD2Ff24775C65", // denominated by ETH
   },
 };
 
@@ -146,8 +149,8 @@ export const redstoneFeed: Config = {
   },
   ethereum: {
     XVS: "0xa2a8507DEb233ceE4F5594044C259DD0582339CC",
-    weETH: "0x8751F736E94F6CD167e8C5B97E245680FbD9CC36", // denominated by ETH
-    pufETH: "0x76A495b0bFfb53ef3F0E94ef0763e03cE410835C", // denominated by ETH
+    "weETH/WETH": "0x8751F736E94F6CD167e8C5B97E245680FbD9CC36", // denominated by ETH
+    "pufETH/WETH": "0x76A495b0bFfb53ef3F0E94ef0763e03cE410835C", // denominated by ETH
     USDe: "0xbC5FBcf58CeAEa19D523aBc76515b9AEFb5cfd58",
     sUSDe: "0xb99D174ED06c83588Af997c8859F93E83dD4733f",
   },
@@ -180,7 +183,7 @@ export const pythID: Config = {
 
 export const pendleMarket: Config = {
   sepolia: { PTweETH_26DEC2024: "0xB1bE063Ccbc4f67f58293C402aF8D082c0459787" },
-  ethereum: {},
+  ethereum: { PTweETH_26DEC2024: "0x7d372819240d14fb477f17b964f95f33beb4c704" },
   arbitrum: {},
   metertest: {},
 };
@@ -221,6 +224,7 @@ export const assets: Assets = {
       address: "0x3b8b6E96e57f0d1cD366AaCf4CcC68413aF308D0",
       oracle: "chainlinkFixed",
       price: "1040000000000000000",
+      denominatedBy: "WETH",
     }, // denominated by ETH
     {
       token: "XVS",
@@ -259,6 +263,12 @@ export const assets: Assets = {
       address: "0xdac17f958d2ee523a2206206994597c13d831ec7",
       oracle: "chainlink",
       stalePeriod: STALE_PERIOD_26H,
+    },
+    {
+      token: "PTweETH_26DEC2024",
+      address: "0x6ee2b5e19ecba773a352e5b21415dc419a700d1d",
+      oracle: "pendle",
+      twapDuration: 1800,
     },
   ],
   arbitrum: [
@@ -304,11 +314,17 @@ export const getOraclesData = async (): Promise<Oracles> => {
             oracles: [chainlinkOracle.address, addr0000, addr0000],
             enableFlagsForOracles: [true, false, false],
             underlyingOracle: chainlinkOracle,
-            getTokenConfig: (asset: Asset, name: string) => ({
-              asset: asset.address,
-              feed: chainlinkFeed[name][asset.token],
-              maxStalePeriod: asset.stalePeriod ? asset.stalePeriod : DEFAULT_STALE_PERIOD,
-            }),
+            getTokenConfig: (asset: Asset, name: string) => {
+              let feedName = asset.token;
+              if (asset.denominatedBy) {
+                feedName = `${asset.token}/${asset.denominatedBy}`;
+              }
+              return {
+                asset: asset.address,
+                feed: chainlinkFeed[name][feedName],
+                maxStalePeriod: asset.stalePeriod ? asset.stalePeriod : DEFAULT_STALE_PERIOD,
+              };
+            },
           },
           chainlinkFixed: {
             oracles: [chainlinkOracle.address, addr0000, addr0000],
@@ -327,11 +343,17 @@ export const getOraclesData = async (): Promise<Oracles> => {
             oracles: [redstoneOracle.address, addr0000, addr0000],
             enableFlagsForOracles: [true, false, false],
             underlyingOracle: redstoneOracle,
-            getTokenConfig: (asset: Asset, name: string) => ({
-              asset: asset.address,
-              feed: redstoneFeed[name][asset.token],
-              maxStalePeriod: asset.stalePeriod ? asset.stalePeriod : DEFAULT_STALE_PERIOD,
-            }),
+            getTokenConfig: (asset: Asset, name: string) => {
+              let feedName = asset.token;
+              if (asset.denominatedBy) {
+                feedName = `${asset.token}/${asset.denominatedBy}`;
+              }
+              return {
+                asset: asset.address,
+                feed: redstoneFeed[name][feedName],
+                maxStalePeriod: asset.stalePeriod ? asset.stalePeriod : DEFAULT_STALE_PERIOD,
+              };
+            },
           },
         }
       : {}),

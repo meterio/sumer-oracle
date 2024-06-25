@@ -2,7 +2,7 @@ import hre, { ethers } from "hardhat";
 import { DeployFunction } from "hardhat-deploy/dist/types";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 
-import { ADDRESSES, SEQUENCER } from "../helpers/deploymentConfig";
+import { ADDRESSES, SEQUENCER, assets, chainlinkFeed, redstoneFeed } from "../helpers/deploymentConfig";
 import { AccessControlManager } from "../typechain-types";
 
 const makeRole = (mainnetBehavior: boolean, targetContract: string, method: string): string =>
@@ -189,6 +189,46 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
         },
       },
     });
+  }
+
+  for (const asset of assets[networkName]) {
+    if (asset.denominatedBy) {
+      if (!(asset.denominatedBy in ADDRESSES[networkName])) {
+        throw new Error(`address for token ${asset.denominatedBy} must be configured in ADDRESSES`);
+      }
+
+      const denominator = ADDRESSES[networkName][asset.denominatedBy];
+      if (chainlinkFeed[networkName][asset.denominatedBy]) {
+        const chainlinkOracle = await ethers.getContract(contractName);
+        await deploy(`${asset.token}Oracle`, {
+          contract: "OneJumpOracle",
+          from: deployer,
+          log: true,
+          deterministicDeployment: false,
+          args: [weETH, denominator, resilientOracle.address, chainlinkOracle.address],
+          proxy: {
+            owner: proxyOwnerAddress,
+            proxyContract: "OptimizedTransparentProxy",
+          },
+          // skipIfAlreadyDeployed: true,
+        });
+        break;
+      }
+      if (redstoneFeed[networkName][asset.denominatedBy]) {
+        const redstoneOracle = await ethers.getContract("RedStoneOracle");
+        await deploy(`${asset.token}Oracle`, {
+          contract: "OneJumpOracle",
+          from: deployer,
+          log: true,
+          deterministicDeployment: false,
+          args: [weETH, denominator, resilientOracle.address, redstoneOracle.address],
+          proxy: {
+            owner: proxyOwnerAddress,
+            proxyContract: "OptimizedTransparentProxy",
+          },
+        });
+      }
+    }
   }
 
   await givePermission(

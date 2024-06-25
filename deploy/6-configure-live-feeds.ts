@@ -22,13 +22,13 @@ const setTokenConfigOnResilientOracle = async (hre: HardhatRuntimeEnvironment, a
       (o: boolean, index: number) => o !== oracleConfig.enableFlagsForOracles[index],
     );
   if (configOnChain.asset.toLowerCase() !== asset.address.toLowerCase() || oracleMismatch || flagsMismatch) {
-    console.log(`Configured ${asset.token} on resilient oracle`);
+    console.log(`Configured ${asset.token} on resilient oracle with ${JSON.stringify(oracleConfig.oracles)}`);
 
     await (
       await resilientOracle.setTokenConfig([asset.address, oracleConfig.oracles, oracleConfig.enableFlagsForOracles])
     ).wait(1);
   } else {
-    console.log(`Checked ${asset.token} on resilient oracle, nothing changed`);
+    console.log(`Checked ${asset.token} on resilient oracle`);
   }
 };
 
@@ -51,9 +51,7 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
       oraclesData[oracle].underlyingOracle.address === chainlinkOracle?.address &&
       getDirectPriceConfig !== undefined
     ) {
-      console.log("asset: ", asset);
       const assetConfig: any = getDirectPriceConfig(asset);
-      console.log("asset config: ", assetConfig);
 
       const priceOnChain = await chainlinkOracle.getPrice(assetConfig.asset);
       if (!priceOnChain.eq(assetConfig.price)) {
@@ -68,6 +66,19 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
     if (oraclesData[oracle].underlyingOracle.address !== binanceOracle?.address && getTokenConfig !== undefined) {
       const tokenConfig: any = getTokenConfig(asset, networkName);
 
+      if (asset.denominatedBy) {
+        // one jump oracle
+        const oneJumpOracle = await ethers.getContract(`${asset.token}Oracle`);
+        if (!oneJumpOracle) {
+          throw new Error(`could not find specific oracle for ${asset.token}`);
+        }
+        await setTokenConfigOnResilientOracle(hre, asset, {
+          oracles: [oneJumpOracle.address, ethers.constants.AddressZero, ethers.constants.AddressZero],
+          enableFlagsForOracles: [true, false, false],
+          underlyingOracle: oneJumpOracle,
+        });
+        return;
+      }
       if (oracle === "pyth") {
         if (pythOracle) {
           const configOnChain = await pythOracle.tokenConfigs(tokenConfig.asset);
@@ -145,21 +156,6 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
 
     await setTokenConfigOnResilientOracle(hre, asset, oraclesData[oracle]);
   }
-
-  // configure weETH
-  const { weETH, WETH } = ADDRESSES[hre.network.name];
-  const weETHOracle = await hre.ethers.getContractOrNull("WeETHOracle_NonEquivalence");
-  if (weETH && WETH && weETHOracle) {
-    const asset: Asset = { token: "weETH", address: weETH, oracle: "weETH" };
-    const oracleConfig: Oracle = {
-      oracles: [weETHOracle.address, ethers.constants.AddressZero, ethers.constants.AddressZero],
-      enableFlagsForOracles: [true, false, false],
-      underlyingOracle: weETHOracle,
-    };
-    await setTokenConfigOnResilientOracle(hre, asset, oracleConfig);
-  }
-
-  // configure pendle
 };
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
