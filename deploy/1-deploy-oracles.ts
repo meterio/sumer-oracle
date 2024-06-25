@@ -77,8 +77,10 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
       owner: proxyOwnerAddress,
       proxyContract: "OptimizedTransparentProxy",
       execute: {
-        methodName: "initialize",
-        args: [accessControlManagerAddress],
+        init: {
+          methodName: "initialize",
+          args: [accessControlManagerAddress],
+        },
       },
     },
   });
@@ -94,8 +96,10 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
       owner: proxyOwnerAddress,
       proxyContract: "OptimizedTransparentProxy",
       execute: {
-        methodName: "initialize",
-        args: [accessControlManagerAddress],
+        init: {
+          methodName: "initialize",
+          args: [accessControlManagerAddress],
+        },
       },
     },
   });
@@ -114,8 +118,10 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
       owner: proxyOwnerAddress,
       proxyContract: "OptimizedTransparentProxy",
       execute: {
-        methodName: "initialize",
-        args: [accessControlManagerAddress],
+        init: {
+          methodName: "initialize",
+          args: [accessControlManagerAddress],
+        },
       },
     },
   });
@@ -130,8 +136,10 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
       owner: proxyOwnerAddress,
       proxyContract: "OptimizedTransparentProxy",
       execute: {
-        methodName: "initialize",
-        args: [accessControlManagerAddress],
+        init: {
+          methodName: "initialize",
+          args: [accessControlManagerAddress],
+        },
       },
     },
   });
@@ -150,18 +158,20 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
         owner: proxyOwnerAddress,
         proxyContract: "OptimizedTransparentProxy",
         execute: {
-          methodName: "initialize",
-          args: [pythOracleAddress, accessControlManagerAddress],
+          init: {
+            methodName: "initialize",
+            args: [pythOracleAddress, accessControlManagerAddress],
+          },
         },
       },
     });
   }
 
-  const { ptOracle } = ADDRESSES[networkName];
+  const { ptOracle, weETH } = ADDRESSES[networkName];
   const resilientOracle = await hre.ethers.getContract("ResilientOracle");
 
   // Skip if no ptOracle address in config
-  if (ptOracle) {
+  if (ptOracle && weETH) {
     await deploy("PendleOracle", {
       contract: "PendleOracle",
       from: deployer,
@@ -172,8 +182,10 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
         owner: proxyOwnerAddress,
         proxyContract: "OptimizedTransparentProxy",
         execute: {
-          methodName: "initialize",
-          args: [accessControlManagerAddress, ptOracle, resilientOracle.address],
+          init: {
+            methodName: "initialize",
+            args: [accessControlManagerAddress, ptOracle, weETH, resilientOracle.address],
+          },
         },
       },
     });

@@ -51,10 +51,18 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
       oraclesData[oracle].underlyingOracle.address === chainlinkOracle?.address &&
       getDirectPriceConfig !== undefined
     ) {
+      console.log("asset: ", asset);
       const assetConfig: any = getDirectPriceConfig(asset);
-      console.log(`Set direct price for ${asset.token} on ${oracle} with`, assetConfig.asset, assetConfig.price);
+      console.log("asset config: ", assetConfig);
 
-      await (await chainlinkOracle.setDirectPrice(assetConfig.asset, assetConfig.price)).wait(1);
+      const priceOnChain = await chainlinkOracle.getPrice(assetConfig.asset);
+      if (!priceOnChain.eq(assetConfig.price)) {
+        console.log(`Set direct price for ${asset.token} on ${oracle} oracle with ${JSON.stringify(assetConfig)}`);
+
+        await (await chainlinkOracle.setDirectPrice(assetConfig.asset, assetConfig.price)).wait(1);
+      } else {
+        console.log(`Checked direct price for ${asset.token} on ${oracle} oracle`);
+      }
     }
 
     if (oraclesData[oracle].underlyingOracle.address !== binanceOracle?.address && getTokenConfig !== undefined) {
@@ -79,7 +87,7 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
         } else {
           console.log(`pythOracle is null!, can not configure`);
         }
-      } else if (oracle == "chainlink" || oracle == "redstone") {
+      } else if (oracle === "chainlink" || oracle === "redstone") {
         const oracleContract = await hre.ethers.getContractAt(
           "ChainlinkOracle",
           oraclesData[oracle].underlyingOracle.address,
@@ -109,7 +117,7 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
         if (
           configOnChain.asset.toLowerCase() !== tokenConfig.asset.toLowerCase() ||
           configOnChain.market !== tokenConfig.market ||
-          configOnChain.twapDuration.toNumber() !== tokenConfig.twapDuration
+          configOnChain.twapDuration !== tokenConfig.twapDuration
         ) {
           console.log(`Config ${asset.token} on ${oracle} oracle with ${JSON.stringify(tokenConfig)}`);
 
