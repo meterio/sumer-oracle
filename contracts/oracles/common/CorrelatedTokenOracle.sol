@@ -10,6 +10,9 @@ import { IERC20Metadata } from "@openzeppelin/contracts/token/ERC20/extensions/I
  * @notice This oracle fetches the price of a token that is correlated to another token.
  */
 abstract contract CorrelatedTokenOracle is OracleInterface {
+    /// @notice Exponent scale (decimal precision) of prices
+    uint256 public constant EXP_SCALE = 1e18;
+
     /// @notice Address of the correlated token
     /// @custom:oz-upgrades-unsafe-allow state-variable-immutable
     address public immutable CORRELATED_TOKEN;
@@ -54,7 +57,7 @@ abstract contract CorrelatedTokenOracle is OracleInterface {
         uint256 decimals = token.decimals();
 
         // underlyingAmount (for 1 correlated token) * underlyingUSDPrice / decimals(correlated token)
-        return (underlyingAmount * underlyingUSDPrice) / (10 ** decimals);
+        return (underlyingAmount * underlyingUSDPrice) / EXP_SCALE;
     }
 
     /**

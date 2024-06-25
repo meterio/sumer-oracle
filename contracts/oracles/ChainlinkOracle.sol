@@ -142,8 +142,7 @@ contract ChainlinkOracle is AccessControlledV8, OracleInterface {
             price = _getChainlinkPrice(asset);
         }
 
-        uint256 decimalDelta = 18 - decimals;
-        return price * (10 ** decimalDelta);
+        return price;
     }
 
     /**

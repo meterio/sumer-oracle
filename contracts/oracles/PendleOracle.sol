@@ -27,11 +27,16 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
         uint32 twapDuration;
     }
 
+    /// @notice Exponent scale (decimal precision) of prices
+    uint256 public constant EXP_SCALE = 1e18;
+
     /// @notice Address of the PT oracle
     /// @custom:oz-upgrades-unsafe-allow state-variable-immutable
     IPendlePtOracle public underlyingPtOracle;
 
     OracleInterface public intermediateOracle;
+
+    address public underlyingAsset;
 
     /// @notice Token config by assets
     mapping(address => TokenConfig) public tokenConfigs;
@@ -43,6 +48,8 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
     event PtOracleSet(address indexed oldOracle, address indexed newOracle);
 
     event IntermediateOracleSet(address indexed oldOracle, address indexed newOracle);
+
+    event UnderlyingAssetSet(address indexed oldAddress, address indexed newAddress);
 
     /// @notice Thrown if the duration is invalid
     error InvalidDuration();
@@ -62,13 +69,22 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
      * @notice Initializes the owner of the contract
      * @param accessControlManager_ Address of the access control manager contract
      */
-    function initialize(address accessControlManager_, address ptOracle, address resilientOracle) external initializer {
+    function initialize(
+        address accessControlManager_,
+        address ptOracle,
+        address underlyingAsset_,
+        address resilientOracle
+    ) external initializer {
         __AccessControlled_init(accessControlManager_);
         ensureNonzeroAddress(ptOracle);
         ensureNonzeroAddress(resilientOracle);
+        ensureNonzeroAddress(underlyingAsset_);
 
         underlyingPtOracle = IPendlePtOracle(ptOracle);
         emit PtOracleSet(address(0), address(underlyingPtOracle));
+
+        underlyingAsset = underlyingAsset_;
+        emit UnderlyingAssetSet(address(0), underlyingAsset);
 
         intermediateOracle = OracleInterface(resilientOracle);
         emit IntermediateOracleSet(address(0), address(intermediateOracle));
@@ -89,6 +105,52 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
                 ++i;
             }
         }
+    }
+
+    /**
+     * @notice Set the underlying Pt oracle contract address
+     * @param underlyingPtOracle_ Pt oracle contract address
+     * @custom:access Only Governance
+     * @custom:error NotNullAddress error thrown if underlyingPtOracle_ address is zero
+     * @custom:event Emits PtOracleSet event with address of Pt oracle.
+     */
+    function setUnderlyingPtOracle(
+        IPendlePtOracle underlyingPtOracle_
+    ) external notNullAddress(address(underlyingPtOracle_)) {
+        _checkAccessAllowed("setUnderlyingPtOracle(address)");
+        IPendlePtOracle oldOracle = underlyingPtOracle;
+        underlyingPtOracle = underlyingPtOracle_;
+        emit PtOracleSet(address(oldOracle), address(underlyingPtOracle));
+    }
+
+    /**
+     * @notice Set the underlying Pyth oracle contract address
+     * @param intermediateOracle_ Pyth oracle contract address
+     * @custom:access Only Governance
+     * @custom:error NotNullAddress error thrown if intermediateOracle_ address is zero
+     * @custom:event Emits IntermediateOracleSet event with address of Pyth oracle.
+     */
+    function setIntermediateOracle(
+        OracleInterface intermediateOracle_
+    ) external notNullAddress(address(intermediateOracle_)) {
+        _checkAccessAllowed("setIntermediateOracle(address)");
+        OracleInterface oldOracle = intermediateOracle;
+        intermediateOracle = intermediateOracle_;
+        emit IntermediateOracleSet(address(oldOracle), address(intermediateOracle_));
+    }
+
+    /**
+     * @notice Set the underlying sset contract address
+     * @param underlyingAsset_ underlying asset contract address
+     * @custom:access Only Governance
+     * @custom:error NotNullAddress error thrown if intermediateOracle_ address is zero
+     * @custom:event Emits IntermediateOracleSet event with address of Pyth oracle.
+     */
+    function setUnderlyingAsset(address underlyingAsset_) external notNullAddress(address(underlyingAsset_)) {
+        _checkAccessAllowed("setUnderlyingAsset(address)");
+        address oldAddress = underlyingAsset;
+        underlyingAsset = underlyingAsset_;
+        emit UnderlyingAssetSet(address(oldAddress), address(underlyingAsset_));
     }
 
     /**
@@ -124,38 +186,6 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
     }
 
     /**
-     * @notice Set the underlying Pt oracle contract address
-     * @param underlyingPtOracle_ Pt oracle contract address
-     * @custom:access Only Governance
-     * @custom:error NotNullAddress error thrown if underlyingPtOracle_ address is zero
-     * @custom:event Emits PtOracleSet event with address of Pt oracle.
-     */
-    function setUnderlyingPtOracle(
-        IPendlePtOracle underlyingPtOracle_
-    ) external notNullAddress(address(underlyingPtOracle_)) {
-        _checkAccessAllowed("setUnderlyingPtOracle(address)");
-        IPendlePtOracle oldOracle = underlyingPtOracle;
-        underlyingPtOracle = underlyingPtOracle_;
-        emit PtOracleSet(address(oldOracle), address(underlyingPtOracle));
-    }
-
-    /**
-     * @notice Set the underlying Pyth oracle contract address
-     * @param intermediateOracle_ Pyth oracle contract address
-     * @custom:access Only Governance
-     * @custom:error NotNullAddress error thrown if intermediateOracle_ address is zero
-     * @custom:event Emits IntermediateOracleSet event with address of Pyth oracle.
-     */
-    function setintermediateOracle(
-        OracleInterface intermediateOracle_
-    ) external notNullAddress(address(intermediateOracle_)) {
-        _checkAccessAllowed("setintermediateOracle(address)");
-        OracleInterface oldOracle = intermediateOracle;
-        intermediateOracle = intermediateOracle_;
-        emit IntermediateOracleSet(address(oldOracle), address(intermediateOracle_));
-    }
-
-    /**
      * @notice Gets the price of a asset from the chainlink oracle
      * @param asset Address of the asset
      * @return Price in USD from Chainlink or a manually set price for the asset
@@ -165,6 +195,6 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
         if (tokenConfig.asset != asset) revert("unknown token");
         uint256 rate = underlyingPtOracle.getPtToSyRate(tokenConfig.market, tokenConfig.twapDuration);
 
-        return (intermediateOracle.getPrice(asset) * rate) / 1e18;
+        return (intermediateOracle.getPrice(underlyingAsset) * rate) / EXP_SCALE;
     }
 }

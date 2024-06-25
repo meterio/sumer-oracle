@@ -33,11 +33,11 @@ contract OneJumpOracle is CorrelatedTokenOracle {
      * @return amount The amount of the underlying token for 1 correlated token scaled by the underlying token decimals
      */
     function _getUnderlyingAmount() internal view override returns (uint256) {
-        uint256 underlyingDecimals = IERC20Metadata(UNDERLYING_TOKEN).decimals();
-        uint256 correlatedDecimals = IERC20Metadata(CORRELATED_TOKEN).decimals();
+        // uint256 underlyingDecimals = IERC20Metadata(UNDERLYING_TOKEN).decimals();
+        // uint256 correlatedDecimals = IERC20Metadata(CORRELATED_TOKEN).decimals();
 
         uint256 underlyingAmount = INTERMEDIATE_ORACLE.getPrice(CORRELATED_TOKEN);
 
-        return (underlyingAmount * (10 ** correlatedDecimals)) / (10 ** (36 - underlyingDecimals));
+        return underlyingAmount;
     }
 }
