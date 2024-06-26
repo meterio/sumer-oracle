@@ -68,18 +68,7 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
     if (oraclesData[oracle].underlyingOracle.address !== binanceOracle?.address && getTokenConfig !== undefined) {
       const tokenConfig: any = getTokenConfig(asset, networkName);
 
-      if (asset.denominatedBy) {
-        // one jump oracle
-        const oneJumpOracle = await ethers.getContract(`${asset.token}Oracle`);
-        if (!oneJumpOracle) {
-          throw new Error(`could not find specific oracle for ${asset.token}`);
-        }
-        await setTokenConfigOnResilientOracle(hre, asset, {
-          oracles: [oneJumpOracle.address, ethers.constants.AddressZero, ethers.constants.AddressZero],
-          enableFlagsForOracles: [true, false, false],
-          underlyingOracle: oneJumpOracle,
-        });
-      } else if (oracle === "pyth") {
+      if (oracle === "pyth") {
         if (pythOracle) {
           const configOnChain = await pythOracle.tokenConfigs(tokenConfig.asset);
 
@@ -154,7 +143,21 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
       await (await binanceOracle.setMaxStalePeriod(...tokenConfig)).wait(1);
     }
 
-    await setTokenConfigOnResilientOracle(hre, asset, oraclesData[oracle]);
+    if (asset.denominatedBy) {
+      console.log("asset.denominatedby ", asset.denominatedBy);
+      // one jump oracle
+      const oneJumpOracle = await ethers.getContract(`${asset.token}Oracle`);
+      if (!oneJumpOracle) {
+        throw new Error(`could not find specific oracle for ${asset.token}`);
+      }
+      await setTokenConfigOnResilientOracle(hre, asset, {
+        oracles: [oneJumpOracle.address, ethers.constants.AddressZero, ethers.constants.AddressZero],
+        enableFlagsForOracles: [true, false, false],
+        underlyingOracle: oneJumpOracle,
+      });
+    } else {
+      await setTokenConfigOnResilientOracle(hre, asset, oraclesData[oracle]);
+    }
   }
 };
 
