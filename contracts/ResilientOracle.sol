@@ -70,10 +70,12 @@ contract ResilientOracle is PausableUpgradeable, AccessControlledV8, ResilientOr
 
     uint256 public constant INVALID_PRICE = 0;
 
+    /// @notice deprecated, keep it here just to maintain the storage layout
     /// @notice Native market address
     /// @custom:oz-upgrades-unsafe-allow state-variable-immutable
     address public immutable nativeMarket;
 
+    /// @notice deprecated, keeip it here just to maintain the storage layout
     /// @notice VAI address
     /// @custom:oz-upgrades-unsafe-allow state-variable-immutable
     address public immutable vai;
@@ -121,20 +123,16 @@ contract ResilientOracle is PausableUpgradeable, AccessControlledV8, ResilientOr
     /// @notice Constructor for the implementation contract. Sets immutable variables.
     /// @dev nativeMarketAddress can be address(0) if on the chain we do not support native market
     ///      (e.g vETH on ethereum would not be supported, only vWETH)
-    /// @param nativeMarketAddress The address of a native market (for bsc it would be vBNB address)
-    /// @param vaiAddress The address of the VAI token (if there is VAI on the deployed chain).
-    ///          Set to address(0) of VAI is not existent.
+    /// @param nativeAssetAddress The address of a native asset (for ethereum it would be WETH address)
     /// @param _boundValidator Address of the bound validator contract
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor(
-        address nativeMarketAddress,
         address nativeAssetAddress,
-        address vaiAddress,
         BoundValidatorInterface _boundValidator
     ) notNullAddress(address(_boundValidator)) {
-        nativeMarket = nativeMarketAddress;
+        nativeMarket = 0x0000000000000000000000000000000000000000;
         nativeAsset = nativeAssetAddress;
-        vai = vaiAddress;
+        vai = 0x0000000000000000000000000000000000000000;
         boundValidator = _boundValidator;
 
         _disableInitializers();
@@ -444,10 +442,8 @@ contract ResilientOracle is PausableUpgradeable, AccessControlledV8, ResilientOr
      * @return asset underlying asset address
      */
     function _getUnderlyingAsset(address vToken) private view notNullAddress(vToken) returns (address asset) {
-        if (vToken == nativeMarket) {
+        if (VBep20Interface(vToken).isCEther()) {
             asset = nativeAsset;
-        } else if (vToken == vai) {
-            asset = vai;
         } else {
             asset = VBep20Interface(vToken).underlying();
         }

@@ -8,4 +8,6 @@ interface VBep20Interface is IERC20Metadata {
      * @notice Underlying asset for this VToken
      */
     function underlying() external view returns (address);
+
+    function isCEther() external view returns (bool);
 }
