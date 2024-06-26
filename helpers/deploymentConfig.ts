@@ -155,9 +155,10 @@ export const chainlinkFeed: Config = {
     DAI: "0xc5C8E77B397E531B8EC06BFb0048328B30E9eCfB",
     suETH: "0x639Fe6ab55C921f74e7fac1ee960C0B6293ba612",
     suBTC: "0x6ce185860a4963106506C203335A2910413708e9",
-    "RETH/WETH": "0xAed0c38402a5d19df6E4c03F4E2DceD6e29c1ee9", // denomicated by ETH
+    "RETH/WETH": "0xD6aB2298946840262FcC278fF31516D39fF611eF", // denomicated by ETH
     "wstETH/WETH": "0xb523AE262D20A936BC152e6023996e46FDC2A95D", // denominated by ETH
-    "weETH/WETH": "0x5c9C449BbC9a6075A2c061dF312a35fd1E05fF22", // denominated by ETH
+    "weETH/WETH": "0xE141425bc1594b8039De6390db1cDaf4397EA22b", // denominated by ETH
+    "rsETH/WETH": "0xb0EA543f9F8d4B818550365d13F66Da747e1476A", // denominated by ETH
   },
   base: {
     "weETH/WETH": "0xFC1415403EbB0c693f9a7844b92aD2Ff24775C65", // denominated by ETH
@@ -308,6 +309,12 @@ export const assets: Assets = {
     {
       token: "wstETH",
       address: "0x5979D7b546E38E414F7E9822514be443A4800529",
+      oracle: "chainlink",
+      denominatedBy: "WETH",
+    },
+    {
+      token: "rsETH",
+      address: "0x4186BFC76E2E237523CBC30FD220FE055156b41F",
       oracle: "chainlink",
       denominatedBy: "WETH",
     },
