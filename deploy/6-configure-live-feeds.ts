@@ -162,6 +162,6 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   await configurePriceFeeds(hre);
 };
 
-func.tags = ["live-feed"];
+func.tags = ["feeds"];
 
 export default func;

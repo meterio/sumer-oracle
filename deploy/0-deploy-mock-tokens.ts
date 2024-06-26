@@ -93,5 +93,5 @@ const func: DeployFunction = async function ({
 };
 
 export default func;
-func.tags = ["mock-tokens"];
+func.tags = ["mocks"];
 func.skip = async (hre: HardhatRuntimeEnvironment) => hre.network.live;

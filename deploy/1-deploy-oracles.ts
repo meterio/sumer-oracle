@@ -279,4 +279,4 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
 };
 
 export default func;
-func.tags = ["deploy"];
+func.tags = ["oracles"];

@@ -44,4 +44,4 @@ const func: DeployFunction = async function ({ getNamedAccounts, network }: Hard
 };
 
 export default func;
-func.tags = ["deploy"];
+func.tags = ["transfer-ownership"];
