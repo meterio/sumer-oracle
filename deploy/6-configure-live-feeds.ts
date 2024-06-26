@@ -36,7 +36,9 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
   const networkName = hre.network.name;
 
   const binanceOracle = await hre.ethers.getContractOrNull("BinanceOracle");
-  const chainlinkOracle = await hre.ethers.getContractOrNull("ChainlinkOracle");
+  const chainlinkOracle =
+    (await hre.ethers.getContractOrNull("ChainlinkOracle")) ||
+    (await hre.ethers.getContractOrNull("SequencerChainlinkOracle"));
   const pythOracle = await hre.ethers.getContractOrNull("PythOracle");
   const oraclesData: Oracles = await getOraclesData();
 

@@ -52,6 +52,7 @@ export interface Oracles {
 
 export const SEQUENCER: Record<string, string> = {
   arbitrum: "0xFdB631F5EE196F0ed6FAa767959853A9F217697D",
+  metertest: "0xFdB631F5EE196F0ed6FAa767959853A9F217697D",
 };
 
 export const addr0000 = "0x0000000000000000000000000000000000000000";
@@ -63,13 +64,15 @@ export const ANY_CONTRACT = ethers.constants.AddressZero;
 
 export const ADDRESSES: PreconfiguredAddresses = {
   metertest: {
-    nativeMarket: ethers.constants.AddressZero,
-    nativeAsset: "",
+    nativeMarket: "0xF5f86Bf56eA2232454745412f5f482Eb8cB11B1D",
+    nativeAsset: "0x1e4C2E7dB213934F6B4dEF75Bef538F0b6466933",
     VAIAddress: ethers.constants.AddressZero,
     acm: "0xcB5f549cF00C342Bc3BA74db2d90d4554dd3De0b", // FIXME:
     timelock: "0x14b27D8DC12E59a9904DaC6d17D33B8de2E80e66", // FIXME: Meter Testnet Multisig
 
     pythOracleAddress: "0x5a71C07a0588074443545eE0c08fb0375564c3E4",
+
+    MTRG: "0x8A419Ef4941355476cf04933E90Bf3bbF2F73814",
   },
   metermain: {
     nativeMarket: ethers.constants.AddressZero,
@@ -109,19 +112,21 @@ export const ADDRESSES: PreconfiguredAddresses = {
     nativeMarket: "0x3C752d0D78BbFddA6BF4b6000a01228B732441aE", // sdrETH
     nativeAsset: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1", // WETH
     VAIAddress: ethers.constants.AddressZero,
-    acm: "", // FIXME: replace this with correct address
+    acm: "0xEc2d55f444ed98Ba69281C8cA6889BCBB682716f",
     timelock: "", // FIXME: Arbitrum One Multisig
 
     weETH: "0x35751007a407ca6FEFfE80b3cB397736D2cf4dbe",
-    ptOracle: "0x9a9fa8338dd5e5b2188006f1cd2ef26d92165",
+    WETH: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1",
+    ptOracle: "0x9a9Fa8338dd5E5B2188006f1Cd2Ef26d921650C2",
   },
   base: {
-    nativeMarket: ethers.constants.AddressZero,
-    nativeAsset: "",
+    nativeMarket: "0x2AA93D3142d7327307b770Dba2e87C97b86B95Bc", // sdrETH
+    nativeAsset: "0x4200000000000000000000000000000000000006", // WETH
     VAIAddress: ethers.constants.AddressZero,
     acm: "", // FIXME: replace this with correct address
     timelock: "", // FIXME: Arbitrum One Multisig
 
+    WETH: "0x4200000000000000000000000000000000000006",
     weETH: "0x04C0599Ae5A44757c0af6F9eC3b93da8976c150A",
   },
 };
@@ -183,20 +188,20 @@ export const pythID: Config = {
     MTRG: "0x20d096e088a9b85f8cf09278965b77aeb05c00769e2ddeda5ea2d07ea554b283",
   },
   metermain: {
-    WBTC: "c9d8b075a5c69303365ae23633d4e085199bf5c520a3b90fed1322a0342ffc33",
-    BTC: "e62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
-    USDT: "2b89b9dc8fdf9f34709a5b106b472f0f39bb6ca9ce04b0fd7f2e971688e2e53b",
-    USDC: "eaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a",
-    ETH: "ff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace",
-    MTR: "8cdc9b2118d2ce55a299f8f1d700d0127cf4036d1aa666a8cd51dcab4254284f",
-    MTRG: "20d096e088a9b85f8cf09278965b77aeb05c00769e2ddeda5ea2d07ea554b283",
+    WBTC: "0xc9d8b075a5c69303365ae23633d4e085199bf5c520a3b90fed1322a0342ffc33",
+    BTC: "0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
+    "USDT.eth": "0x2b89b9dc8fdf9f34709a5b106b472f0f39bb6ca9ce04b0fd7f2e971688e2e53b",
+    "USDC.eth": "0xeaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a",
+    ETH: "0xff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace",
+    WMTR: "0x8cdc9b2118d2ce55a299f8f1d700d0127cf4036d1aa666a8cd51dcab4254284f",
+    MTRG: "0x20d096e088a9b85f8cf09278965b77aeb05c00769e2ddeda5ea2d07ea554b283",
   },
 };
 
 export const pendleMarket: Config = {
   sepolia: { PTweETH_26DEC2024: "0xB1bE063Ccbc4f67f58293C402aF8D082c0459787" },
   ethereum: { PTweETH_26DEC2024: "0x7d372819240d14fb477f17b964f95f33beb4c704" },
-  arbitrum: { PTweETH_25SEP2024: "0xf9f9779d8ff604732eba9ad345e6a27ef5c2a9d6" },
+  arbitrum: { PTweETH_26SEP2024: "0xf9f9779d8ff604732eba9ad345e6a27ef5c2a9d6" },
   metertest: {},
 };
 
@@ -207,8 +212,24 @@ export const assets: Assets = {
     { token: "ETH", address: "0xe8876830e7cc85dae8ce31b0802313caf856886f", oracle: "pyth" },
     { token: "BTC", address: "0x7EB9e0Df1C6E6f1E9d3d1EdA09fcF688FE7A710c", oracle: "pyth" },
     { token: "MTRG", address: "0x8a419ef4941355476cf04933e90bf3bbf2f73814", oracle: "pyth" },
-    // { token: "MTR", address: "0x0000000000000000000000000000000000000000", oracle: "pyth" },
+    { token: "wstMTRG", address: "0x871497Eb8596d2cBdBE5bb23D552D35bFfbb8CF5", oracle: "pyth", denominatedBy: "MTRG" },
+    { token: "WMTR", address: "0x6ABAEDAB0Ba368F1DF52D857f24154CC76c8c972", oracle: "pyth" },
   ],
+  metermain: [
+    { token: "USDC.eth", address: "0xd86e243fc0007e6226b07c9a50c9d70d78299eb5", oracle: "pyth" },
+    { token: "USDT.eth", address: "0xd86e243fc0007e6226b07c9a50c9d70d78299eb5", oracle: "pyth" },
+    { token: "MTRG", address: "0xd86e243fc0007e6226b07c9a50c9d70d78299eb5", oracle: "pyth" },
+    { token: "wstMTRG", address: "0xe2de616fbd8cb9180b26fcfb1b761a232fe56717", oracle: "pyth", denominatedBy: "MTRG" },
+    { token: "ETH", address: "0x983147fb73a45fc7f8b4dfa1cd61bdc7b111e5b6", oracle: "pyth" },
+    {
+      token: "suUSD",
+      address: "0x8BF591Eae535f93a242D5A954d3Cde648b48A5A8",
+      oracle: "chainlinkFixed",
+      price: "1000000000000000000",
+    },
+    { token: "suETH", address: "0x1c22531AA9747d76fFF8F0A43b37954ca67d28e0", oracle: "pyth" },
+  ],
+
   sepolia: [
     { token: "WBTC", address: "0x92A2928f5634BEa89A195e7BeCF0f0FEEDAB885b", oracle: "chainlink" },
     { token: "WETH", address: "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9", oracle: "chainlink" },
@@ -273,7 +294,7 @@ export const assets: Assets = {
     { token: "WETH", address: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1", oracle: "chainlink" },
     {
       token: "weETH",
-      address: "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee",
+      address: "0x35751007a407ca6FEFfE80b3cB397736D2cf4dbe",
       oracle: "chainlink",
       denominatedBy: "WETH",
     },
@@ -291,16 +312,56 @@ export const assets: Assets = {
       denominatedBy: "WETH",
     },
     {
-      token: "PTweETH_25SEP2024",
+      token: "PTweETH_26SEP2024",
       address: "0xb8b0a120f6a68dd06209619f62429fb1a8e92fec",
       oracle: "pendle",
       twapDuration: 1800,
     },
+    {
+      token: "suUSD",
+      address: "0x8bf591eae535f93a242d5a954d3cde648b48a5a8",
+      oracle: "chainlinkFixed",
+      price: "1000000000000000000",
+    },
+    { token: "suETH", address: "0x1c22531aa9747d76fff8f0a43b37954ca67d28e0", oracle: "chainlink" },
+    { token: "suBTC", address: "0xe85411c030fb32a9d8b14bbbc6cb19417391f711", oracle: "chainlink" },
+  ],
+  base: [
+    { token: "USDC", address: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", oracle: "chainlink" },
+    { token: "USDbc", address: "0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA", oracle: "chainlink" },
+    { token: "WETH", address: "0x4200000000000000000000000000000000000006", oracle: "chainlink" },
+    { token: "DAI", address: "0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb", oracle: "chainlink" },
+    {
+      token: "weETH",
+      address: "0x35751007a407ca6FEFfE80b3cB397736D2cf4dbe",
+      oracle: "chainlink",
+      denominatedBy: "WETH",
+    },
+    {
+      token: "wstETH",
+      address: "0xc1CBa3fCea344f92D9239c08C0568f6F2F0ee452",
+      oracle: "chainlink",
+      denominatedBy: "WETH",
+    },
+    {
+      token: "cbETH",
+      address: "0x2Ae3F1Ec7F1F5012CFEab0185bfc7aa3cf0DEc22",
+      oracle: "chainlink",
+      denominatedBy: "WETH",
+    },
+    {
+      token: "suUSD",
+      address: "0x8bf591eae535f93a242d5a954d3cde648b48a5a8",
+      oracle: "chainlinkFixed",
+      price: "1000000000000000000",
+    },
+    { token: "suETH", address: "0x1c22531aa9747d76fff8f0a43b37954ca67d28e0", oracle: "chainlink" },
   ],
 };
 
 export const getOraclesData = async (): Promise<Oracles> => {
-  const chainlinkOracle = await ethers.getContractOrNull("ChainlinkOracle");
+  const chainlinkOracle =
+    (await ethers.getContractOrNull("ChainlinkOracle")) || (await ethers.getContractOrNull("SequencerChainlinkOracle"));
   const redstoneOracle = await ethers.getContractOrNull("RedStoneOracle");
   const binanceOracle = await ethers.getContractOrNull("BinanceOracle");
   const pythOracle = await ethers.getContractOrNull("PythOracle");
