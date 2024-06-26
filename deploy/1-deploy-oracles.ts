@@ -46,8 +46,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
 
   console.log(`Timelock: ${ADDRESSES[networkName].timelock}`);
 
-  const { nativeMarket, nativeAsset } = ADDRESSES[networkName];
-  const { VAIAddress } = ADDRESSES[networkName];
+  const { nativeAsset } = ADDRESSES[networkName];
 
   if (!ADDRESSES[networkName].acm || ADDRESSES[networkName].acm === ethers.constants.AddressZero) {
     await deploy("AccessControlManager", {
@@ -58,8 +57,8 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
     });
   }
 
-  if (!nativeMarket || !nativeAsset) {
-    throw new Error("nativeMarket and nativeAsset must NOT empty");
+  if (!nativeAsset) {
+    throw new Error("nativeAsset must NOT empty");
   }
 
   const accessControlManager = await hre.ethers.getContract("AccessControlManager");
@@ -97,7 +96,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
     from: deployer,
     log: true,
     deterministicDeployment: false,
-    args: [nativeMarket, nativeAsset, VAIAddress, boundValidator.address],
+    args: [nativeAsset, boundValidator.address],
     proxy: {
       owner: proxyOwnerAddress,
       proxyContract: "OptimizedTransparentProxy",

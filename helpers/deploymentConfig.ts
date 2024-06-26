@@ -64,9 +64,7 @@ export const ANY_CONTRACT = ethers.constants.AddressZero;
 
 export const ADDRESSES: PreconfiguredAddresses = {
   metertest: {
-    nativeMarket: "0xF5f86Bf56eA2232454745412f5f482Eb8cB11B1D",
     nativeAsset: "0x1e4C2E7dB213934F6B4dEF75Bef538F0b6466933",
-    VAIAddress: ethers.constants.AddressZero,
     acm: "0xcB5f549cF00C342Bc3BA74db2d90d4554dd3De0b", // FIXME:
     timelock: "0x14b27D8DC12E59a9904DaC6d17D33B8de2E80e66", // FIXME: Meter Testnet Multisig
 
@@ -75,18 +73,14 @@ export const ADDRESSES: PreconfiguredAddresses = {
     MTRG: "0x8A419Ef4941355476cf04933E90Bf3bbF2F73814",
   },
   metermain: {
-    nativeMarket: ethers.constants.AddressZero,
     nativeAsset: "",
-    VAIAddress: ethers.constants.AddressZero,
     acm: "", // FIXME:
     timelock: "", // FIXME: Meter Mainnet Multisig
 
     pythOracleAddress: "0xbfe3f445653f2136b2fd1e6dddb5676392e3af16",
   },
   sepolia: {
-    nativeMarket: ethers.constants.AddressZero, // sdrETH
     nativeAsset: "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9", // WETH
-    VAIAddress: ethers.constants.AddressZero,
     acm: "0xbcbda48712A075fa7B50b4B6f8C42D40D4505F8B",
     timelock: "0x14b27D8DC12E59a9904DaC6d17D33B8de2E80e66", // FIXME: Sepolia Multisig
 
@@ -96,9 +90,7 @@ export const ADDRESSES: PreconfiguredAddresses = {
     ptOracle: "0x28A59851C1CB12351D7c6aEf98FFE2871d7cF898",
   },
   ethereum: {
-    nativeMarket: "", // FIXME: replace this with correct address
     nativeAsset: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-    VAIAddress: ethers.constants.AddressZero,
     acm: ethers.constants.AddressZero, // FIXME: replace this with correct address
     timelock: "", // FIXME: Ethereum Multisig
 
@@ -109,9 +101,7 @@ export const ADDRESSES: PreconfiguredAddresses = {
     WETH: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
   },
   arbitrum: {
-    nativeMarket: "0x3C752d0D78BbFddA6BF4b6000a01228B732441aE", // sdrETH
     nativeAsset: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1", // WETH
-    VAIAddress: ethers.constants.AddressZero,
     acm: "0xEc2d55f444ed98Ba69281C8cA6889BCBB682716f",
     timelock: "", // FIXME: Arbitrum One Multisig
 
@@ -120,9 +110,7 @@ export const ADDRESSES: PreconfiguredAddresses = {
     ptOracle: "0x9a9Fa8338dd5E5B2188006f1Cd2Ef26d921650C2",
   },
   base: {
-    nativeMarket: "0x2AA93D3142d7327307b770Dba2e87C97b86B95Bc", // sdrETH
     nativeAsset: "0x4200000000000000000000000000000000000006", // WETH
-    VAIAddress: ethers.constants.AddressZero,
     acm: "", // FIXME: replace this with correct address
     timelock: "", // FIXME: Arbitrum One Multisig
 
