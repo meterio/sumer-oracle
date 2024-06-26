@@ -202,14 +202,14 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
       }
 
       const denominator = ADDRESSES[networkName][asset.denominatedBy];
-      if (chainlinkFeed[networkName][asset.denominatedBy]) {
+      if (chainlinkFeed[networkName] && chainlinkFeed[networkName][asset.denominatedBy]) {
         const chainlinkOracle = await ethers.getContract(contractName);
         await deploy(`${asset.token}Oracle`, {
           contract: "OneJumpOracle",
           from: deployer,
           log: true,
           deterministicDeployment: false,
-          args: [weETH, denominator, resilientOracle.address, chainlinkOracle.address],
+          args: [asset.address, denominator, resilientOracle.address, chainlinkOracle.address],
           proxy: {
             owner: proxyOwnerAddress,
             proxyContract: "OptimizedTransparentProxy",
@@ -218,14 +218,14 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
         });
         break;
       }
-      if (redstoneFeed[networkName][asset.denominatedBy]) {
+      if (redstoneFeed[networkName] && redstoneFeed[networkName][asset.denominatedBy]) {
         const redstoneOracle = await ethers.getContract("RedStoneOracle");
         await deploy(`${asset.token}Oracle`, {
           contract: "OneJumpOracle",
           from: deployer,
           log: true,
           deterministicDeployment: false,
-          args: [weETH, denominator, resilientOracle.address, redstoneOracle.address],
+          args: [asset.address, denominator, resilientOracle.address, redstoneOracle.address],
           proxy: {
             owner: proxyOwnerAddress,
             proxyContract: "OptimizedTransparentProxy",
