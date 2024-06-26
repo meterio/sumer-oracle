@@ -212,10 +212,6 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
           log: true,
           deterministicDeployment: false,
           args: [asset.address, denominator, resilientOracle.address, chainlinkOracle.address],
-          proxy: {
-            owner: proxyOwnerAddress,
-            proxyContract: "OptimizedTransparentProxy",
-          },
           // skipIfAlreadyDeployed: true,
         });
       } else if (redstoneFeed[networkName] && redstoneFeed[networkName][asset.denominatedBy]) {

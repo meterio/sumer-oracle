@@ -55,7 +55,7 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
     ) {
       const assetConfig: any = getDirectPriceConfig(asset);
 
-      const priceOnChain = await chainlinkOracle.getPrice(assetConfig.asset);
+      const priceOnChain = await chainlinkOracle.prices(assetConfig.asset);
       if (!priceOnChain.eq(assetConfig.price)) {
         console.log(`Set direct price for ${asset.token} on ${oracle} oracle with ${JSON.stringify(assetConfig)}`);
 
