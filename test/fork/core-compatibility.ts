@@ -66,7 +66,7 @@ async function deployOracleFixture(): Promise<OracleFixture> {
     ResilientOracleFactory,
     [accessControlManager.address],
     {
-      constructorArgs: [networkAddresses.vBNBAddress, networkAddresses.VAIAddress, boundValidator.address],
+      constructorArgs: [networkAddresses.CEtherAddress, networkAddresses.VAIAddress, boundValidator.address],
     },
   );
 

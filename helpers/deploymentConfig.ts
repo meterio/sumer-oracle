@@ -63,7 +63,8 @@ export const ANY_CONTRACT = ethers.constants.AddressZero;
 
 export const ADDRESSES: PreconfiguredAddresses = {
   metertest: {
-    vBNBAddress: ethers.constants.AddressZero,
+    nativeMarket: ethers.constants.AddressZero,
+    nativeAsset: "",
     VAIAddress: ethers.constants.AddressZero,
     acm: "0xcB5f549cF00C342Bc3BA74db2d90d4554dd3De0b", // FIXME:
     timelock: "0x14b27D8DC12E59a9904DaC6d17D33B8de2E80e66", // FIXME: Meter Testnet Multisig
@@ -71,7 +72,8 @@ export const ADDRESSES: PreconfiguredAddresses = {
     pythOracleAddress: "0x5a71C07a0588074443545eE0c08fb0375564c3E4",
   },
   metermain: {
-    vBNBAddress: ethers.constants.AddressZero,
+    nativeMarket: ethers.constants.AddressZero,
+    nativeAsset: "",
     VAIAddress: ethers.constants.AddressZero,
     acm: "", // FIXME:
     timelock: "", // FIXME: Meter Mainnet Multisig
@@ -79,7 +81,8 @@ export const ADDRESSES: PreconfiguredAddresses = {
     pythOracleAddress: "0xbfe3f445653f2136b2fd1e6dddb5676392e3af16",
   },
   sepolia: {
-    vBNBAddress: ethers.constants.AddressZero,
+    nativeMarket: ethers.constants.AddressZero, // sdrETH
+    nativeAsset: "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9", // WETH
     VAIAddress: ethers.constants.AddressZero,
     acm: "0xbcbda48712A075fa7B50b4B6f8C42D40D4505F8B",
     timelock: "0x14b27D8DC12E59a9904DaC6d17D33B8de2E80e66", // FIXME: Sepolia Multisig
@@ -90,28 +93,36 @@ export const ADDRESSES: PreconfiguredAddresses = {
     ptOracle: "0x28A59851C1CB12351D7c6aEf98FFE2871d7cF898",
   },
   ethereum: {
-    vBNBAddress: ethers.constants.AddressZero,
+    nativeMarket: "", // FIXME: replace this with correct address
+    nativeAsset: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
     VAIAddress: ethers.constants.AddressZero,
     acm: ethers.constants.AddressZero, // FIXME: replace this with correct address
     timelock: "", // FIXME: Ethereum Multisig
 
     weETH: "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee",
     eETH: "0x35fA164735182de50811E8e2E824cFb9B6118ac2",
-    ptOracle: "0x66a1096C6366b2529274dF4f5D8247827fe4CEA8",
+    ptOracle: "0x9a9fa8338dd5e5b2188006f1cd2ef26d921650c2",
     EtherFiLiquidityPool: "0x308861A430be4cce5502d0A12724771Fc6DaF216",
     WETH: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
   },
   arbitrum: {
-    vBNBAddress: ethers.constants.AddressZero,
+    nativeMarket: "0x3C752d0D78BbFddA6BF4b6000a01228B732441aE", // sdrETH
+    nativeAsset: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1", // WETH
     VAIAddress: ethers.constants.AddressZero,
     acm: "", // FIXME: replace this with correct address
     timelock: "", // FIXME: Arbitrum One Multisig
+
+    weETH: "0x35751007a407ca6FEFfE80b3cB397736D2cf4dbe",
+    ptOracle: "0x9a9fa8338dd5e5b2188006f1cd2ef26d92165",
   },
   base: {
-    vBNBAddress: ethers.constants.AddressZero,
+    nativeMarket: ethers.constants.AddressZero,
+    nativeAsset: "",
     VAIAddress: ethers.constants.AddressZero,
     acm: "", // FIXME: replace this with correct address
     timelock: "", // FIXME: Arbitrum One Multisig
+
+    weETH: "0x04C0599Ae5A44757c0af6F9eC3b93da8976c150A",
   },
 };
 
@@ -128,15 +139,20 @@ export const chainlinkFeed: Config = {
     WETH: "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419",
     USDT: "0x3E7d1eAB13ad0104d2750B8863b489D65364e32D",
     USDC: "0x8fFfFfd4AfB6115b954Bd326cbe7B4BA576818f6",
-    stETH: "0xCfE54B5cD566aB89272946F602D76Ea879CAb4a8",
     "weETH/WETH": "0x5c9C449BbC9a6075A2c061dF312a35fd1E05fF22", // denominated by ETH
   },
   arbitrum: {
-    WBTC: "0x6ce185860a4963106506C203335A2910413708e9",
     USDC: "0x50834F3163758fcC1Df9973b6e91f0F0F0434aD3",
     USDT: "0x3f3f5dF88dC9F13eac63DF89EC16ef6e7E25DdE7",
+    WBTC: "0x6ce185860a4963106506C203335A2910413708e9",
     ARB: "0xb2A824043730FE05F3DA2efaFa1CBbe83fa548D6",
     WETH: "0x639Fe6ab55C921f74e7fac1ee960C0B6293ba612",
+    DAI: "0xc5C8E77B397E531B8EC06BFb0048328B30E9eCfB",
+    suETH: "0x639Fe6ab55C921f74e7fac1ee960C0B6293ba612",
+    suBTC: "0x6ce185860a4963106506C203335A2910413708e9",
+    "RETH/WETH": "0xAed0c38402a5d19df6E4c03F4E2DceD6e29c1ee9", // denomicated by ETH
+    "wstETH/WETH": "0xb523AE262D20A936BC152e6023996e46FDC2A95D", // denominated by ETH
+    "weETH/WETH": "0x5c9C449BbC9a6075A2c061dF312a35fd1E05fF22", // denominated by ETH
   },
   base: {
     "weETH/WETH": "0xFC1415403EbB0c693f9a7844b92aD2Ff24775C65", // denominated by ETH
@@ -144,19 +160,15 @@ export const chainlinkFeed: Config = {
 };
 
 export const redstoneFeed: Config = {
-  sepolia: {
-    XVS: "0x0d7697a15bce933cE8671Ba3D60ab062dA216C60",
-  },
+  sepolia: {},
   ethereum: {
-    XVS: "0xa2a8507DEb233ceE4F5594044C259DD0582339CC",
     "weETH/WETH": "0x8751F736E94F6CD167e8C5B97E245680FbD9CC36", // denominated by ETH
     "pufETH/WETH": "0x76A495b0bFfb53ef3F0E94ef0763e03cE410835C", // denominated by ETH
     USDe: "0xbC5FBcf58CeAEa19D523aBc76515b9AEFb5cfd58",
     sUSDe: "0xb99D174ED06c83588Af997c8859F93E83dD4733f",
   },
   arbitrum: {
-    XVS: "0xd9a66Ff1D660aD943F48e9c606D09eA672f312E8",
-    weETH: "0xA736eAe8805dDeFFba40cAB8c99bCB309dEaBd9B", // denominated by ETH
+    "weETH/WETH": "0xA736eAe8805dDeFFba40cAB8c99bCB309dEaBd9B", // denominated by ETH
   },
 };
 
@@ -184,7 +196,7 @@ export const pythID: Config = {
 export const pendleMarket: Config = {
   sepolia: { PTweETH_26DEC2024: "0xB1bE063Ccbc4f67f58293C402aF8D082c0459787" },
   ethereum: { PTweETH_26DEC2024: "0x7d372819240d14fb477f17b964f95f33beb4c704" },
-  arbitrum: {},
+  arbitrum: { PTweETH_25SEP2024: "0xf9f9779d8ff604732eba9ad345e6a27ef5c2a9d6" },
   metertest: {},
 };
 
@@ -198,21 +210,9 @@ export const assets: Assets = {
     // { token: "MTR", address: "0x0000000000000000000000000000000000000000", oracle: "pyth" },
   ],
   sepolia: [
-    {
-      token: "WBTC",
-      address: "0x92A2928f5634BEa89A195e7BeCF0f0FEEDAB885b",
-      oracle: "chainlink",
-    },
-    {
-      token: "WETH",
-      address: "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9",
-      oracle: "chainlink",
-    },
-    {
-      token: "USDC",
-      address: "0x772d68929655ce7234C8C94256526ddA66Ef641E",
-      oracle: "chainlink",
-    },
+    { token: "WBTC", address: "0x92A2928f5634BEa89A195e7BeCF0f0FEEDAB885b", oracle: "chainlink" },
+    { token: "WETH", address: "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9", oracle: "chainlink" },
+    { token: "USDC", address: "0x772d68929655ce7234C8C94256526ddA66Ef641E", oracle: "chainlink" },
     {
       token: "USDT",
       address: "0x8d412FD0bc5d826615065B931171Eed10F5AF266",
@@ -226,11 +226,6 @@ export const assets: Assets = {
       price: "1040000000000000000",
       denominatedBy: "WETH",
     }, // denominated by ETH
-    {
-      token: "XVS",
-      address: "0xdb633c11d3f9e6b8d17ac2c972c9e3b05da59bf9",
-      oracle: "redstone",
-    },
     {
       token: "PTweETH_26DEC2024",
       address: "0x0F0747Fe5a6B68C1149AeD0A437905b06b77b9Cb",
@@ -251,7 +246,6 @@ export const assets: Assets = {
       oracle: "chainlink",
       stalePeriod: STALE_PERIOD_100M,
     },
-
     {
       token: "USDC",
       address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
@@ -272,30 +266,35 @@ export const assets: Assets = {
     },
   ],
   arbitrum: [
+    { token: "WBTC", address: "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f", oracle: "chainlink" },
+    { token: "USDC", address: "0xaf88d065e77c8cc2239327c5edb3a432268e5831", oracle: "chainlink" },
+    { token: "USDT", address: "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9", oracle: "chainlink" },
+    { token: "ARB", address: "0x912ce59144191c1204e64559fe8253a0e49e6548", oracle: "chainlink" },
+    { token: "WETH", address: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1", oracle: "chainlink" },
     {
-      token: "WBTC",
-      address: "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f",
+      token: "weETH",
+      address: "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee",
       oracle: "chainlink",
+      denominatedBy: "WETH",
+    },
+    { token: "DAI", address: "0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1", oracle: "chainlink" },
+    {
+      token: "RETH",
+      address: "0xec70dcb4a1efa46b8f2d97c310c9c4790ba5ffa8",
+      oracle: "chainlink",
+      denominatedBy: "WETH",
     },
     {
-      token: "USDC",
-      address: "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+      token: "wstETH",
+      address: "0x5979D7b546E38E414F7E9822514be443A4800529",
       oracle: "chainlink",
+      denominatedBy: "WETH",
     },
     {
-      token: "USDT",
-      address: "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
-      oracle: "chainlink",
-    },
-    {
-      token: "ARB",
-      address: "0x912ce59144191c1204e64559fe8253a0e49e6548",
-      oracle: "chainlink",
-    },
-    {
-      token: "WETH",
-      address: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1",
-      oracle: "chainlink",
+      token: "PTweETH_25SEP2024",
+      address: "0xb8b0a120f6a68dd06209619f62429fb1a8e92fec",
+      oracle: "pendle",
+      twapDuration: 1800,
     },
   ],
 };
