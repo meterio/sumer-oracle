@@ -79,9 +79,7 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
           enableFlagsForOracles: [true, false, false],
           underlyingOracle: oneJumpOracle,
         });
-        return;
-      }
-      if (oracle === "pyth") {
+      } else if (oracle === "pyth") {
         if (pythOracle) {
           const configOnChain = await pythOracle.tokenConfigs(tokenConfig.asset);
 

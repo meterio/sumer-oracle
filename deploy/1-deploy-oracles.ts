@@ -2,7 +2,7 @@ import hre, { ethers } from "hardhat";
 import { DeployFunction } from "hardhat-deploy/dist/types";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 
-import { ADDRESSES, SEQUENCER, assets, chainlinkFeed, redstoneFeed } from "../helpers/deploymentConfig";
+import { ADDRESSES, SEQUENCER, assets, chainlinkFeed, getOraclesData, redstoneFeed } from "../helpers/deploymentConfig";
 import { AccessControlManager } from "../typechain-types";
 
 const makeRole = (mainnetBehavior: boolean, targetContract: string, method: string): string =>
@@ -41,6 +41,8 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
   const { deployer } = await getNamedAccounts();
 
   const networkName: string = network.name === "hardhat" ? "metertest" : network.name;
+  console.log(`assets:`, assets[networkName]);
+  console.log(`oracleData: `, (await getOraclesData())[networkName]);
 
   console.log(`Timelock: ${ADDRESSES[networkName].timelock}`);
 
@@ -216,9 +218,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
           },
           // skipIfAlreadyDeployed: true,
         });
-        break;
-      }
-      if (redstoneFeed[networkName] && redstoneFeed[networkName][asset.denominatedBy]) {
+      } else if (redstoneFeed[networkName] && redstoneFeed[networkName][asset.denominatedBy]) {
         const redstoneOracle = await ethers.getContract("RedStoneOracle");
         await deploy(`${asset.token}Oracle`, {
           contract: "OneJumpOracle",
