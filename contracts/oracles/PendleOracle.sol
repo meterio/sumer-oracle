@@ -8,6 +8,7 @@ import "@venusprotocol/governance-contracts/contracts/Governance/AccessControlle
 import "../interfaces/IStandardizedYield.sol";
 import "../interfaces/IPMarket.sol";
 import "../interfaces/IPPrincipalToken.sol";
+import { EXP_SCALE } from "@venusprotocol/solidity-utilities/contracts/constants.sol";
 
 /**
  * @title PendleOracle
@@ -18,17 +19,12 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
     struct TokenConfig {
         /// @notice Underlying token address, which can't be a null address
         /// @notice Used to check if a token is supported
-        /// @notice 0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB address for native tokens
-        ///         (e.g BNB for BNB chain, ETH for Ethereum network)
         address asset;
         /// @notice Address of the market
         address market;
         /// @notice Twap duration for the oracle
         uint32 twapDuration;
     }
-
-    /// @notice Exponent scale (decimal precision) of prices
-    uint256 public constant EXP_SCALE = 1e18;
 
     /// @notice Address of the PT oracle
     /// @custom:oz-upgrades-unsafe-allow state-variable-immutable

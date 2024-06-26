@@ -4,15 +4,12 @@ pragma solidity 0.8.25;
 import { OracleInterface } from "../../interfaces/OracleInterface.sol";
 import { ensureNonzeroAddress } from "@venusprotocol/solidity-utilities/contracts/validators.sol";
 import { IERC20Metadata } from "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
-
+import { EXP_SCALE } from "@venusprotocol/solidity-utilities/contracts/constants.sol";
 /**
  * @title CorrelatedTokenOracle
  * @notice This oracle fetches the price of a token that is correlated to another token.
  */
 abstract contract CorrelatedTokenOracle is OracleInterface {
-    /// @notice Exponent scale (decimal precision) of prices
-    uint256 public constant EXP_SCALE = 1e18;
-
     /// @notice Address of the correlated token
     /// @custom:oz-upgrades-unsafe-allow state-variable-immutable
     address public immutable CORRELATED_TOKEN;

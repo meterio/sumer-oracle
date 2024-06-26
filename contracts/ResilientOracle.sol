@@ -11,19 +11,19 @@ import "@venusprotocol/governance-contracts/contracts/Governance/AccessControlle
  * @title ResilientOracle
  * @author Venus
  * @notice The Resilient Oracle is the main contract that the protocol uses to fetch prices of assets.
- * 
+ *
  * DeFi protocols are vulnerable to price oracle failures including oracle manipulation and incorrectly
  * reported prices. If only one oracle is used, this creates a single point of failure and opens a vector
  * for attacking the protocol.
- * 
+ *
  * The Resilient Oracle uses multiple sources and fallback mechanisms to provide accurate prices and protect
  * the protocol from oracle attacks. Currently it includes integrations with Chainlink, Pyth, Binance Oracle
  * and TWAP (Time-Weighted Average Price) oracles. TWAP uses PancakeSwap as the on-chain price source.
- * 
- * For every market (vToken) we configure the main, pivot and fallback oracles. The oracles are configured per 
- * vToken's underlying asset address. The main oracle oracle is the most trustworthy price source, the pivot 
- * oracle is used as a loose sanity checker and the fallback oracle is used as a backup price source. 
- * 
+ *
+ * For every market (vToken) we configure the main, pivot and fallback oracles. The oracles are configured per
+ * vToken's underlying asset address. The main oracle oracle is the most trustworthy price source, the pivot
+ * oracle is used as a loose sanity checker and the fallback oracle is used as a backup price source.
+ *
  * To validate prices returned from two oracles, we use an upper and lower bound ratio that is set for every
  * market. The upper bound ratio represents the deviation between reported price (the price that’s being
  * validated) and the anchor price (the price we are validating against) above which the reported price will
@@ -38,8 +38,8 @@ isValid = anchorRatio <= upperBoundAnchorRatio && anchorRatio >= lowerBoundAncho
 
  * In most cases, Chainlink is used as the main oracle, TWAP or Pyth oracles are used as the pivot oracle depending
  * on which supports the given market and Binance oracle is used as the fallback oracle. For some markets we may
- * use Pyth or TWAP as the main oracle if the token price is not supported by Chainlink or Binance oracles. 
- * 
+ * use Pyth or TWAP as the main oracle if the token price is not supported by Chainlink or Binance oracles.
+ *
  * For a fetched price to be valid it must be positive and not stagnant. If the price is invalid then we consider the
  * oracle to be stagnant and treat it like it's disabled.
  */
@@ -78,9 +78,8 @@ contract ResilientOracle is PausableUpgradeable, AccessControlledV8, ResilientOr
     /// @custom:oz-upgrades-unsafe-allow state-variable-immutable
     address public immutable vai;
 
-    /// @notice Set this as asset address for Native token on each chain.This is the underlying for vBNB (on bsc)
-    /// and can serve as any underlying asset of a market that supports native tokens
-    address public constant NATIVE_TOKEN_ADDR = 0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB;
+    /// @notice Set this as asset address for Native token on each chain.
+    address public immutable nativeAsset;
 
     /// @notice Bound validator contract address
     /// @custom:oz-upgrades-unsafe-allow state-variable-immutable
@@ -129,10 +128,12 @@ contract ResilientOracle is PausableUpgradeable, AccessControlledV8, ResilientOr
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor(
         address nativeMarketAddress,
+        address nativeAssetAddress,
         address vaiAddress,
         BoundValidatorInterface _boundValidator
     ) notNullAddress(address(_boundValidator)) {
         nativeMarket = nativeMarketAddress;
+        nativeAsset = nativeAssetAddress;
         vai = vaiAddress;
         boundValidator = _boundValidator;
 
@@ -444,7 +445,7 @@ contract ResilientOracle is PausableUpgradeable, AccessControlledV8, ResilientOr
      */
     function _getUnderlyingAsset(address vToken) private view notNullAddress(vToken) returns (address asset) {
         if (vToken == nativeMarket) {
-            asset = NATIVE_TOKEN_ADDR;
+            asset = nativeAsset;
         } else if (vToken == vai) {
             asset = vai;
         } else {

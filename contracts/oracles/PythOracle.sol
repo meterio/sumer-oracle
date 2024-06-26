@@ -7,6 +7,7 @@ import "../interfaces/PythInterface.sol";
 import "../interfaces/OracleInterface.sol";
 import "../interfaces/VBep20Interface.sol";
 import "@venusprotocol/governance-contracts/contracts/Governance/AccessControlledV8.sol";
+import { EXP_SCALE } from "@venusprotocol/solidity-utilities/contracts/constants.sol";
 
 /**
  * @title PythOracle
@@ -26,12 +27,6 @@ contract PythOracle is AccessControlledV8, OracleInterface {
         address asset;
         uint64 maxStalePeriod;
     }
-
-    /// @notice Exponent scale (decimal precision) of prices
-    uint256 public constant EXP_SCALE = 1e18;
-
-    /// @notice Set this as asset address for BNB. This is the underlying for vBNB
-    address public constant BNB_ADDR = 0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB;
 
     /// @notice The actual pyth oracle address fetch & store the prices
     IPyth public underlyingPythOracle;
@@ -126,12 +121,8 @@ contract PythOracle is AccessControlledV8, OracleInterface {
     function getPrice(address asset) public view returns (uint256) {
         uint256 decimals;
 
-        if (asset == BNB_ADDR) {
-            decimals = 18;
-        } else {
-            IERC20Metadata token = IERC20Metadata(asset);
-            decimals = token.decimals();
-        }
+        IERC20Metadata token = IERC20Metadata(asset);
+        decimals = token.decimals();
 
         return _getPriceInternal(asset, decimals);
     }
