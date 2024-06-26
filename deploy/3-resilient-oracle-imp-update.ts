@@ -10,7 +10,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
 
   const networkName: string = network.name === "hardhat" ? "bsctestnet" : network.name;
 
-  const { vBNBAddress } = ADDRESSES[networkName];
+  const { nativeMarket, nativeAsset } = ADDRESSES[networkName];
   const { VAIAddress } = ADDRESSES[networkName];
 
   const proxyOwnerAddress = ADDRESSES[networkName].timelock || deployer;
@@ -21,7 +21,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
       from: deployer,
       log: true,
       deterministicDeployment: false,
-      args: [vBNBAddress, VAIAddress, boundValidator.address],
+      args: [nativeMarket, nativeAsset, VAIAddress, boundValidator.address],
       proxy: {
         owner: proxyOwnerAddress,
         proxyContract: "OptimizedTransparentProxy",
