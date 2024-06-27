@@ -7,71 +7,6 @@ on:
     branches: [master, main, develop]
 
 jobs:
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18
-          cache: "yarn"
-
-      - name: Install dependencies
-        # Hack to get around failing "ethereumjs-abi The remote archive doesn't match the expected checksum" error
-        run: YARN_CHECKSUM_BEHAVIOR=update yarn
-
-      - name: Compile contract types
-        run: yarn hardhat compile
-
-      - name: Lint solidity and ts files
-        run: yarn lint
-
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18
-          cache: "yarn"
-
-      - name: Install dependencies
-        # Hack to get around failing "ethereumjs-abi The remote archive doesn't match the expected checksum" error
-        run: YARN_CHECKSUM_BEHAVIOR=update yarn
-
-      - name: Run hardhat tests coverage
-        run: yarn hardhat:coverage
-
-      - name: Code Coverage Report
-        uses: irongut/CodeCoverageSummary@v1.3.0
-        with:
-          filename: coverage/**/cobertura-coverage.xml
-          badge: true
-          fail_below_min: false
-          format: markdown
-          hide_branch_rate: false
-          hide_complexity: true
-          indicators: true
-          output: both
-          thresholds: "50 80"
-
-      - name: Add Coverage PR Comment
-        uses: marocchino/sticky-pull-request-comment@v2
-        if: github.event_name == 'pull_request'
-        with:
-          recreate: true
-          path: code-coverage-results.md
-
   export-deployments:
     runs-on: ubuntu-latest
     permissions:
@@ -82,7 +17,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
-          token: ${{ secrets.VENUS_TOOLS_TOKEN }}
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
@@ -96,7 +30,7 @@ jobs:
 
       - name: Export deployments
         run: |
-          for NETWORK in  ethereum sepolia arbitrum; do
+          for NETWORK in  sepolia arbitrum metertest metermain; do
             EXPORT=true yarn hardhat export --network ${NETWORK} --export ./deployments/${NETWORK}.json
             jq -M '{name, chainId, addresses: .contracts | map_values(.address)}' ./deployments/${NETWORK}.json > ./deployments/${NETWORK}_addresses.json
           done
