@@ -162,7 +162,9 @@ export const chainlinkFeed: Config = {
 };
 
 export const redstoneFeed: Config = {
-  sepolia: {},
+  sepolia: {
+    "weETH/WETH": "0x8751F736E94F6CD167e8C5B97E245680FbD9CC36", // denominated by ETH
+  },
   ethereum: {
     "weETH/WETH": "0x8751F736E94F6CD167e8C5B97E245680FbD9CC36", // denominated by ETH
     "pufETH/WETH": "0x76A495b0bFfb53ef3F0E94ef0763e03cE410835C", // denominated by ETH
@@ -349,7 +351,7 @@ export const assets: Assets = {
     {
       token: "cbETH",
       address: "0x2Ae3F1Ec7F1F5012CFEab0185bfc7aa3cf0DEc22",
-      oracle: "chainlink"
+      oracle: "chainlink",
     },
     {
       token: "suUSD",
