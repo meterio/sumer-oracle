@@ -828,7 +828,7 @@
       ]
     },
     "BoundValidator_Implementation": {
-      "address": "0x34f8e10033614dd779e9769693D823bc15b2637a",
+      "address": "0xA7a8511bf29458908D1f64c39Dc6E8DE64C50396",
       "abi": [
         {
           "inputs": [],
@@ -1814,7 +1814,7 @@
       ]
     },
     "ChainlinkOracle_Implementation": {
-      "address": "0xE8f107C5823d23dD27BBcB61D3638095D3D59a33",
+      "address": "0x21ACE3D380dEbdD424c755984300377d44f7971b",
       "abi": [
         {
           "inputs": [],
@@ -5907,7 +5907,7 @@
       ]
     },
     "RedStoneOracle_Implementation": {
-      "address": "0x7ad45894d34a3a4fF24eeEAda255FCa2e997dA97",
+      "address": "0x7062A206fb17C86fa6A75fb9B472DcE6549953fe",
       "abi": [
         {
           "inputs": [],
@@ -6916,6 +6916,25 @@
         {
           "inputs": [
             {
+              "internalType": "address[]",
+              "name": "cTokens",
+              "type": "address[]"
+            }
+          ],
+          "name": "getUnderlyingPrices",
+          "outputs": [
+            {
+              "internalType": "uint256[]",
+              "name": "",
+              "type": "uint256[]"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
               "internalType": "address",
               "name": "accessControlManager_",
               "type": "address"
@@ -7184,23 +7203,13 @@
       ]
     },
     "ResilientOracle_Implementation": {
-      "address": "0x5EB13843c3Ab7fd20918b962B7E39F1B8da92EF3",
+      "address": "0x9e3ca84C236825DB7c6997F8dc094228BCAAdd9E",
       "abi": [
         {
           "inputs": [
             {
               "internalType": "address",
-              "name": "nativeMarketAddress",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
               "name": "nativeAssetAddress",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "vaiAddress",
               "type": "address"
             },
             {
@@ -7577,6 +7586,25 @@
               "internalType": "uint256",
               "name": "",
               "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "cTokens",
+              "type": "address[]"
+            }
+          ],
+          "name": "getUnderlyingPrices",
+          "outputs": [
+            {
+              "internalType": "uint256[]",
+              "name": "",
+              "type": "uint256[]"
             }
           ],
           "stateMutability": "view",
@@ -7968,117 +7996,33 @@
       ]
     },
     "WeETHOracle": {
-      "address": "0xC5F9eccB48910E6Cc07b0Ca3Ce995C1F07e4491b",
+      "address": "0x904061093c6460176eE24365A4c4903C2c8Ac5E9",
       "abi": [
         {
-          "anonymous": false,
           "inputs": [
             {
-              "indexed": false,
               "internalType": "address",
-              "name": "previousAdmin",
+              "name": "correlatedToken",
               "type": "address"
             },
             {
-              "indexed": false,
               "internalType": "address",
-              "name": "newAdmin",
-              "type": "address"
-            }
-          ],
-          "name": "AdminChanged",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "beacon",
-              "type": "address"
-            }
-          ],
-          "name": "BeaconUpgraded",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "implementation",
-              "type": "address"
-            }
-          ],
-          "name": "Upgraded",
-          "type": "event"
-        },
-        {
-          "stateMutability": "payable",
-          "type": "fallback"
-        },
-        {
-          "inputs": [],
-          "name": "admin",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "admin_",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "implementation",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "implementation_",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newImplementation",
-              "type": "address"
-            }
-          ],
-          "name": "upgradeTo",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newImplementation",
+              "name": "underlyingToken",
               "type": "address"
             },
             {
-              "internalType": "bytes",
-              "name": "data",
-              "type": "bytes"
+              "internalType": "address",
+              "name": "resilientOracle",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "intermediateOracle",
+              "type": "address"
             }
           ],
-          "name": "upgradeToAndCall",
-          "outputs": [],
-          "stateMutability": "payable",
-          "type": "function"
-        },
-        {
-          "stateMutability": "payable",
-          "type": "receive"
+          "stateMutability": "nonpayable",
+          "type": "constructor"
         },
         {
           "inputs": [],
@@ -8160,27 +8104,6 @@
           ],
           "stateMutability": "view",
           "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "_logic",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "admin_",
-              "type": "address"
-            },
-            {
-              "internalType": "bytes",
-              "name": "_data",
-              "type": "bytes"
-            }
-          ],
-          "stateMutability": "payable",
-          "type": "constructor"
         }
       ]
     },
