@@ -349,8 +349,7 @@ export const assets: Assets = {
     {
       token: "cbETH",
       address: "0x2Ae3F1Ec7F1F5012CFEab0185bfc7aa3cf0DEc22",
-      oracle: "chainlink",
-      denominatedBy: "WETH",
+      oracle: "chainlink"
     },
     {
       token: "suUSD",
