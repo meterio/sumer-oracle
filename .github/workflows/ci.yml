@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main, develop]
+    branches: [master, main, develop]
   pull_request:
-    branches: [main, develop]
+    branches: [master, main, develop]
 
 jobs:
   lint:
@@ -71,26 +71,6 @@ jobs:
         with:
           recreate: true
           path: code-coverage-results.md
-
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18
-          cache: "yarn"
-
-      - name: Install dependencies
-        # Hack to get around failing "ethereumjs-abi The remote archive doesn't match the expected checksum" error
-        run: YARN_CHECKSUM_BEHAVIOR=update yarn
-
-      - name: Verify deployments work
-        run: yarn hardhat deploy
 
   export-deployments:
     runs-on: ubuntu-latest

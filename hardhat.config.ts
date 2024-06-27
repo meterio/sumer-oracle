@@ -110,7 +110,7 @@ const config: HardhatUserConfig = {
       accounts: process.env.DEPLOYER_PRIVATE_KEY ? [`0x${process.env.DEPLOYER_PRIVATE_KEY}`] : [],
     },
     base: {
-      url: 'https://base.blockpi.network/v1/rpc/public',
+      url: "https://base.blockpi.network/v1/rpc/public",
       chainId: 8453,
       live: true,
       accounts: process.env.DEPLOYER_PRIVATE_KEY ? [`0x${process.env.DEPLOYER_PRIVATE_KEY}`] : [],
@@ -153,13 +153,13 @@ const config: HardhatUserConfig = {
         },
       },
       {
-        network: 'base',
+        network: "base",
         chainId: 8453,
-        urls: { 
-          apiURL: 'https://api.basescan.org/aip/',
-          browserURL: 'https://basescan.org' },
-      }
-      
+        urls: {
+          apiURL: "https://api.basescan.org/api/",
+          browserURL: "https://basescan.org",
+        },
+      },
     ],
   },
   paths: {
