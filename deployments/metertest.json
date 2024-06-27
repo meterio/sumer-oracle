@@ -1,9 +1,9 @@
 {
-  "name": "sepolia",
-  "chainId": "11155111",
+  "name": "metertest",
+  "chainId": "83",
   "contracts": {
     "AccessControlManager": {
-      "address": "0xbcbda48712A075fa7B50b4B6f8C42D40D4505F8B",
+      "address": "0xcB5f549cF00C342Bc3BA74db2d90d4554dd3De0b",
       "abi": [
         {
           "inputs": [],
@@ -366,7 +366,7 @@
       ]
     },
     "BoundValidator": {
-      "address": "0xbE531fF6891280deA898f8C94449492BDCF7DAe3",
+      "address": "0xde928d679473bD485ac7f9D9f0525b276A5aC07b",
       "abi": [
         {
           "anonymous": false,
@@ -828,7 +828,7 @@
       ]
     },
     "BoundValidator_Implementation": {
-      "address": "0x34f8e10033614dd779e9769693D823bc15b2637a",
+      "address": "0x4Ddd1448288b7E07D6fdACee68FA7FE7F007a3fB",
       "abi": [
         {
           "inputs": [],
@@ -1164,7 +1164,7 @@
       ]
     },
     "BoundValidator_Proxy": {
-      "address": "0xbE531fF6891280deA898f8C94449492BDCF7DAe3",
+      "address": "0xde928d679473bD485ac7f9D9f0525b276A5aC07b",
       "abi": [
         {
           "inputs": [
@@ -1300,7 +1300,7 @@
       ]
     },
     "ChainlinkOracle": {
-      "address": "0x3704D4D0EB8fF916e411d2fE602A8cA82786d6f2",
+      "address": "0xd43dfE85b4cB0AfC15c48E0C7F76728eaf4eA15C",
       "abi": [
         {
           "anonymous": false,
@@ -1552,6 +1552,19 @@
           ],
           "name": "TokenConfigAdded",
           "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "NATIVE_TOKEN_ADDR",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
         },
         {
           "inputs": [],
@@ -1814,7 +1827,7 @@
       ]
     },
     "ChainlinkOracle_Implementation": {
-      "address": "0xE8f107C5823d23dD27BBcB61D3638095D3D59a33",
+      "address": "0x9b0A203e93ecdfb97e42604c4d7c4241B6F7d78B",
       "abi": [
         {
           "inputs": [],
@@ -1961,6 +1974,19 @@
           ],
           "name": "TokenConfigAdded",
           "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "NATIVE_TOKEN_ADDR",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
         },
         {
           "inputs": [],
@@ -2202,7 +2228,7 @@
       ]
     },
     "ChainlinkOracle_Proxy": {
-      "address": "0x3704D4D0EB8fF916e411d2fE602A8cA82786d6f2",
+      "address": "0xd43dfE85b4cB0AfC15c48E0C7F76728eaf4eA15C",
       "abi": [
         {
           "inputs": [
@@ -2338,7 +2364,7 @@
       ]
     },
     "DefaultProxyAdmin": {
-      "address": "0x63d69486168b29C88779cECC471DB813E4DF6BBe",
+      "address": "0x18BcD5DF1Acff8b567b3f82A0b2037d5808cA0aD",
       "abi": [
         {
           "inputs": [
@@ -2502,1654 +2528,8 @@
         }
       ]
     },
-    "MockEtherFiLiquidityPool": {
-      "address": "0x34E174Bfc3Bb3A45eb766f235E407b255439e3d9",
-      "abi": [
-        {
-          "inputs": [],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "previousOwner",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "OwnershipTransferred",
-          "type": "event"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_share",
-              "type": "uint256"
-            }
-          ],
-          "name": "amountForShare",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "amountPerShare",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "owner",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "renounceOwnership",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_amountPerShare",
-              "type": "uint256"
-            }
-          ],
-          "name": "setAmountPerShare",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "transferOwnership",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        }
-      ]
-    },
-    "MockMarketweETH_26DEC2024": {
-      "address": "0xB1bE063Ccbc4f67f58293C402aF8D082c0459787",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "sy_",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "pt_",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "yt_",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "previousOwner",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "OwnershipTransferred",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "exchangeRate",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "owner",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "ptToken",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "readTokens",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "renounceOwnership",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "syToken",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "transferOwnership",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "sy_",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "pt_",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "yt_",
-              "type": "address"
-            }
-          ],
-          "name": "writeTokens",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "ytToken",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
-    "MockPTweETH_26DEC2024": {
-      "address": "0x0F0747Fe5a6B68C1149AeD0A437905b06b77b9Cb",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "string",
-              "name": "name_",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "symbol_",
-              "type": "string"
-            },
-            {
-              "internalType": "uint8",
-              "name": "decimals_",
-              "type": "uint8"
-            },
-            {
-              "internalType": "address",
-              "name": "syToken_",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "owner",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "spender",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "value",
-              "type": "uint256"
-            }
-          ],
-          "name": "Approval",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "previousOwner",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "OwnershipTransferred",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "from",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "to",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "value",
-              "type": "uint256"
-            }
-          ],
-          "name": "Transfer",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "SY",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "owner",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "spender",
-              "type": "address"
-            }
-          ],
-          "name": "allowance",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "spender",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "approve",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "account",
-              "type": "address"
-            }
-          ],
-          "name": "balanceOf",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "decimals",
-          "outputs": [
-            {
-              "internalType": "uint8",
-              "name": "",
-              "type": "uint8"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "spender",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "subtractedValue",
-              "type": "uint256"
-            }
-          ],
-          "name": "decreaseAllowance",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "exchangeRate",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "faucet",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "spender",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "addedValue",
-              "type": "uint256"
-            }
-          ],
-          "name": "increaseAllowance",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "name",
-          "outputs": [
-            {
-              "internalType": "string",
-              "name": "",
-              "type": "string"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "owner",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "renounceOwnership",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "syToken",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "symbol",
-          "outputs": [
-            {
-              "internalType": "string",
-              "name": "",
-              "type": "string"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "totalSupply",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "to",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "transfer",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "from",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "to",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "transferFrom",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "transferOwnership",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        }
-      ]
-    },
-    "MockPendlePtOracle": {
-      "address": "0x28A59851C1CB12351D7c6aEf98FFE2871d7cF898",
-      "abi": [
-        {
-          "inputs": [],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "previousOwner",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "OwnershipTransferred",
-          "type": "event"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "market",
-              "type": "address"
-            },
-            {
-              "internalType": "uint32",
-              "name": "duration",
-              "type": "uint32"
-            }
-          ],
-          "name": "getOracleState",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "increaseCardinalityRequired",
-              "type": "bool"
-            },
-            {
-              "internalType": "uint16",
-              "name": "cardinalityRequired",
-              "type": "uint16"
-            },
-            {
-              "internalType": "bool",
-              "name": "oldestObservationSatisfied",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "market",
-              "type": "address"
-            },
-            {
-              "internalType": "uint32",
-              "name": "duration",
-              "type": "uint32"
-            }
-          ],
-          "name": "getPtToSyRate",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "owner",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            },
-            {
-              "internalType": "uint32",
-              "name": "",
-              "type": "uint32"
-            }
-          ],
-          "name": "ptToAssetRate",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "renounceOwnership",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "market",
-              "type": "address"
-            },
-            {
-              "internalType": "uint32",
-              "name": "duration",
-              "type": "uint32"
-            },
-            {
-              "internalType": "uint256",
-              "name": "rate",
-              "type": "uint256"
-            }
-          ],
-          "name": "setPtToSyRate",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "transferOwnership",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        }
-      ]
-    },
-    "MockSYweETH_26DEC2024": {
-      "address": "0x28f59Bb85749A2992F6765C601774e0d1B1f70Ce",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "string",
-              "name": "name_",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "symbol_",
-              "type": "string"
-            },
-            {
-              "internalType": "uint8",
-              "name": "decimals_",
-              "type": "uint8"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "owner",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "spender",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "value",
-              "type": "uint256"
-            }
-          ],
-          "name": "Approval",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "from",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "to",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "value",
-              "type": "uint256"
-            }
-          ],
-          "name": "Transfer",
-          "type": "event"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "owner",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "spender",
-              "type": "address"
-            }
-          ],
-          "name": "allowance",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "spender",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "approve",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "account",
-              "type": "address"
-            }
-          ],
-          "name": "balanceOf",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "decimals",
-          "outputs": [
-            {
-              "internalType": "uint8",
-              "name": "",
-              "type": "uint8"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "decimalsInternal",
-          "outputs": [
-            {
-              "internalType": "uint8",
-              "name": "",
-              "type": "uint8"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "spender",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "subtractedValue",
-              "type": "uint256"
-            }
-          ],
-          "name": "decreaseAllowance",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "faucet",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "spender",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "addedValue",
-              "type": "uint256"
-            }
-          ],
-          "name": "increaseAllowance",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "name",
-          "outputs": [
-            {
-              "internalType": "string",
-              "name": "",
-              "type": "string"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "symbol",
-          "outputs": [
-            {
-              "internalType": "string",
-              "name": "",
-              "type": "string"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "totalSupply",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "to",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "transfer",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "from",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "to",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "transferFrom",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        }
-      ]
-    },
-    "MockSfrxEthFraxOracle": {
-      "address": "0xD08cf252E50113a4a43E9C9357ee8b971AbB7720",
-      "abi": [
-        {
-          "inputs": [],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "previousOwner",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "OwnershipTransferred",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "getPrices",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "isBadData",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "owner",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "priceHigh",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "priceLow",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "renounceOwnership",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "bool",
-              "name": "_isBadData",
-              "type": "bool"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_priceLow",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_priceHigh",
-              "type": "uint256"
-            }
-          ],
-          "name": "setPrices",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "transferOwnership",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        }
-      ]
-    },
-    "MockYTweETH_26DEC2024": {
-      "address": "0x1148C973208fa04d0e7D44825eE6E22705e2d806",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "string",
-              "name": "name_",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "symbol_",
-              "type": "string"
-            },
-            {
-              "internalType": "uint8",
-              "name": "decimals_",
-              "type": "uint8"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "owner",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "spender",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "value",
-              "type": "uint256"
-            }
-          ],
-          "name": "Approval",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "from",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "to",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "value",
-              "type": "uint256"
-            }
-          ],
-          "name": "Transfer",
-          "type": "event"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "owner",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "spender",
-              "type": "address"
-            }
-          ],
-          "name": "allowance",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "spender",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "approve",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "account",
-              "type": "address"
-            }
-          ],
-          "name": "balanceOf",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "decimals",
-          "outputs": [
-            {
-              "internalType": "uint8",
-              "name": "",
-              "type": "uint8"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "decimalsInternal",
-          "outputs": [
-            {
-              "internalType": "uint8",
-              "name": "",
-              "type": "uint8"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "spender",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "subtractedValue",
-              "type": "uint256"
-            }
-          ],
-          "name": "decreaseAllowance",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "faucet",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "spender",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "addedValue",
-              "type": "uint256"
-            }
-          ],
-          "name": "increaseAllowance",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "name",
-          "outputs": [
-            {
-              "internalType": "string",
-              "name": "",
-              "type": "string"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "symbol",
-          "outputs": [
-            {
-              "internalType": "string",
-              "name": "",
-              "type": "string"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "totalSupply",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "to",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "transfer",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "from",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "to",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "transferFrom",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        }
-      ]
-    },
-    "PendleOracle": {
-      "address": "0x89C1CE4E67A8F70828c3A12fE4BE5307FF238731",
+    "PythOracle": {
+      "address": "0xB274d5383eDFbA9c8c79d6223d065b4258F89E8e",
       "abi": [
         {
           "anonymous": false,
@@ -4262,11 +2642,6 @@
           "type": "receive"
         },
         {
-          "inputs": [],
-          "name": "InvalidDuration",
-          "type": "error"
-        },
-        {
           "inputs": [
             {
               "internalType": "address",
@@ -4288,16 +2663,6 @@
           "type": "error"
         },
         {
-          "inputs": [],
-          "name": "ZeroAddressNotAllowed",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "ZeroValueNotAllowed",
-          "type": "error"
-        },
-        {
           "anonymous": false,
           "inputs": [
             {
@@ -4308,25 +2673,6 @@
             }
           ],
           "name": "Initialized",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "oldOracle",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "newOracle",
-              "type": "address"
-            }
-          ],
-          "name": "IntermediateOracleSet",
           "type": "event"
         },
         {
@@ -4392,17 +2738,17 @@
             {
               "indexed": true,
               "internalType": "address",
-              "name": "oldOracle",
+              "name": "oldPythOracle",
               "type": "address"
             },
             {
               "indexed": true,
               "internalType": "address",
-              "name": "newOracle",
+              "name": "newPythOracle",
               "type": "address"
             }
           ],
-          "name": "PtOracleSet",
+          "name": "PythOracleSet",
           "type": "event"
         },
         {
@@ -4415,39 +2761,46 @@
               "type": "address"
             },
             {
-              "indexed": false,
-              "internalType": "address",
-              "name": "market",
-              "type": "address"
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "pythId",
+              "type": "bytes32"
             },
             {
-              "indexed": false,
-              "internalType": "uint32",
-              "name": "twapDuration",
-              "type": "uint32"
+              "indexed": true,
+              "internalType": "uint64",
+              "name": "maxStalePeriod",
+              "type": "uint64"
             }
           ],
           "name": "TokenConfigAdded",
           "type": "event"
         },
         {
-          "anonymous": false,
-          "inputs": [
+          "inputs": [],
+          "name": "BNB_ADDR",
+          "outputs": [
             {
-              "indexed": true,
               "internalType": "address",
-              "name": "oldAddress",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "newAddress",
+              "name": "",
               "type": "address"
             }
           ],
-          "name": "UnderlyingAssetSet",
-          "type": "event"
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "EXP_SCALE",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
         },
         {
           "inputs": [],
@@ -4492,41 +2845,18 @@
           "inputs": [
             {
               "internalType": "address",
+              "name": "underlyingPythOracle_",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
               "name": "accessControlManager_",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "ptOracle",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "underlyingAsset_",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "resilientOracle",
               "type": "address"
             }
           ],
           "name": "initialize",
           "outputs": [],
           "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "intermediateOracle",
-          "outputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
           "type": "function"
         },
         {
@@ -4578,37 +2908,24 @@
         {
           "inputs": [
             {
-              "internalType": "contract OracleInterface",
-              "name": "intermediateOracle_",
-              "type": "address"
-            }
-          ],
-          "name": "setIntermediateOracle",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
               "components": [
+                {
+                  "internalType": "bytes32",
+                  "name": "pythId",
+                  "type": "bytes32"
+                },
                 {
                   "internalType": "address",
                   "name": "asset",
                   "type": "address"
                 },
                 {
-                  "internalType": "address",
-                  "name": "market",
-                  "type": "address"
-                },
-                {
-                  "internalType": "uint32",
-                  "name": "twapDuration",
-                  "type": "uint32"
+                  "internalType": "uint64",
+                  "name": "maxStalePeriod",
+                  "type": "uint64"
                 }
               ],
-              "internalType": "struct PendleOracle.TokenConfig",
+              "internalType": "struct PythOracle.TokenConfig",
               "name": "tokenConfig",
               "type": "tuple"
             }
@@ -4623,22 +2940,22 @@
             {
               "components": [
                 {
+                  "internalType": "bytes32",
+                  "name": "pythId",
+                  "type": "bytes32"
+                },
+                {
                   "internalType": "address",
                   "name": "asset",
                   "type": "address"
                 },
                 {
-                  "internalType": "address",
-                  "name": "market",
-                  "type": "address"
-                },
-                {
-                  "internalType": "uint32",
-                  "name": "twapDuration",
-                  "type": "uint32"
+                  "internalType": "uint64",
+                  "name": "maxStalePeriod",
+                  "type": "uint64"
                 }
               ],
-              "internalType": "struct PendleOracle.TokenConfig[]",
+              "internalType": "struct PythOracle.TokenConfig[]",
               "name": "tokenConfigs_",
               "type": "tuple[]"
             }
@@ -4651,25 +2968,12 @@
         {
           "inputs": [
             {
-              "internalType": "address",
-              "name": "underlyingAsset_",
+              "internalType": "contract IPyth",
+              "name": "underlyingPythOracle_",
               "type": "address"
             }
           ],
-          "name": "setUnderlyingAsset",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "contract IPendlePtOracle",
-              "name": "underlyingPtOracle_",
-              "type": "address"
-            }
-          ],
-          "name": "setUnderlyingPtOracle",
+          "name": "setUnderlyingPythOracle",
           "outputs": [],
           "stateMutability": "nonpayable",
           "type": "function"
@@ -4685,19 +2989,19 @@
           "name": "tokenConfigs",
           "outputs": [
             {
+              "internalType": "bytes32",
+              "name": "pythId",
+              "type": "bytes32"
+            },
+            {
               "internalType": "address",
               "name": "asset",
               "type": "address"
             },
             {
-              "internalType": "address",
-              "name": "market",
-              "type": "address"
-            },
-            {
-              "internalType": "uint32",
-              "name": "twapDuration",
-              "type": "uint32"
+              "internalType": "uint64",
+              "name": "maxStalePeriod",
+              "type": "uint64"
             }
           ],
           "stateMutability": "view",
@@ -4718,23 +3022,10 @@
         },
         {
           "inputs": [],
-          "name": "underlyingAsset",
+          "name": "underlyingPythOracle",
           "outputs": [
             {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "underlyingPtOracle",
-          "outputs": [
-            {
-              "internalType": "contract IPendlePtOracle",
+              "internalType": "contract IPyth",
               "name": "",
               "type": "address"
             }
@@ -4765,18 +3056,13 @@
         }
       ]
     },
-    "PendleOracle_Implementation": {
-      "address": "0x174384fF5DCf2af5b9Cdd0E5e51D1468Dfe3bAcc",
+    "PythOracle_Implementation": {
+      "address": "0xE439Bf606AaE5818B802A67810fA40e9aE5F1F34",
       "abi": [
         {
           "inputs": [],
           "stateMutability": "nonpayable",
           "type": "constructor"
-        },
-        {
-          "inputs": [],
-          "name": "InvalidDuration",
-          "type": "error"
         },
         {
           "inputs": [
@@ -4800,16 +3086,6 @@
           "type": "error"
         },
         {
-          "inputs": [],
-          "name": "ZeroAddressNotAllowed",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "ZeroValueNotAllowed",
-          "type": "error"
-        },
-        {
           "anonymous": false,
           "inputs": [
             {
@@ -4820,25 +3096,6 @@
             }
           ],
           "name": "Initialized",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "oldOracle",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "newOracle",
-              "type": "address"
-            }
-          ],
-          "name": "IntermediateOracleSet",
           "type": "event"
         },
         {
@@ -4904,17 +3161,17 @@
             {
               "indexed": true,
               "internalType": "address",
-              "name": "oldOracle",
+              "name": "oldPythOracle",
               "type": "address"
             },
             {
               "indexed": true,
               "internalType": "address",
-              "name": "newOracle",
+              "name": "newPythOracle",
               "type": "address"
             }
           ],
-          "name": "PtOracleSet",
+          "name": "PythOracleSet",
           "type": "event"
         },
         {
@@ -4927,39 +3184,46 @@
               "type": "address"
             },
             {
-              "indexed": false,
-              "internalType": "address",
-              "name": "market",
-              "type": "address"
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "pythId",
+              "type": "bytes32"
             },
             {
-              "indexed": false,
-              "internalType": "uint32",
-              "name": "twapDuration",
-              "type": "uint32"
+              "indexed": true,
+              "internalType": "uint64",
+              "name": "maxStalePeriod",
+              "type": "uint64"
             }
           ],
           "name": "TokenConfigAdded",
           "type": "event"
         },
         {
-          "anonymous": false,
-          "inputs": [
+          "inputs": [],
+          "name": "BNB_ADDR",
+          "outputs": [
             {
-              "indexed": true,
               "internalType": "address",
-              "name": "oldAddress",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "newAddress",
+              "name": "",
               "type": "address"
             }
           ],
-          "name": "UnderlyingAssetSet",
-          "type": "event"
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "EXP_SCALE",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
         },
         {
           "inputs": [],
@@ -5004,41 +3268,18 @@
           "inputs": [
             {
               "internalType": "address",
+              "name": "underlyingPythOracle_",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
               "name": "accessControlManager_",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "ptOracle",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "underlyingAsset_",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "resilientOracle",
               "type": "address"
             }
           ],
           "name": "initialize",
           "outputs": [],
           "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "intermediateOracle",
-          "outputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
           "type": "function"
         },
         {
@@ -5090,37 +3331,24 @@
         {
           "inputs": [
             {
-              "internalType": "contract OracleInterface",
-              "name": "intermediateOracle_",
-              "type": "address"
-            }
-          ],
-          "name": "setIntermediateOracle",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
               "components": [
+                {
+                  "internalType": "bytes32",
+                  "name": "pythId",
+                  "type": "bytes32"
+                },
                 {
                   "internalType": "address",
                   "name": "asset",
                   "type": "address"
                 },
                 {
-                  "internalType": "address",
-                  "name": "market",
-                  "type": "address"
-                },
-                {
-                  "internalType": "uint32",
-                  "name": "twapDuration",
-                  "type": "uint32"
+                  "internalType": "uint64",
+                  "name": "maxStalePeriod",
+                  "type": "uint64"
                 }
               ],
-              "internalType": "struct PendleOracle.TokenConfig",
+              "internalType": "struct PythOracle.TokenConfig",
               "name": "tokenConfig",
               "type": "tuple"
             }
@@ -5135,22 +3363,22 @@
             {
               "components": [
                 {
+                  "internalType": "bytes32",
+                  "name": "pythId",
+                  "type": "bytes32"
+                },
+                {
                   "internalType": "address",
                   "name": "asset",
                   "type": "address"
                 },
                 {
-                  "internalType": "address",
-                  "name": "market",
-                  "type": "address"
-                },
-                {
-                  "internalType": "uint32",
-                  "name": "twapDuration",
-                  "type": "uint32"
+                  "internalType": "uint64",
+                  "name": "maxStalePeriod",
+                  "type": "uint64"
                 }
               ],
-              "internalType": "struct PendleOracle.TokenConfig[]",
+              "internalType": "struct PythOracle.TokenConfig[]",
               "name": "tokenConfigs_",
               "type": "tuple[]"
             }
@@ -5163,25 +3391,12 @@
         {
           "inputs": [
             {
-              "internalType": "address",
-              "name": "underlyingAsset_",
+              "internalType": "contract IPyth",
+              "name": "underlyingPythOracle_",
               "type": "address"
             }
           ],
-          "name": "setUnderlyingAsset",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "contract IPendlePtOracle",
-              "name": "underlyingPtOracle_",
-              "type": "address"
-            }
-          ],
-          "name": "setUnderlyingPtOracle",
+          "name": "setUnderlyingPythOracle",
           "outputs": [],
           "stateMutability": "nonpayable",
           "type": "function"
@@ -5197,19 +3412,19 @@
           "name": "tokenConfigs",
           "outputs": [
             {
+              "internalType": "bytes32",
+              "name": "pythId",
+              "type": "bytes32"
+            },
+            {
               "internalType": "address",
               "name": "asset",
               "type": "address"
             },
             {
-              "internalType": "address",
-              "name": "market",
-              "type": "address"
-            },
-            {
-              "internalType": "uint32",
-              "name": "twapDuration",
-              "type": "uint32"
+              "internalType": "uint64",
+              "name": "maxStalePeriod",
+              "type": "uint64"
             }
           ],
           "stateMutability": "view",
@@ -5230,23 +3445,10 @@
         },
         {
           "inputs": [],
-          "name": "underlyingAsset",
+          "name": "underlyingPythOracle",
           "outputs": [
             {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "underlyingPtOracle",
-          "outputs": [
-            {
-              "internalType": "contract IPendlePtOracle",
+              "internalType": "contract IPyth",
               "name": "",
               "type": "address"
             }
@@ -5256,8 +3458,8 @@
         }
       ]
     },
-    "PendleOracle_Proxy": {
-      "address": "0x89C1CE4E67A8F70828c3A12fE4BE5307FF238731",
+    "PythOracle_Proxy": {
+      "address": "0xB274d5383eDFbA9c8c79d6223d065b4258F89E8e",
       "abi": [
         {
           "inputs": [
@@ -5393,7 +3595,7 @@
       ]
     },
     "RedStoneOracle": {
-      "address": "0x86fd48CeCa26Fd4D99677d778313Cd48E64Ce3d1",
+      "address": "0xD65E3912067b97C7F6b6F6Cf7B9F6b054215d8ec",
       "abi": [
         {
           "anonymous": false,
@@ -5645,6 +3847,19 @@
           ],
           "name": "TokenConfigAdded",
           "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "NATIVE_TOKEN_ADDR",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
         },
         {
           "inputs": [],
@@ -5907,7 +4122,7 @@
       ]
     },
     "RedStoneOracle_Implementation": {
-      "address": "0x7ad45894d34a3a4fF24eeEAda255FCa2e997dA97",
+      "address": "0xFaeE758B5503118cad889E64C1902efc72B420C4",
       "abi": [
         {
           "inputs": [],
@@ -6054,6 +4269,19 @@
           ],
           "name": "TokenConfigAdded",
           "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "NATIVE_TOKEN_ADDR",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
         },
         {
           "inputs": [],
@@ -6295,7 +4523,7 @@
       ]
     },
     "RedStoneOracle_Proxy": {
-      "address": "0x86fd48CeCa26Fd4D99677d778313Cd48E64Ce3d1",
+      "address": "0xD65E3912067b97C7F6b6F6Cf7B9F6b054215d8ec",
       "abi": [
         {
           "inputs": [
@@ -6431,7 +4659,7 @@
       ]
     },
     "ResilientOracle": {
-      "address": "0x0A0855765C9777B44369e7aD65d2279b7F1F66A4",
+      "address": "0xd86dA0217Aa08F9624AddBFa3cbF8D3e4F48294D",
       "abi": [
         {
           "anonymous": false,
@@ -6756,6 +4984,19 @@
         },
         {
           "inputs": [],
+          "name": "NATIVE_TOKEN_ADDR",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
           "name": "acceptOwnership",
           "outputs": [],
           "stateMutability": "nonpayable",
@@ -6924,19 +5165,6 @@
           "name": "initialize",
           "outputs": [],
           "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "nativeAsset",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
           "type": "function"
         },
         {
@@ -7184,18 +5412,13 @@
       ]
     },
     "ResilientOracle_Implementation": {
-      "address": "0x5EB13843c3Ab7fd20918b962B7E39F1B8da92EF3",
+      "address": "0x7EAEB1077cA12878f1bEb69fcc820c27c05a8A1c",
       "abi": [
         {
           "inputs": [
             {
               "internalType": "address",
               "name": "nativeMarketAddress",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "nativeAssetAddress",
               "type": "address"
             },
             {
@@ -7425,6 +5648,19 @@
         },
         {
           "inputs": [],
+          "name": "NATIVE_TOKEN_ADDR",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
           "name": "acceptOwnership",
           "outputs": [],
           "stateMutability": "nonpayable",
@@ -7593,19 +5829,6 @@
           "name": "initialize",
           "outputs": [],
           "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "nativeAsset",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
           "type": "function"
         },
         {
@@ -7832,937 +6055,7 @@
       ]
     },
     "ResilientOracle_Proxy": {
-      "address": "0x0A0855765C9777B44369e7aD65d2279b7F1F66A4",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "_logic",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "admin_",
-              "type": "address"
-            },
-            {
-              "internalType": "bytes",
-              "name": "_data",
-              "type": "bytes"
-            }
-          ],
-          "stateMutability": "payable",
-          "type": "constructor"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "previousAdmin",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "newAdmin",
-              "type": "address"
-            }
-          ],
-          "name": "AdminChanged",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "beacon",
-              "type": "address"
-            }
-          ],
-          "name": "BeaconUpgraded",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "implementation",
-              "type": "address"
-            }
-          ],
-          "name": "Upgraded",
-          "type": "event"
-        },
-        {
-          "stateMutability": "payable",
-          "type": "fallback"
-        },
-        {
-          "inputs": [],
-          "name": "admin",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "admin_",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "implementation",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "implementation_",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newImplementation",
-              "type": "address"
-            }
-          ],
-          "name": "upgradeTo",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newImplementation",
-              "type": "address"
-            },
-            {
-              "internalType": "bytes",
-              "name": "data",
-              "type": "bytes"
-            }
-          ],
-          "name": "upgradeToAndCall",
-          "outputs": [],
-          "stateMutability": "payable",
-          "type": "function"
-        },
-        {
-          "stateMutability": "payable",
-          "type": "receive"
-        }
-      ]
-    },
-    "WeETHOracle": {
-      "address": "0xC5F9eccB48910E6Cc07b0Ca3Ce995C1F07e4491b",
-      "abi": [
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "previousAdmin",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "newAdmin",
-              "type": "address"
-            }
-          ],
-          "name": "AdminChanged",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "beacon",
-              "type": "address"
-            }
-          ],
-          "name": "BeaconUpgraded",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "implementation",
-              "type": "address"
-            }
-          ],
-          "name": "Upgraded",
-          "type": "event"
-        },
-        {
-          "stateMutability": "payable",
-          "type": "fallback"
-        },
-        {
-          "inputs": [],
-          "name": "admin",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "admin_",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "implementation",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "implementation_",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newImplementation",
-              "type": "address"
-            }
-          ],
-          "name": "upgradeTo",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newImplementation",
-              "type": "address"
-            },
-            {
-              "internalType": "bytes",
-              "name": "data",
-              "type": "bytes"
-            }
-          ],
-          "name": "upgradeToAndCall",
-          "outputs": [],
-          "stateMutability": "payable",
-          "type": "function"
-        },
-        {
-          "stateMutability": "payable",
-          "type": "receive"
-        },
-        {
-          "inputs": [],
-          "name": "InvalidTokenAddress",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "ZeroAddressNotAllowed",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "CORRELATED_TOKEN",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "INTERMEDIATE_ORACLE",
-          "outputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "RESILIENT_ORACLE",
-          "outputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "UNDERLYING_TOKEN",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "asset",
-              "type": "address"
-            }
-          ],
-          "name": "getPrice",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "_logic",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "admin_",
-              "type": "address"
-            },
-            {
-              "internalType": "bytes",
-              "name": "_data",
-              "type": "bytes"
-            }
-          ],
-          "stateMutability": "payable",
-          "type": "constructor"
-        }
-      ]
-    },
-    "WeETHOracle_Equivalence": {
-      "address": "0xC2664a50458bEd19f6Ac57C9833e7e1c259CaCa8",
-      "abi": [
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "previousAdmin",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "newAdmin",
-              "type": "address"
-            }
-          ],
-          "name": "AdminChanged",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "beacon",
-              "type": "address"
-            }
-          ],
-          "name": "BeaconUpgraded",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "implementation",
-              "type": "address"
-            }
-          ],
-          "name": "Upgraded",
-          "type": "event"
-        },
-        {
-          "stateMutability": "payable",
-          "type": "fallback"
-        },
-        {
-          "inputs": [],
-          "name": "admin",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "admin_",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "implementation",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "implementation_",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newImplementation",
-              "type": "address"
-            }
-          ],
-          "name": "upgradeTo",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newImplementation",
-              "type": "address"
-            },
-            {
-              "internalType": "bytes",
-              "name": "data",
-              "type": "bytes"
-            }
-          ],
-          "name": "upgradeToAndCall",
-          "outputs": [],
-          "stateMutability": "payable",
-          "type": "function"
-        },
-        {
-          "stateMutability": "payable",
-          "type": "receive"
-        },
-        {
-          "inputs": [],
-          "name": "InvalidTokenAddress",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "ZeroAddressNotAllowed",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "CORRELATED_TOKEN",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "LIQUIDITY_POOL",
-          "outputs": [
-            {
-              "internalType": "contract IEtherFiLiquidityPool",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "RESILIENT_ORACLE",
-          "outputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "UNDERLYING_TOKEN",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "asset",
-              "type": "address"
-            }
-          ],
-          "name": "getPrice",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "_logic",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "admin_",
-              "type": "address"
-            },
-            {
-              "internalType": "bytes",
-              "name": "_data",
-              "type": "bytes"
-            }
-          ],
-          "stateMutability": "payable",
-          "type": "constructor"
-        }
-      ]
-    },
-    "WeETHOracle_Equivalence_Implementation": {
-      "address": "0xfED59B70c4E7Ca01BF978681D073f5FB9069dc20",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "liquidityPool",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "weETH",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "eETH",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "resilientOracle",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "inputs": [],
-          "name": "InvalidTokenAddress",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "ZeroAddressNotAllowed",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "CORRELATED_TOKEN",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "LIQUIDITY_POOL",
-          "outputs": [
-            {
-              "internalType": "contract IEtherFiLiquidityPool",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "RESILIENT_ORACLE",
-          "outputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "UNDERLYING_TOKEN",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "asset",
-              "type": "address"
-            }
-          ],
-          "name": "getPrice",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
-    "WeETHOracle_Equivalence_Proxy": {
-      "address": "0xC2664a50458bEd19f6Ac57C9833e7e1c259CaCa8",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "_logic",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "admin_",
-              "type": "address"
-            },
-            {
-              "internalType": "bytes",
-              "name": "_data",
-              "type": "bytes"
-            }
-          ],
-          "stateMutability": "payable",
-          "type": "constructor"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "previousAdmin",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "newAdmin",
-              "type": "address"
-            }
-          ],
-          "name": "AdminChanged",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "beacon",
-              "type": "address"
-            }
-          ],
-          "name": "BeaconUpgraded",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "implementation",
-              "type": "address"
-            }
-          ],
-          "name": "Upgraded",
-          "type": "event"
-        },
-        {
-          "stateMutability": "payable",
-          "type": "fallback"
-        },
-        {
-          "inputs": [],
-          "name": "admin",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "admin_",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "implementation",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "implementation_",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newImplementation",
-              "type": "address"
-            }
-          ],
-          "name": "upgradeTo",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newImplementation",
-              "type": "address"
-            },
-            {
-              "internalType": "bytes",
-              "name": "data",
-              "type": "bytes"
-            }
-          ],
-          "name": "upgradeToAndCall",
-          "outputs": [],
-          "stateMutability": "payable",
-          "type": "function"
-        },
-        {
-          "stateMutability": "payable",
-          "type": "receive"
-        }
-      ]
-    },
-    "WeETHOracle_Implementation": {
-      "address": "0x8755Ce7962f4aE0E4040d2DafcfcD3Bd039a770b",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "correlatedToken",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "underlyingToken",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "resilientOracle",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "intermediateOracle",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "inputs": [],
-          "name": "InvalidTokenAddress",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "ZeroAddressNotAllowed",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "CORRELATED_TOKEN",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "INTERMEDIATE_ORACLE",
-          "outputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "RESILIENT_ORACLE",
-          "outputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "UNDERLYING_TOKEN",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "asset",
-              "type": "address"
-            }
-          ],
-          "name": "getPrice",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
-    "WeETHOracle_Proxy": {
-      "address": "0xC5F9eccB48910E6Cc07b0Ca3Ce995C1F07e4491b",
+      "address": "0xd86dA0217Aa08F9624AddBFa3cbF8D3e4F48294D",
       "abi": [
         {
           "inputs": [
