@@ -1,0 +1,23 @@
+{
+  "name": "base",
+  "chainId": "8453",
+  "addresses": {
+    "AccessControlManager": "0x0453DCB07fC787E33AD6dAde04f0f168C48FD8B4",
+    "BoundValidator": "0x7E7856b1AC3B6D18C941Fe6f5e1f75E8C661343B",
+    "BoundValidator_Implementation": "0x6Ec4d0aDBa065D4BD775BB928776D15243c53663",
+    "BoundValidator_Proxy": "0x7E7856b1AC3B6D18C941Fe6f5e1f75E8C661343B",
+    "ChainlinkOracle": "0xa144a8649619b963C1531E77Fa963E39Aa30C66f",
+    "ChainlinkOracle_Implementation": "0x85224F86bb3A00b298c0d0bfD246Ba2D966eb32c",
+    "ChainlinkOracle_Proxy": "0xa144a8649619b963C1531E77Fa963E39Aa30C66f",
+    "DefaultProxyAdmin": "0xcb764352c5014bDc02a0ff646fBFde42505B7357",
+    "RedStoneOracle": "0xA359C2cDd33D863703672cE4baa9A82Fb644a533",
+    "RedStoneOracle_Implementation": "0xA039F42887D2D8d1234E95D3A051091D6cFf7AE1",
+    "RedStoneOracle_Proxy": "0xA359C2cDd33D863703672cE4baa9A82Fb644a533",
+    "ResilientOracle": "0xCc08A29128c5Ecd4A83971019D7cFe609E4c40B7",
+    "ResilientOracle_Implementation": "0x92838d531ca08cfDA274F66fD5674655CdC13D21",
+    "ResilientOracle_Proxy": "0xCc08A29128c5Ecd4A83971019D7cFe609E4c40B7",
+    "cbETHOracle": "0x4Ad0a417996f6EB3439aE6D956a8e959Cc532E54",
+    "weETHOracle": "0xC3E4e27B39f3d6D2DF98A243e4f54742d1D54d30",
+    "wstETHOracle": "0xf7ED9A787696CA0823D5e0acBa919e4039DC67c7"
+  }
+}
