@@ -274,7 +274,7 @@ contract ResilientOracle is PausableUpgradeable, AccessControlledV8, ResilientOr
      * @custom:error Paused error is thrown when resilent oracle is paused
      * @custom:error Invalid resilient oracle price error is thrown if fetched prices from oracle is invalid
      */
-    function getUnderlyingPrice(address vToken) external view override returns (uint256) {
+    function getUnderlyingPrice(address vToken) public view override returns (uint256) {
         if (paused()) revert("resilient oracle is paused");
 
         address asset = _getUnderlyingAsset(vToken);
@@ -364,6 +364,15 @@ contract ResilientOracle is PausableUpgradeable, AccessControlledV8, ResilientOr
         }
 
         revert("invalid resilient oracle price");
+    }
+
+    function getUnderlyingPrices(address[] memory cTokens) public view returns (uint256[] memory) {
+        uint256 length = cTokens.length;
+        uint256[] memory results = new uint256[](length);
+        for (uint256 i; i < length; ++i) {
+            results[i] = getUnderlyingPrice(cTokens[i]);
+        }
+        return results;
     }
 
     /**
