@@ -143,6 +143,7 @@ export const chainlinkFeed: Config = {
     DAI: "0xc5C8E77B397E531B8EC06BFb0048328B30E9eCfB",
     suETH: "0x639Fe6ab55C921f74e7fac1ee960C0B6293ba612",
     suBTC: "0x6ce185860a4963106506C203335A2910413708e9",
+    SolvBTC: "0x6ce185860a4963106506C203335A2910413708e9",
     "RETH/WETH": "0xD6aB2298946840262FcC278fF31516D39fF611eF", // denomicated by ETH
     "wstETH/WETH": "0xb523AE262D20A936BC152e6023996e46FDC2A95D", // denominated by ETH
     "weETH/WETH": "0xE141425bc1594b8039De6390db1cDaf4397EA22b", // denominated by ETH
@@ -200,7 +201,10 @@ export const pythID: Config = {
 export const pendleMarket: Config = {
   sepolia: { PTweETH_26DEC2024: "0xB1bE063Ccbc4f67f58293C402aF8D082c0459787" },
   ethereum: { PTweETH_26DEC2024: "0x7d372819240d14fb477f17b964f95f33beb4c704" },
-  arbitrum: { PTweETH_26SEP2024: "0xf9f9779d8ff604732eba9ad345e6a27ef5c2a9d6" },
+  arbitrum: {
+    PTweETH_26SEP2024: "0xf9f9779d8ff604732eba9ad345e6a27ef5c2a9d6",
+    PTrsETH_25SEP2024: "0xed99fc8bdb8e9e7b8240f62f69609a125a0fbf14",
+  },
   metertest: {},
 };
 
@@ -330,6 +334,13 @@ export const assets: Assets = {
     },
     { token: "suETH", address: "0x1c22531aa9747d76fff8f0a43b37954ca67d28e0", oracle: "chainlink" },
     { token: "suBTC", address: "0xe85411c030fb32a9d8b14bbbc6cb19417391f711", oracle: "chainlink" },
+    { token: "SolvBTC", address: "0x3647c54c4c2C65bC7a2D63c0Da2809B399DBBDC0", oracle: "chainlink" },
+    {
+      token: "PTrsETH_25SEP2024",
+      address: "0x30c98c0139b62290e26ac2a2158ac341dcaf1333",
+      oracle: "pendle",
+      twapDuration: 1800,
+    },
   ],
   base: [
     { token: "USDC", address: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", oracle: "chainlink" },
