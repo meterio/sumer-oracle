@@ -58,13 +58,18 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     assetMap[asset.token] = asset;
   }
   const chainlinkOracle =
-    (await hre.ethers.getContract("ChainlinkOracle")) || (await hre.ethers.getContract("SequencerChainlinkOracle"));
+    (await hre.ethers.getContractOrNull("ChainlinkOracle")) ||
+    (await hre.ethers.getContractOrNull("SequencerChainlinkOracle"));
 
-  await configurePriceFeeds(hre, chainlinkOracle, "chainlink", chainlinkFeed[networkName]);
+  if (chainlinkOracle) {
+    await configurePriceFeeds(hre, chainlinkOracle, "chainlink", chainlinkFeed[networkName]);
+  }
 
-  const redstoneOracle = await hre.ethers.getContract("RedStoneOracle");
+  const redstoneOracle = await hre.ethers.getContractOrNull("RedStoneOracle");
 
-  await configurePriceFeeds(hre, redstoneOracle, "redstone", redstoneFeed[networkName]);
+  if (redstoneOracle) {
+    await configurePriceFeeds(hre, redstoneOracle, "redstone", redstoneFeed[networkName]);
+  }
 };
 
 func.tags = ["feeds"];
