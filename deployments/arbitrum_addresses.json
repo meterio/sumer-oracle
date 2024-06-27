@@ -1,0 +1,27 @@
+{
+  "name": "arbitrum",
+  "chainId": "42161",
+  "addresses": {
+    "AccessControlManager": "0xEc2d55f444ed98Ba69281C8cA6889BCBB682716f",
+    "BoundValidator": "0x1F2ca038D3dA31f852D02B6d4741Fdca31F99Ec8",
+    "BoundValidator_Implementation": "0xbB207A540f6Af7B5CC09C7AA6E479Fa7089530D6",
+    "BoundValidator_Proxy": "0x1F2ca038D3dA31f852D02B6d4741Fdca31F99Ec8",
+    "DefaultProxyAdmin": "0x740E842DDFAb6CDA39933f72bb6AEaA172aB12B0",
+    "PendleOracle": "0xC157f665da751B6B60207F2248f000B0A67608Da",
+    "PendleOracle_Implementation": "0xCFDA1c9910fC074681f9D6E80b53736719fB91Cb",
+    "PendleOracle_Proxy": "0xC157f665da751B6B60207F2248f000B0A67608Da",
+    "RETHOracle": "0x05A04fea2B61e797671b88Adb99e98326438Ec17",
+    "RedStoneOracle": "0x71bd008Bd6088B4E241A014e6f1B5c7d1B3C1aD6",
+    "RedStoneOracle_Implementation": "0xb114194727b6871B503F045cF6bEc6069e70aFb0",
+    "RedStoneOracle_Proxy": "0x71bd008Bd6088B4E241A014e6f1B5c7d1B3C1aD6",
+    "ResilientOracle": "0x3d9b5399059d36644B8b67860439Af221C67B273",
+    "ResilientOracle_Implementation": "0xe5d492934c69151251D974cA12F9a0169Ccd0d34",
+    "ResilientOracle_Proxy": "0x3d9b5399059d36644B8b67860439Af221C67B273",
+    "SequencerChainlinkOracle": "0xe5c9f0eE67A5C71678f256DCC349e5d962a3F56D",
+    "SequencerChainlinkOracle_Implementation": "0xD27C60BDB2ba403216921adb142c702352425641",
+    "SequencerChainlinkOracle_Proxy": "0xe5c9f0eE67A5C71678f256DCC349e5d962a3F56D",
+    "rsETHOracle": "0xD5B422e04d04726486A3F389fdDC150E3315197f",
+    "weETHOracle": "0x08f0C8e4Ca779Ba922915926bF15454932dDA8A9",
+    "wstETHOracle": "0x018bEF628f897071aC1D3247Fb305cEC718C6b55"
+  }
+}
