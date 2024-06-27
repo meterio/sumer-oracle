@@ -109,6 +109,12 @@ const config: HardhatUserConfig = {
       live: false,
       accounts: process.env.DEPLOYER_PRIVATE_KEY ? [`0x${process.env.DEPLOYER_PRIVATE_KEY}`] : [],
     },
+    base: {
+      url: 'https://base.blockpi.network/v1/rpc/public',
+      chainId: 8453,
+      live: true,
+      accounts: process.env.DEPLOYER_PRIVATE_KEY ? [`0x${process.env.DEPLOYER_PRIVATE_KEY}`] : [],
+    },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
@@ -119,6 +125,7 @@ const config: HardhatUserConfig = {
       sepolia: process.env.ETHERSCAN_API_KEY || "ETHERSCAN_API_KEY",
       ethereum: process.env.ETHERSCAN_API_KEY || "ETHERSCAN_API_KEY",
       arbitrum: process.env.ARBISCAN_API_KEY || "ARBISCAN_API_KEY",
+      base: process.env.ETHERSCAN_API_KEY || "ETHERSCAN_API_KEY",
     },
     customChains: [
       {
@@ -145,6 +152,14 @@ const config: HardhatUserConfig = {
           browserURL: "https://arbiscan.io/",
         },
       },
+      {
+        network: 'base',
+        chainId: 8453,
+        urls: { 
+          apiURL: 'https://api.basescan.org/aip/',
+          browserURL: 'https://basescan.org' },
+      }
+      
     ],
   },
   paths: {

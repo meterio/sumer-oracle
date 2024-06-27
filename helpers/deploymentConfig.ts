@@ -111,7 +111,7 @@ export const ADDRESSES: PreconfiguredAddresses = {
   },
   base: {
     nativeAsset: "0x4200000000000000000000000000000000000006", // WETH
-    acm: "", // FIXME: replace this with correct address
+    acm: "0x0453DCB07fC787E33AD6dAde04f0f168C48FD8B4", // FIXME: replace this with correct address
     timelock: "", // FIXME: Arbitrum One Multisig
 
     WETH: "0x4200000000000000000000000000000000000006",
@@ -336,7 +336,7 @@ export const assets: Assets = {
     { token: "DAI", address: "0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb", oracle: "chainlink" },
     {
       token: "weETH",
-      address: "0x35751007a407ca6FEFfE80b3cB397736D2cf4dbe",
+      address: "0x04C0599Ae5A44757c0af6F9eC3b93da8976c150A",
       oracle: "chainlink",
       denominatedBy: "WETH",
     },
