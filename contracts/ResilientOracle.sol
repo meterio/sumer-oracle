@@ -127,10 +127,11 @@ contract ResilientOracle is PausableUpgradeable, AccessControlledV8, ResilientOr
     /// @param _boundValidator Address of the bound validator contract
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor(
+        address nativeMarketAddress,
         address nativeAssetAddress,
         BoundValidatorInterface _boundValidator
     ) notNullAddress(address(_boundValidator)) {
-        nativeMarket = 0x0000000000000000000000000000000000000000;
+        nativeMarket = nativeMarketAddress;
         nativeAsset = nativeAssetAddress;
         vai = 0x0000000000000000000000000000000000000000;
         boundValidator = _boundValidator;
@@ -451,7 +452,7 @@ contract ResilientOracle is PausableUpgradeable, AccessControlledV8, ResilientOr
      * @return asset underlying asset address
      */
     function _getUnderlyingAsset(address vToken) private view notNullAddress(vToken) returns (address asset) {
-        if (VBep20Interface(vToken).isCEther()) {
+        if (vToken == nativeMarket && VBep20Interface(vToken).isCEther()) {
             asset = nativeAsset;
         } else {
             asset = VBep20Interface(vToken).underlying();
