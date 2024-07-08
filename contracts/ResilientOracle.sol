@@ -452,7 +452,7 @@ contract ResilientOracle is PausableUpgradeable, AccessControlledV8, ResilientOr
      * @return asset underlying asset address
      */
     function _getUnderlyingAsset(address vToken) private view notNullAddress(vToken) returns (address asset) {
-        if (vToken == nativeMarket && VBep20Interface(vToken).isCEther()) {
+        if (vToken == nativeMarket) {
             asset = nativeAsset;
         } else {
             asset = VBep20Interface(vToken).underlying();

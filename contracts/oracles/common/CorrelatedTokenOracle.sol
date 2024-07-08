@@ -50,8 +50,8 @@ abstract contract CorrelatedTokenOracle is OracleInterface {
         // oracle returns (36 - asset decimal) scaled price
         uint256 underlyingUSDPrice = RESILIENT_ORACLE.getPrice(UNDERLYING_TOKEN);
 
-        IERC20Metadata token = IERC20Metadata(CORRELATED_TOKEN);
-        uint256 decimals = token.decimals();
+        // IERC20Metadata token = IERC20Metadata(CORRELATED_TOKEN);
+        // uint256 decimals = token.decimals();
 
         // underlyingAmount (for 1 correlated token) * underlyingUSDPrice / decimals(correlated token)
         return (underlyingAmount * underlyingUSDPrice) / EXP_SCALE;

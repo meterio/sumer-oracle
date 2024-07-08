@@ -32,8 +32,6 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
 
     OracleInterface public intermediateOracle;
 
-    address public underlyingAsset;
-
     /// @notice Token config by assets
     mapping(address => TokenConfig) public tokenConfigs;
 
@@ -65,22 +63,13 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
      * @notice Initializes the owner of the contract
      * @param accessControlManager_ Address of the access control manager contract
      */
-    function initialize(
-        address accessControlManager_,
-        address ptOracle,
-        address underlyingAsset_,
-        address resilientOracle
-    ) external initializer {
+    function initialize(address accessControlManager_, address ptOracle, address resilientOracle) external initializer {
         __AccessControlled_init(accessControlManager_);
         ensureNonzeroAddress(ptOracle);
         ensureNonzeroAddress(resilientOracle);
-        ensureNonzeroAddress(underlyingAsset_);
 
         underlyingPtOracle = IPendlePtOracle(ptOracle);
         emit PtOracleSet(address(0), address(underlyingPtOracle));
-
-        underlyingAsset = underlyingAsset_;
-        emit UnderlyingAssetSet(address(0), underlyingAsset);
 
         intermediateOracle = OracleInterface(resilientOracle);
         emit IntermediateOracleSet(address(0), address(intermediateOracle));
@@ -136,20 +125,6 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
     }
 
     /**
-     * @notice Set the underlying sset contract address
-     * @param underlyingAsset_ underlying asset contract address
-     * @custom:access Only Governance
-     * @custom:error NotNullAddress error thrown if intermediateOracle_ address is zero
-     * @custom:event Emits IntermediateOracleSet event with address of Pyth oracle.
-     */
-    function setUnderlyingAsset(address underlyingAsset_) external notNullAddress(address(underlyingAsset_)) {
-        _checkAccessAllowed("setUnderlyingAsset(address)");
-        address oldAddress = underlyingAsset;
-        underlyingAsset = underlyingAsset_;
-        emit UnderlyingAssetSet(address(oldAddress), address(underlyingAsset_));
-    }
-
-    /**
      * @notice Add single token config. asset & feed cannot be null addresses and maxStalePeriod must be positive
      * @param tokenConfig Token config struct
      * @custom:access Only Governance
@@ -191,6 +166,7 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
         if (tokenConfig.asset != asset) revert("unknown token");
         uint256 rate = underlyingPtOracle.getPtToSyRate(tokenConfig.market, tokenConfig.twapDuration);
 
-        return (intermediateOracle.getPrice(underlyingAsset) * rate) / EXP_SCALE;
+        (IStandardizedYield sy, , ) = IPMarket(tokenConfig.market).readTokens();
+        return (intermediateOracle.getPrice(sy.yieldToken()) * rate) / EXP_SCALE;
     }
 }

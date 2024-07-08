@@ -109,7 +109,7 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
         }
       } else if (oracle === "pendle") {
         const oracleContract = await hre.ethers.getContractAt(
-          "PendleOracle",
+          `PendleOracle`,
           oraclesData[oracle].underlyingOracle.address,
         );
         const configOnChain = await oracleContract.tokenConfigs(tokenConfig.asset);

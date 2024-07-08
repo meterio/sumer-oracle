@@ -46,7 +46,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
 
   console.log(`Timelock: ${ADDRESSES[networkName].timelock}`);
 
-  const { nativeAsset } = ADDRESSES[networkName];
+  const { nativeMarket, nativeAsset } = ADDRESSES[networkName];
 
   if (!ADDRESSES[networkName].acm || ADDRESSES[networkName].acm === ethers.constants.AddressZero) {
     await deploy("AccessControlManager", {
@@ -57,8 +57,11 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
     });
   }
 
+  if (!nativeMarket) {
+    throw new Error("nativeMarket must NOT be empty");
+  }
   if (!nativeAsset) {
-    throw new Error("nativeAsset must NOT empty");
+    throw new Error("nativeAsset must NOT be empty");
   }
 
   const accessControlManager = await hre.ethers.getContract("AccessControlManager");
@@ -96,7 +99,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
     from: deployer,
     log: true,
     deterministicDeployment: false,
-    args: [nativeAsset, boundValidator.address],
+    args: [nativeMarket, nativeAsset, boundValidator.address],
     proxy: {
       owner: proxyOwnerAddress,
       proxyContract: "OptimizedTransparentProxy",
@@ -172,11 +175,11 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
     });
   }
 
-  const { ptOracle, weETH } = ADDRESSES[networkName];
+  const { ptOracle } = ADDRESSES[networkName];
   const resilientOracle = await hre.ethers.getContract("ResilientOracle");
 
   // Skip if no ptOracle address in config
-  if (ptOracle && weETH) {
+  if (ptOracle) {
     await deploy("PendleOracle", {
       contract: "PendleOracle",
       from: deployer,
@@ -189,13 +192,14 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
         execute: {
           init: {
             methodName: "initialize",
-            args: [accessControlManagerAddress, ptOracle, weETH, resilientOracle.address],
+            args: [accessControlManagerAddress, ptOracle, resilientOracle.address],
           },
         },
       },
     });
   }
 
+  // deploy OneJumpOracle for token with `denominatedBy` field in asset
   for (const asset of assets[networkName]) {
     if (asset.denominatedBy) {
       if (!(asset.denominatedBy in ADDRESSES[networkName])) {
