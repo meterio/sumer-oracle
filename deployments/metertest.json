@@ -366,7 +366,7 @@
       ]
     },
     "BoundValidator": {
-      "address": "0xde928d679473bD485ac7f9D9f0525b276A5aC07b",
+      "address": "0x94fc301E46a1C8b19e5983B33568236E83A3f07D",
       "abi": [
         {
           "anonymous": false,
@@ -828,7 +828,7 @@
       ]
     },
     "BoundValidator_Implementation": {
-      "address": "0x4Ddd1448288b7E07D6fdACee68FA7FE7F007a3fB",
+      "address": "0xB8Be299f37c04Fe8980f04fd0733B8D50b235d26",
       "abi": [
         {
           "inputs": [],
@@ -1164,7 +1164,7 @@
       ]
     },
     "BoundValidator_Proxy": {
-      "address": "0xde928d679473bD485ac7f9D9f0525b276A5aC07b",
+      "address": "0x94fc301E46a1C8b19e5983B33568236E83A3f07D",
       "abi": [
         {
           "inputs": [
@@ -1300,7 +1300,7 @@
       ]
     },
     "ChainlinkOracle": {
-      "address": "0xd43dfE85b4cB0AfC15c48E0C7F76728eaf4eA15C",
+      "address": "0x37878010E143A7Bae888AbD59110e0832853bE42",
       "abi": [
         {
           "anonymous": false,
@@ -1552,19 +1552,6 @@
           ],
           "name": "TokenConfigAdded",
           "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "NATIVE_TOKEN_ADDR",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
         },
         {
           "inputs": [],
@@ -1827,7 +1814,7 @@
       ]
     },
     "ChainlinkOracle_Implementation": {
-      "address": "0x9b0A203e93ecdfb97e42604c4d7c4241B6F7d78B",
+      "address": "0xaFc830c7cDDE3E1De62fb045ba503F59F26058AB",
       "abi": [
         {
           "inputs": [],
@@ -1974,19 +1961,6 @@
           ],
           "name": "TokenConfigAdded",
           "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "NATIVE_TOKEN_ADDR",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
         },
         {
           "inputs": [],
@@ -2228,7 +2202,7 @@
       ]
     },
     "ChainlinkOracle_Proxy": {
-      "address": "0xd43dfE85b4cB0AfC15c48E0C7F76728eaf4eA15C",
+      "address": "0x37878010E143A7Bae888AbD59110e0832853bE42",
       "abi": [
         {
           "inputs": [
@@ -2529,7 +2503,7 @@
       ]
     },
     "PythOracle": {
-      "address": "0xB274d5383eDFbA9c8c79d6223d065b4258F89E8e",
+      "address": "0x24f9cb463F95129dA282200669512fc1eABE7f0A",
       "abi": [
         {
           "anonymous": false,
@@ -2775,32 +2749,6 @@
           ],
           "name": "TokenConfigAdded",
           "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "BNB_ADDR",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "EXP_SCALE",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
         },
         {
           "inputs": [],
@@ -3057,7 +3005,7 @@
       ]
     },
     "PythOracle_Implementation": {
-      "address": "0xE439Bf606AaE5818B802A67810fA40e9aE5F1F34",
+      "address": "0x073a230b46835333A2DeEb72a1993573392C6838",
       "abi": [
         {
           "inputs": [],
@@ -3198,32 +3146,6 @@
           ],
           "name": "TokenConfigAdded",
           "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "BNB_ADDR",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "EXP_SCALE",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
         },
         {
           "inputs": [],
@@ -3459,7 +3381,7 @@
       ]
     },
     "PythOracle_Proxy": {
-      "address": "0xB274d5383eDFbA9c8c79d6223d065b4258F89E8e",
+      "address": "0x24f9cb463F95129dA282200669512fc1eABE7f0A",
       "abi": [
         {
           "inputs": [
@@ -3595,7 +3517,7 @@
       ]
     },
     "RedStoneOracle": {
-      "address": "0xD65E3912067b97C7F6b6F6Cf7B9F6b054215d8ec",
+      "address": "0x34A4F5249eA74c09d3AF6a325b184b9606899793",
       "abi": [
         {
           "anonymous": false,
@@ -3847,19 +3769,6 @@
           ],
           "name": "TokenConfigAdded",
           "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "NATIVE_TOKEN_ADDR",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
         },
         {
           "inputs": [],
@@ -4122,7 +4031,7 @@
       ]
     },
     "RedStoneOracle_Implementation": {
-      "address": "0xFaeE758B5503118cad889E64C1902efc72B420C4",
+      "address": "0x6aa1f73EBA4F7a032EA1d6A5738397130a7e8D84",
       "abi": [
         {
           "inputs": [],
@@ -4269,19 +4178,6 @@
           ],
           "name": "TokenConfigAdded",
           "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "NATIVE_TOKEN_ADDR",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
         },
         {
           "inputs": [],
@@ -4523,7 +4419,7 @@
       ]
     },
     "RedStoneOracle_Proxy": {
-      "address": "0xD65E3912067b97C7F6b6F6Cf7B9F6b054215d8ec",
+      "address": "0x34A4F5249eA74c09d3AF6a325b184b9606899793",
       "abi": [
         {
           "inputs": [
@@ -4659,7 +4555,7 @@
       ]
     },
     "ResilientOracle": {
-      "address": "0xd86dA0217Aa08F9624AddBFa3cbF8D3e4F48294D",
+      "address": "0xE790D0916B0BaC27ad696F56aF3d55f189981b3D",
       "abi": [
         {
           "anonymous": false,
@@ -4984,19 +4880,6 @@
         },
         {
           "inputs": [],
-          "name": "NATIVE_TOKEN_ADDR",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
           "name": "acceptOwnership",
           "outputs": [],
           "stateMutability": "nonpayable",
@@ -5157,6 +5040,25 @@
         {
           "inputs": [
             {
+              "internalType": "address[]",
+              "name": "cTokens",
+              "type": "address[]"
+            }
+          ],
+          "name": "getUnderlyingPrices",
+          "outputs": [
+            {
+              "internalType": "uint256[]",
+              "name": "",
+              "type": "uint256[]"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
               "internalType": "address",
               "name": "accessControlManager_",
               "type": "address"
@@ -5165,6 +5067,19 @@
           "name": "initialize",
           "outputs": [],
           "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "nativeAsset",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
           "type": "function"
         },
         {
@@ -5412,7 +5327,7 @@
       ]
     },
     "ResilientOracle_Implementation": {
-      "address": "0x7EAEB1077cA12878f1bEb69fcc820c27c05a8A1c",
+      "address": "0x53154342044Bb83351e064228211Bac2326D1446",
       "abi": [
         {
           "inputs": [
@@ -5423,7 +5338,7 @@
             },
             {
               "internalType": "address",
-              "name": "vaiAddress",
+              "name": "nativeAssetAddress",
               "type": "address"
             },
             {
@@ -5648,19 +5563,6 @@
         },
         {
           "inputs": [],
-          "name": "NATIVE_TOKEN_ADDR",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
           "name": "acceptOwnership",
           "outputs": [],
           "stateMutability": "nonpayable",
@@ -5821,6 +5723,25 @@
         {
           "inputs": [
             {
+              "internalType": "address[]",
+              "name": "cTokens",
+              "type": "address[]"
+            }
+          ],
+          "name": "getUnderlyingPrices",
+          "outputs": [
+            {
+              "internalType": "uint256[]",
+              "name": "",
+              "type": "uint256[]"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
               "internalType": "address",
               "name": "accessControlManager_",
               "type": "address"
@@ -5829,6 +5750,19 @@
           "name": "initialize",
           "outputs": [],
           "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "nativeAsset",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
           "type": "function"
         },
         {
@@ -6055,7 +5989,7 @@
       ]
     },
     "ResilientOracle_Proxy": {
-      "address": "0xd86dA0217Aa08F9624AddBFa3cbF8D3e4F48294D",
+      "address": "0xE790D0916B0BaC27ad696F56aF3d55f189981b3D",
       "abi": [
         {
           "inputs": [
@@ -6187,6 +6121,82 @@
         {
           "stateMutability": "payable",
           "type": "receive"
+        }
+      ]
+    },
+    "WstMTRGOracle": {
+      "address": "0x3bCE337Fb6B52BeC2C2E4f2bD84F864E5d629Dd9",
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "MTRG",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "resilientOracle",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [],
+          "name": "InvalidTokenAddress",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "ZeroAddressNotAllowed",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "RESILIENT_ORACLE",
+          "outputs": [
+            {
+              "internalType": "contract OracleInterface",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "UNDERLYING_TOKEN",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "correlatedToken",
+              "type": "address"
+            }
+          ],
+          "name": "getPrice",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
         }
       ]
     }
