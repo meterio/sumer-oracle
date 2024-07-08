@@ -85,22 +85,29 @@ export const ADDRESSES: PreconfiguredAddresses = {
     acm: "0xbcbda48712A075fa7B50b4B6f8C42D40D4505F8B",
     timelock: "0x14b27D8DC12E59a9904DaC6d17D33B8de2E80e66", // Sepolia Multisig
 
-    weETH: "0x3b8b6E96e57f0d1cD366AaCf4CcC68413aF308D0",
-    eETH: "0x0012875a7395a293Adfc9b5cDC2Cfa352C4cDcD3",
+    // used by oneJumpOracle
     WETH: "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9",
+
+    // enable deploy PendleOracle
     ptOracle: "0x28A59851C1CB12351D7c6aEf98FFE2871d7cF898",
   },
   ethereum: {
     nativeMarket: "0x42778d0962884510b85d4D1B30DFe9e9Dd270446", // FIXME: sdrETH
-    nativeAsset: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+    nativeAsset: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", // WETH
     acm: "", // FIXME: replace this with correct address
     timelock: "", // FIXME:Ethereum Multisig
 
-    weETH: "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee",
-    eETH: "0x35fA164735182de50811E8e2E824cFb9B6118ac2",
+    // enable deploy PendleOracle
     ptOracle: "0x9a9fa8338dd5e5b2188006f1cd2ef26d921650c2",
+
+    // enable deploy WeETHOracle_Equivalence
     EtherFiLiquidityPool: "0x308861A430be4cce5502d0A12724771Fc6DaF216",
+    weETH: "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee",
+
+    // used by OneJumpOracle
     WETH: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+
+    // used by WstETHOracle
   },
   arbitrum: {
     nativeMarket: "0x3C752d0D78BbFddA6BF4b6000a01228B732441aE", // sdrETH
@@ -108,9 +115,11 @@ export const ADDRESSES: PreconfiguredAddresses = {
     acm: "0xEc2d55f444ed98Ba69281C8cA6889BCBB682716f",
     timelock: "", // FIXME: Arbitrum One Multisig
 
-    weETH: "0x35751007a407ca6FEFfE80b3cB397736D2cf4dbe",
-    WETH: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1",
+    // enable deploy PendleOracle
     ptOracle: "0x9a9Fa8338dd5E5B2188006f1Cd2Ef26d921650C2",
+
+    // used by OneJumpOracle
+    WETH: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1",
   },
   base: {
     nativeMarket: "0x2AA93D3142d7327307b770Dba2e87C97b86B95Bc", // sdrETH
@@ -118,8 +127,8 @@ export const ADDRESSES: PreconfiguredAddresses = {
     acm: "0x0453DCB07fC787E33AD6dAde04f0f168C48FD8B4", // FIXME: replace this with correct address
     timelock: "", // FIXME: Arbitrum One Multisig
 
+    // used by OneJumpOracle
     WETH: "0x4200000000000000000000000000000000000006",
-    weETH: "0x04C0599Ae5A44757c0af6F9eC3b93da8976c150A",
   },
 };
 
@@ -142,7 +151,7 @@ export const chainlinkFeed: Config = {
     "rsETH/WETH": "0x03c68933f7a3F76875C0bc670a58e69294cDFD01", // denominated by ETH
     "weETH/WETH": "0x5c9C449BbC9a6075A2c061dF312a35fd1E05fF22", // denominated by ETH
     "RETH/WETH": "0x536218f9E9Eb48863970252233c8F271f554C2d0", // denominated by ETH
-    "wstETH/WETH": "", // denominated by ETH
+    "stETH/WETH": "0x86392dC19c0b719886221c78AB11eb8Cf5c52812", // denominated by ETH
   },
   arbitrum: {
     USDC: "0x50834F3163758fcC1Df9973b6e91f0F0F0434aD3",
@@ -232,8 +241,11 @@ export const assets: Assets = {
     { token: "ETH", address: "0xe8876830e7cc85dae8ce31b0802313caf856886f", oracle: "pyth" },
     { token: "BTC", address: "0x7EB9e0Df1C6E6f1E9d3d1EdA09fcF688FE7A710c", oracle: "pyth" },
     { token: "MTRG", address: "0x8a419ef4941355476cf04933e90bf3bbf2f73814", oracle: "pyth" },
-    { token: "wstMTRG", address: "0x871497Eb8596d2cBdBE5bb23D552D35bFfbb8CF5", oracle: "pyth", denominatedBy: "MTRG" },
-    { token: "WMTR", address: "0x6ABAEDAB0Ba368F1DF52D857f24154CC76c8c972", oracle: "pyth" },
+    {
+      token: "wstMTRG",
+      address: "0x871497Eb8596d2cBdBE5bb23D552D35bFfbb8CF5",
+      oracle: "WstMTRGOracle",
+    },
   ],
   metermain: [
     { token: "USDC.eth", address: "0xd86e243fc0007e6226b07c9a50c9d70d78299eb5", oracle: "pyth" },
@@ -276,33 +288,38 @@ export const assets: Assets = {
   ],
   ethereum: [
     {
-      token: "weETH",
-      address: "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee",
-      oracle: "chainlink",
-      stalePeriod: STALE_PERIOD_26H,
-    },
-    {
       token: "WETH",
       address: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
       oracle: "chainlink",
       stalePeriod: STALE_PERIOD_100M,
     },
-    // {
-    //   token: "wstETH",
-    //   address: "0x15b5220024c3242f7d61177d6ff715cfac4909ed",
-    //   oracle: "chainlink",
-    //   stalePeriod: STALE_PERIOD_100M,
-    // },
+    {
+      token: "weETH",
+      address: "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee",
+      oracle: "chainlink",
+      denominatedBy: "WETH",
+      stalePeriod: STALE_PERIOD_26H,
+    },
+    {
+      token: "stETH",
+      address: "0x15b5220024c3242f7d61177d6ff715cfac4909ed",
+      oracle: "chainlink",
+      denominatedBy: "WETH",
+      stalePeriod: STALE_PERIOD_26H,
+    },
+    { token: "wstETH", address: "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0", oracle: "WstETHOracle" },
     {
       token: "RETH",
       address: "0xae78736Cd615f374D3085123A210448E74Fc6393",
       oracle: "chainlink",
+      denominatedBy: "WETH",
       stalePeriod: STALE_PERIOD_26H,
     },
     {
       token: "rsETH",
       address: "0xA1290d69c65A6Fe4DF752f95823fae25cB99e5A7",
       oracle: "chainlink",
+      denominatedBy: "WETH",
       stalePeriod: STALE_PERIOD_26H,
     },
     {
@@ -457,7 +474,6 @@ export const getOraclesData = async (): Promise<Oracles> => {
   const chainlinkOracle =
     (await ethers.getContractOrNull("ChainlinkOracle")) || (await ethers.getContractOrNull("SequencerChainlinkOracle"));
   const redstoneOracle = await ethers.getContractOrNull("RedStoneOracle");
-  const binanceOracle = await ethers.getContractOrNull("BinanceOracle");
   const pythOracle = await ethers.getContractOrNull("PythOracle");
   const pendleOracle = await ethers.getContractOrNull("PendleOracle");
 
@@ -508,19 +524,6 @@ export const getOraclesData = async (): Promise<Oracles> => {
                 maxStalePeriod: asset.stalePeriod ? asset.stalePeriod : DEFAULT_STALE_PERIOD,
               };
             },
-          },
-        }
-      : {}),
-    ...(binanceOracle
-      ? {
-          binance: {
-            oracles: [binanceOracle.address, addr0000, addr0000],
-            enableFlagsForOracles: [true, false, false],
-            underlyingOracle: binanceOracle,
-            getStalePeriodConfig: (asset: Asset) => [
-              asset.token,
-              asset.stalePeriod ? asset.stalePeriod.toString() : DEFAULT_STALE_PERIOD.toString(),
-            ],
           },
         }
       : {}),
