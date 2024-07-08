@@ -225,7 +225,8 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
           console.log(`skip ${oneJumpName}, already deployed`);
         }
         oneJumpNames[oneJumpName] = true;
-      } else if (redstoneFeed[networkName] && redstoneFeed[networkName][asset.denominatedBy]) {
+      }
+      if (redstoneFeed[networkName] && redstoneFeed[networkName][asset.denominatedBy]) {
         const redstoneOracle = await ethers.getContract("RedStoneOracle");
         const oneJumpName = `OneJumpOracle_${asset.denominatedBy}_RedStone`;
         if (!oneJumpNames[oneJumpName]) {

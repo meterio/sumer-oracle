@@ -136,12 +136,12 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
       console.log("asset.denominatedby ", asset.denominatedBy);
       // one jump oracle
       const oneJumps: string[] = [];
-      const oneJumpOracle_chainlink = await ethers.getContract(`OneJumpOracle_${asset.denominatedBy}_Chainlink`);
+      const oneJumpOracle_chainlink = await ethers.getContractOrNull(`OneJumpOracle_${asset.denominatedBy}_Chainlink`);
       if (oneJumpOracle_chainlink) {
         oneJumps.push(oneJumpOracle_chainlink.address);
       }
 
-      const oneJumpOracle_redstone = await ethers.getContract(`OneJumpOracle_${asset.denominatedBy}_RedStone`);
+      const oneJumpOracle_redstone = await ethers.getContractOrNull(`OneJumpOracle_${asset.denominatedBy}_RedStone`);
       if (oneJumpOracle_redstone) {
         oneJumps.push(oneJumpOracle_redstone.address);
       }
