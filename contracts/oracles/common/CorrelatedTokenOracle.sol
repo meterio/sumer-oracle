@@ -10,10 +10,6 @@ import { EXP_SCALE } from "@venusprotocol/solidity-utilities/contracts/constants
  * @notice This oracle fetches the price of a token that is correlated to another token.
  */
 abstract contract CorrelatedTokenOracle is OracleInterface {
-    /// @notice Address of the correlated token
-    /// @custom:oz-upgrades-unsafe-allow state-variable-immutable
-    address public immutable CORRELATED_TOKEN;
-
     /// @notice Address of the underlying token
     /// @custom:oz-upgrades-unsafe-allow state-variable-immutable
     address public immutable UNDERLYING_TOKEN;
@@ -27,25 +23,21 @@ abstract contract CorrelatedTokenOracle is OracleInterface {
 
     /// @notice Constructor for the implementation contract.
     /// @custom:oz-upgrades-unsafe-allow constructor
-    constructor(address correlatedToken, address underlyingToken, address resilientOracle) {
-        ensureNonzeroAddress(correlatedToken);
+    constructor(address underlyingToken, address resilientOracle) {
         ensureNonzeroAddress(underlyingToken);
         ensureNonzeroAddress(resilientOracle);
-        CORRELATED_TOKEN = correlatedToken;
         UNDERLYING_TOKEN = underlyingToken;
         RESILIENT_ORACLE = OracleInterface(resilientOracle);
     }
 
     /**
      * @notice Fetches the price of the correlated token
-     * @param asset Address of the correlated token
+     * @param correlatedToken Address of the correlated token
      * @return price The price of the correlated token in scaled decimal places
      */
-    function getPrice(address asset) external view override returns (uint256) {
-        if (asset != CORRELATED_TOKEN) revert InvalidTokenAddress();
-
+    function getPrice(address correlatedToken) external view override returns (uint256) {
         // get underlying token amount for 1 correlated token scaled by underlying token decimals
-        uint256 underlyingAmount = _getUnderlyingAmount();
+        uint256 underlyingAmount = _getUnderlyingAmount(correlatedToken);
 
         // oracle returns (36 - asset decimal) scaled price
         uint256 underlyingUSDPrice = RESILIENT_ORACLE.getPrice(UNDERLYING_TOKEN);
@@ -61,5 +53,5 @@ abstract contract CorrelatedTokenOracle is OracleInterface {
      * @notice Gets the underlying amount for correlated token
      * @return underlyingAmount Amount of underlying token
      */
-    function _getUnderlyingAmount() internal view virtual returns (uint256);
+    function _getUnderlyingAmount(address asset) internal view virtual returns (uint256);
 }

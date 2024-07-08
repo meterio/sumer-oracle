@@ -19,11 +19,10 @@ contract OneJumpOracle is CorrelatedTokenOracle {
     /// @notice Constructor for the implementation contract.
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor(
-        address correlatedToken,
         address underlyingToken,
         address resilientOracle,
         address intermediateOracle
-    ) CorrelatedTokenOracle(correlatedToken, underlyingToken, resilientOracle) {
+    ) CorrelatedTokenOracle(underlyingToken, resilientOracle) {
         ensureNonzeroAddress(intermediateOracle);
         INTERMEDIATE_ORACLE = OracleInterface(intermediateOracle);
     }
@@ -32,11 +31,11 @@ contract OneJumpOracle is CorrelatedTokenOracle {
      * @notice Fetches the amount of the underlying token for 1 correlated token, using the intermediate oracle
      * @return amount The amount of the underlying token for 1 correlated token scaled by the underlying token decimals
      */
-    function _getUnderlyingAmount() internal view override returns (uint256) {
+    function _getUnderlyingAmount(address corelatedToken) internal view override returns (uint256) {
         // uint256 underlyingDecimals = IERC20Metadata(UNDERLYING_TOKEN).decimals();
         // uint256 correlatedDecimals = IERC20Metadata(CORRELATED_TOKEN).decimals();
 
-        uint256 underlyingAmount = INTERMEDIATE_ORACLE.getPrice(CORRELATED_TOKEN);
+        uint256 underlyingAmount = INTERMEDIATE_ORACLE.getPrice(corelatedToken);
 
         return underlyingAmount;
     }

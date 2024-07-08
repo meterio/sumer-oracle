@@ -14,20 +14,16 @@ interface IWstMTRG {
  * @author Venus
  * @notice This oracle fetches the price of weETH
  */
-contract wstMTRGOracle is CorrelatedTokenOracle {
+contract WstMTRGOracle is CorrelatedTokenOracle {
     /// @notice Constructor for the implementation contract.
     /// @custom:oz-upgrades-unsafe-allow constructor
-    constructor(
-        address wstMTRG,
-        address MTRG,
-        address resilientOracle
-    ) CorrelatedTokenOracle(wstMTRG, MTRG, resilientOracle) {}
+    constructor(address MTRG, address resilientOracle) CorrelatedTokenOracle(MTRG, resilientOracle) {}
 
     /**
      * @notice Gets the eETH for 1 weETH
      * @return amount Amount of eETH
      */
-    function _getUnderlyingAmount() internal view override returns (uint256) {
-        return IWstMTRG(CORRELATED_TOKEN).stMTRGPerToken();
+    function _getUnderlyingAmount(address correlatedToken) internal view override returns (uint256) {
+        return IWstMTRG(correlatedToken).stMTRGPerToken();
     }
 }
