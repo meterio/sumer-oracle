@@ -201,6 +201,8 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
 
   // deploy OneJumpOracle for token with `denominatedBy` field in asset
   for (const asset of assets[networkName]) {
+    const oneJumpNames: { [key: string]: boolean } = {};
+
     if (asset.denominatedBy) {
       if (!(asset.denominatedBy in ADDRESSES[networkName])) {
         throw new Error(`address for token ${asset.denominatedBy} must be configured in ADDRESSES`);
@@ -209,27 +211,35 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
       const denominator = ADDRESSES[networkName][asset.denominatedBy];
       if (chainlinkFeed[networkName] && chainlinkFeed[networkName][asset.denominatedBy]) {
         const chainlinkOracle = await ethers.getContract(contractName);
-        await deploy(`${asset.token}Oracle`, {
-          contract: "OneJumpOracle",
-          from: deployer,
-          log: true,
-          deterministicDeployment: false,
-          args: [asset.address, denominator, resilientOracle.address, chainlinkOracle.address],
-          // skipIfAlreadyDeployed: true,
-        });
+        const oneJumpName = `OneJumpOracle_${asset.denominatedBy}_Chainlink`;
+        if (!oneJumpNames[oneJumpName]) {
+          await deploy(oneJumpName, {
+            contract: "OneJumpOracle",
+            from: deployer,
+            log: true,
+            deterministicDeployment: false,
+            args: [denominator, resilientOracle.address, chainlinkOracle.address],
+            // skipIfAlreadyDeployed: true,
+          });
+        } else {
+          console.log(`skip ${oneJumpName}, already deployed`);
+        }
+        oneJumpNames[oneJumpName] = true;
       } else if (redstoneFeed[networkName] && redstoneFeed[networkName][asset.denominatedBy]) {
         const redstoneOracle = await ethers.getContract("RedStoneOracle");
-        await deploy(`${asset.token}Oracle`, {
-          contract: "OneJumpOracle",
-          from: deployer,
-          log: true,
-          deterministicDeployment: false,
-          args: [asset.address, denominator, resilientOracle.address, redstoneOracle.address],
-          proxy: {
-            owner: proxyOwnerAddress,
-            proxyContract: "OptimizedTransparentProxy",
-          },
-        });
+        const oneJumpName = `OneJumpOracle_${asset.denominatedBy}_RedStone`;
+        if (!oneJumpNames[oneJumpName]) {
+          await deploy(oneJumpName, {
+            contract: "OneJumpOracle",
+            from: deployer,
+            log: true,
+            deterministicDeployment: false,
+            args: [denominator, resilientOracle.address, redstoneOracle.address],
+          });
+        } else {
+          console.log(`skip ${oneJumpName}, already deployed`);
+        }
+        oneJumpNames[oneJumpName] = true;
       }
     }
   }

@@ -10,7 +10,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
 
   const networkName: string = network.name === "hardhat" ? "bsctestnet" : network.name;
 
-  const { nativeAsset } = ADDRESSES[networkName];
+  const { nativeMarket, nativeAsset } = ADDRESSES[networkName];
 
   const proxyOwnerAddress = ADDRESSES[networkName].timelock || deployer;
   const boundValidator = await hre.ethers.getContract("BoundValidator");
@@ -20,7 +20,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
       from: deployer,
       log: true,
       deterministicDeployment: false,
-      args: [nativeAsset, boundValidator.address],
+      args: [nativeMarket, nativeAsset, boundValidator.address],
       proxy: {
         owner: proxyOwnerAddress,
         proxyContract: "OptimizedTransparentProxy",
