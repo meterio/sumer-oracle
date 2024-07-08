@@ -126,7 +126,7 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
           if (
             configOnChain.asset.toLowerCase() !== tokenConfig.asset.toLowerCase() ||
             configOnChain.market.toLowerCase() !== tokenConfig.market.toLowerCase() ||
-            configOnChain.twapDuration.toNumber() !== tokenConfig.twapDuration
+            configOnChain.twapDuration !== tokenConfig.twapDuration
           ) {
             console.log(`Config ${asset.token} on ${oracle} oracle with ${JSON.stringify(tokenConfig)}`);
 
