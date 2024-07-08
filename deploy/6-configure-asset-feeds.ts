@@ -1,8 +1,17 @@
+import { Contract } from "ethers";
 import { ethers } from "hardhat";
 import { DeployFunction } from "hardhat-deploy/types";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 
-import { Asset, Oracle, Oracles, assets, getOraclesData } from "../helpers/deploymentConfig";
+import {
+  Asset,
+  Oracle,
+  Oracles,
+  assets,
+  chainlinkFeed,
+  getOraclesData,
+  redstoneFeed,
+} from "../helpers/deploymentConfig";
 
 const setTokenConfigOnResilientOracle = async (hre: HardhatRuntimeEnvironment, asset: Asset, oracleConfig: Oracle) => {
   const resilientOracle = await hre.ethers.getContract("ResilientOracle");
@@ -116,8 +125,8 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
 
           if (
             configOnChain.asset.toLowerCase() !== tokenConfig.asset.toLowerCase() ||
-            configOnChain.market !== tokenConfig.market ||
-            configOnChain.twapDuration !== tokenConfig.twapDuration
+            configOnChain.market.toLowerCase() !== tokenConfig.market.toLowerCase() ||
+            configOnChain.twapDuration.toNumber() !== tokenConfig.twapDuration
           ) {
             console.log(`Config ${asset.token} on ${oracle} oracle with ${JSON.stringify(tokenConfig)}`);
 
@@ -136,14 +145,25 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
       console.log("asset.denominatedby ", asset.denominatedBy);
       // one jump oracle
       const oneJumps: string[] = [];
-      const oneJumpOracle_chainlink = await ethers.getContractOrNull(`OneJumpOracle_${asset.denominatedBy}_Chainlink`);
-      if (oneJumpOracle_chainlink) {
-        oneJumps.push(oneJumpOracle_chainlink.address);
+      let oneJumpOracle: Contract | null = null;
+      if (chainlinkFeed[networkName][`${asset.token}/${asset.denominatedBy}`]) {
+        const oneJumpOracle_chainlink = await ethers.getContractOrNull(
+          `OneJumpOracle_${asset.denominatedBy}_Chainlink`,
+        );
+        if (oneJumpOracle_chainlink) {
+          oneJumps.push(oneJumpOracle_chainlink.address);
+          oneJumpOracle = oneJumpOracle_chainlink;
+        }
       }
 
-      const oneJumpOracle_redstone = await ethers.getContractOrNull(`OneJumpOracle_${asset.denominatedBy}_RedStone`);
-      if (oneJumpOracle_redstone) {
-        oneJumps.push(oneJumpOracle_redstone.address);
+      if (redstoneFeed[networkName][`${asset.token}/${asset.denominatedBy}`]) {
+        const oneJumpOracle_redstone = await ethers.getContractOrNull(`OneJumpOracle_${asset.denominatedBy}_RedStone`);
+        if (oneJumpOracle_redstone) {
+          oneJumps.push(oneJumpOracle_redstone.address);
+        }
+        if (!oneJumpOracle) {
+          oneJumpOracle = oneJumpOracle_redstone;
+        }
       }
 
       if (oneJumps.length <= 0) {
@@ -164,7 +184,7 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
       await setTokenConfigOnResilientOracle(hre, asset, {
         oracles,
         enableFlagsForOracles: enables,
-        underlyingOracle: oneJumpOracle_chainlink || oneJumpOracle_redstone,
+        underlyingOracle: oneJumpOracle!,
       });
     } else if (!["pyth", "pendle", "chainlink", "redstone", "chainlinkFixed"].includes(asset.oracle)) {
       const standaloneOracle = await ethers.getContract(asset.oracle);
