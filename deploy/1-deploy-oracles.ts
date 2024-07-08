@@ -208,7 +208,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
         throw new Error(`address for token ${asset.denominatedBy} must be configured in ADDRESSES`);
       }
 
-      const denominator = ADDRESSES[networkName][asset.denominatedBy];
+      const denominator = ADDRESSES[networkName][`${asset.token}/${asset.denominatedBy}`];
       if (chainlinkFeed[networkName] && chainlinkFeed[networkName][asset.denominatedBy]) {
         const chainlinkOracle = await ethers.getContract(contractName);
         const oneJumpName = `OneJumpOracle_${asset.denominatedBy}_Chainlink`;
@@ -226,7 +226,8 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
         }
         oneJumpNames[oneJumpName] = true;
       }
-      if (redstoneFeed[networkName] && redstoneFeed[networkName][asset.denominatedBy]) {
+
+      if (redstoneFeed[networkName] && redstoneFeed[networkName][`${asset.token}/${asset.denominatedBy}`]) {
         const redstoneOracle = await ethers.getContract("RedStoneOracle");
         const oneJumpName = `OneJumpOracle_${asset.denominatedBy}_RedStone`;
         if (!oneJumpNames[oneJumpName]) {
