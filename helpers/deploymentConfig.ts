@@ -52,7 +52,6 @@ export interface Oracles {
 
 export const SEQUENCER: Record<string, string> = {
   arbitrum: "0xFdB631F5EE196F0ed6FAa767959853A9F217697D",
-  metertest: "0xFdB631F5EE196F0ed6FAa767959853A9F217697D",
 };
 
 export const addr0000 = "0x0000000000000000000000000000000000000000";
@@ -211,15 +210,17 @@ export const pythID: Config = {
 };
 
 export const pendleMarket: Config = {
-  sepolia: { PTweETH_26DEC2024: "0xB1bE063Ccbc4f67f58293C402aF8D082c0459787" },
+  sepolia: {
+    PT_weETH_26DEC2024: "0xB1bE063Ccbc4f67f58293C402aF8D082c0459787",
+  },
   ethereum: {
-    PTweETH_26DEC2024: "0x7d372819240d14fb477f17b964f95f33beb4c704",
-    PTrsETH_26SEP2024: "",
-    PTsUSDe_26SEP2024: "",
+    PT_weETH_26DEC2024: "0x7d372819240d14fb477f17b964f95f33beb4c704",
+    PT_rsETH_26SEP2024: "0x6b4740722e46048874d84306b2877600abcea3ae",
+    PT_sUSDe_26SEP2024: "0xd1d7d99764f8a52aff007b7831cc02748b2013b5",
   },
   arbitrum: {
-    PTweETH_26SEP2024: "0xf9f9779d8ff604732eba9ad345e6a27ef5c2a9d6",
-    PTrsETH_25SEP2024: "0xed99fc8bdb8e9e7b8240f62f69609a125a0fbf14",
+    PT_weETH_26SEP2024: "0xf9f9779d8ff604732eba9ad345e6a27ef5c2a9d6",
+    PT_rsETH_25SEP2024: "0xed99fc8bdb8e9e7b8240f62f69609a125a0fbf14",
   },
   metertest: {},
 };
@@ -267,7 +268,7 @@ export const assets: Assets = {
       denominatedBy: "WETH",
     }, // denominated by ETH
     {
-      token: "PTweETH_26DEC2024",
+      token: "PT_weETH_26DEC2024",
       address: "0x0F0747Fe5a6B68C1149AeD0A437905b06b77b9Cb",
       oracle: "pendle",
       twapDuration: 1800,
@@ -276,9 +277,9 @@ export const assets: Assets = {
   ethereum: [
     {
       token: "weETH",
-      address: "0xbc6590a7b15513e4d649b158393175a839f27ed8",
+      address: "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee",
       oracle: "chainlink",
-      stalePeriod: STALE_PERIOD_100M,
+      stalePeriod: STALE_PERIOD_26H,
     },
     {
       token: "WETH",
@@ -294,78 +295,78 @@ export const assets: Assets = {
     // },
     {
       token: "RETH",
-      address: "0x1ff86e97b273de2b1d42f0fdd5ea7350a66c4857",
+      address: "0xae78736Cd615f374D3085123A210448E74Fc6393",
       oracle: "chainlink",
-      stalePeriod: STALE_PERIOD_100M,
+      stalePeriod: STALE_PERIOD_26H,
     },
     {
       token: "rsETH",
-      address: "0x61561b2e01c69c2906735866c94cc4a33bb71c85",
+      address: "0xA1290d69c65A6Fe4DF752f95823fae25cB99e5A7",
       oracle: "chainlink",
-      stalePeriod: STALE_PERIOD_100M,
+      stalePeriod: STALE_PERIOD_26H,
     },
     {
       token: "WBTC",
-      address: "0xdca98947c3c9cf0b3cf448b6a03f991598fb9460",
+      address: "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
       oracle: "chainlink",
       stalePeriod: STALE_PERIOD_100M,
     },
     {
       token: "USDC",
-      address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
       oracle: "chainlink",
       stalePeriod: STALE_PERIOD_26H,
     },
     {
       token: "USDT",
-      address: "0xdac17f958d2ee523a2206206994597c13d831ec7",
+      address: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
       oracle: "chainlink",
       stalePeriod: STALE_PERIOD_26H,
     },
     {
       token: "DAI",
-      address: "0x6b175474e89094c44da98b954eedeac495271d0f",
+      address: "0x6B175474E89094C44Da98b954EedeAC495271d0F",
       oracle: "chainlink",
-      stalePeriod: STALE_PERIOD_26H,
+      stalePeriod: STALE_PERIOD_100M,
     },
     {
       token: "USDe",
-      address: "0xf5d682d42e16550cc5d8f48193243103d2ceaf0a",
+      address: "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3",
       oracle: "chainlink",
       stalePeriod: STALE_PERIOD_26H,
     },
     {
       token: "sUSDe",
-      address: "0xf5d682d42e16550cc5d8f48193243103d2ceaf0a",
+      address: "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497",
       oracle: "chainlink",
       stalePeriod: STALE_PERIOD_26H,
     },
     {
-      token: "PTsUSDe_26SEP2024",
-      address: "0xa46d0328dfa5822d3e9b4423e2a0a73467c2d2d5",
+      token: "PT_sUSDe_26SEP2024",
+      address: "0x6c9f097e044506712B58EAC670c9a5fd4BCceF13",
       oracle: "pendle",
       twapDuration: 1800,
     },
     {
-      token: "PTweETH_26SEP2024",
-      address: "0xe550a6f792a8b6c07555378ea74063021885a33e",
+      token: "PT_weETH_26SEP2024",
+      address: "0x1c085195437738d73d75DC64bC5A3E098b7f93b1",
       oracle: "pendle",
       twapDuration: 1800,
     },
     {
-      token: "PTrsETH_26SEP2024",
-      address: "0x86208af42580823401b504b341150c92cc99c69a",
+      token: "PT_rsETH_26SEP2024",
+      address: "0x7bAf258049cc8B9A78097723dc19a8b103D4098F",
       oracle: "pendle",
       twapDuration: 1800,
     },
     {
       token: "suUSD",
-      address: "0x2509bd3b69440d39238b464d09f9f04a61fd62c6",
+      address: "0x8bf591eae535f93a242d5a954d3cde648b48a5a8",
       oracle: "chainlinkFixed",
       price: "1000000000000000000",
     },
-    { token: "suETH", address: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", oracle: "chainlink" },
-    { token: "suBTC", address: "0xdca98947c3c9cf0b3cf448b6a03f991598fb9460", oracle: "chainlink" },
+    { token: "suETH", address: "0x1c22531aa9747d76fff8f0a43b37954ca67d28e0", oracle: "chainlink" },
+    { token: "suBTC", address: "0xe85411c030fb32a9d8b14bbbc6cb19417391f711", oracle: "chainlink" },
   ],
   arbitrum: [
     { token: "WBTC", address: "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f", oracle: "chainlink" },
@@ -399,8 +400,14 @@ export const assets: Assets = {
       denominatedBy: "WETH",
     },
     {
-      token: "PTweETH_26SEP2024",
+      token: "PT_weETH_26SEP2024",
       address: "0xb8b0a120f6a68dd06209619f62429fb1a8e92fec",
+      oracle: "pendle",
+      twapDuration: 1800,
+    },
+    {
+      token: "PT_rsETH_25SEP2024",
+      address: "0x30c98c0139b62290e26ac2a2158ac341dcaf1333",
       oracle: "pendle",
       twapDuration: 1800,
     },
@@ -413,12 +420,6 @@ export const assets: Assets = {
     { token: "suETH", address: "0x1c22531aa9747d76fff8f0a43b37954ca67d28e0", oracle: "chainlink" },
     { token: "suBTC", address: "0xe85411c030fb32a9d8b14bbbc6cb19417391f711", oracle: "chainlink" },
     { token: "SolvBTC", address: "0x3647c54c4c2C65bC7a2D63c0Da2809B399DBBDC0", oracle: "chainlink" },
-    {
-      token: "PTrsETH_25SEP2024",
-      address: "0x30c98c0139b62290e26ac2a2158ac341dcaf1333",
-      oracle: "pendle",
-      twapDuration: 1800,
-    },
   ],
   base: [
     { token: "USDC", address: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", oracle: "chainlink" },
