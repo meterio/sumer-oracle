@@ -828,7 +828,7 @@
       ]
     },
     "BoundValidator_Implementation": {
-      "address": "0xbB207A540f6Af7B5CC09C7AA6E479Fa7089530D6",
+      "address": "0x3b4D863Fcd1C92726dc70fb052b4d268f00FEa1A",
       "abi": [
         {
           "inputs": [],
@@ -1465,7 +1465,7 @@
       ]
     },
     "PendleOracle": {
-      "address": "0xC157f665da751B6B60207F2248f000B0A67608Da",
+      "address": "0xCFAca048f3061D75a3f74745C3D584e5e14dF482",
       "abi": [
         {
           "anonymous": false,
@@ -1818,11 +1818,6 @@
             },
             {
               "internalType": "address",
-              "name": "underlyingAsset_",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
               "name": "resilientOracle",
               "type": "address"
             }
@@ -1967,19 +1962,6 @@
         {
           "inputs": [
             {
-              "internalType": "address",
-              "name": "underlyingAsset_",
-              "type": "address"
-            }
-          ],
-          "name": "setUnderlyingAsset",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
               "internalType": "contract IPendlePtOracle",
               "name": "underlyingPtOracle_",
               "type": "address"
@@ -2030,19 +2012,6 @@
           "name": "transferOwnership",
           "outputs": [],
           "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "underlyingAsset",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
           "type": "function"
         },
         {
@@ -2082,7 +2051,7 @@
       ]
     },
     "PendleOracle_Implementation": {
-      "address": "0xCFDA1c9910fC074681f9D6E80b53736719fB91Cb",
+      "address": "0xdd780af50830bAE7FAE19f3a615e9E064b498F2c",
       "abi": [
         {
           "inputs": [],
@@ -2330,11 +2299,6 @@
             },
             {
               "internalType": "address",
-              "name": "underlyingAsset_",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
               "name": "resilientOracle",
               "type": "address"
             }
@@ -2479,19 +2443,6 @@
         {
           "inputs": [
             {
-              "internalType": "address",
-              "name": "underlyingAsset_",
-              "type": "address"
-            }
-          ],
-          "name": "setUnderlyingAsset",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
               "internalType": "contract IPendlePtOracle",
               "name": "underlyingPtOracle_",
               "type": "address"
@@ -2546,19 +2497,6 @@
         },
         {
           "inputs": [],
-          "name": "underlyingAsset",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
           "name": "underlyingPtOracle",
           "outputs": [
             {
@@ -2573,7 +2511,7 @@
       ]
     },
     "PendleOracle_Proxy": {
-      "address": "0xC157f665da751B6B60207F2248f000B0A67608Da",
+      "address": "0xCFAca048f3061D75a3f74745C3D584e5e14dF482",
       "abi": [
         {
           "inputs": [
@@ -2708,120 +2646,8 @@
         }
       ]
     },
-    "RETHOracle": {
-      "address": "0x05A04fea2B61e797671b88Adb99e98326438Ec17",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "correlatedToken",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "underlyingToken",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "resilientOracle",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "intermediateOracle",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "inputs": [],
-          "name": "InvalidTokenAddress",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "ZeroAddressNotAllowed",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "CORRELATED_TOKEN",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "INTERMEDIATE_ORACLE",
-          "outputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "RESILIENT_ORACLE",
-          "outputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "UNDERLYING_TOKEN",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "asset",
-              "type": "address"
-            }
-          ],
-          "name": "getPrice",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
     "RedStoneOracle": {
-      "address": "0x71bd008Bd6088B4E241A014e6f1B5c7d1B3C1aD6",
+      "address": "0x80008f7438d7605d8df47b33A8D546F49d403E82",
       "abi": [
         {
           "anonymous": false,
@@ -3361,7 +3187,7 @@
       ]
     },
     "RedStoneOracle_Implementation": {
-      "address": "0xb114194727b6871B503F045cF6bEc6069e70aFb0",
+      "address": "0x5375b5a36Ff0EDdDF3e25a0315dAbf68B14E2155",
       "abi": [
         {
           "inputs": [
@@ -3781,7 +3607,7 @@
       ]
     },
     "RedStoneOracle_Proxy": {
-      "address": "0x71bd008Bd6088B4E241A014e6f1B5c7d1B3C1aD6",
+      "address": "0x80008f7438d7605d8df47b33A8D546F49d403E82",
       "abi": [
         {
           "inputs": [
@@ -3917,7 +3743,7 @@
       ]
     },
     "ResilientOracle": {
-      "address": "0x3d9b5399059d36644B8b67860439Af221C67B273",
+      "address": "0x26d21aeeF171e7634bd8361EbC66709007668843",
       "abi": [
         {
           "anonymous": false,
@@ -4689,10 +4515,15 @@
       ]
     },
     "ResilientOracle_Implementation": {
-      "address": "0xe5d492934c69151251D974cA12F9a0169Ccd0d34",
+      "address": "0x8Fa3a1E87a9D32755665e76357Cb98db85fa32D1",
       "abi": [
         {
           "inputs": [
+            {
+              "internalType": "address",
+              "name": "nativeMarketAddress",
+              "type": "address"
+            },
             {
               "internalType": "address",
               "name": "nativeAssetAddress",
@@ -5346,7 +5177,7 @@
       ]
     },
     "ResilientOracle_Proxy": {
-      "address": "0x3d9b5399059d36644B8b67860439Af221C67B273",
+      "address": "0x26d21aeeF171e7634bd8361EbC66709007668843",
       "abi": [
         {
           "inputs": [
@@ -5482,7 +5313,7 @@
       ]
     },
     "SequencerChainlinkOracle": {
-      "address": "0xe5c9f0eE67A5C71678f256DCC349e5d962a3F56D",
+      "address": "0xA9Ab7fC3288a71D7e9D6b084D57110F94BBeC860",
       "abi": [
         {
           "anonymous": false,
@@ -6022,7 +5853,7 @@
       ]
     },
     "SequencerChainlinkOracle_Implementation": {
-      "address": "0xD27C60BDB2ba403216921adb142c702352425641",
+      "address": "0x000410de35DF3396dC1578e9136e7f8B1c7835b2",
       "abi": [
         {
           "inputs": [
@@ -6442,7 +6273,7 @@
       ]
     },
     "SequencerChainlinkOracle_Proxy": {
-      "address": "0xe5c9f0eE67A5C71678f256DCC349e5d962a3F56D",
+      "address": "0xA9Ab7fC3288a71D7e9D6b084D57110F94BBeC860",
       "abi": [
         {
           "inputs": [
@@ -6574,342 +6405,6 @@
         {
           "stateMutability": "payable",
           "type": "receive"
-        }
-      ]
-    },
-    "rsETHOracle": {
-      "address": "0xD5B422e04d04726486A3F389fdDC150E3315197f",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "correlatedToken",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "underlyingToken",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "resilientOracle",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "intermediateOracle",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "inputs": [],
-          "name": "InvalidTokenAddress",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "ZeroAddressNotAllowed",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "CORRELATED_TOKEN",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "INTERMEDIATE_ORACLE",
-          "outputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "RESILIENT_ORACLE",
-          "outputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "UNDERLYING_TOKEN",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "asset",
-              "type": "address"
-            }
-          ],
-          "name": "getPrice",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
-    "weETHOracle": {
-      "address": "0x08f0C8e4Ca779Ba922915926bF15454932dDA8A9",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "correlatedToken",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "underlyingToken",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "resilientOracle",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "intermediateOracle",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "inputs": [],
-          "name": "InvalidTokenAddress",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "ZeroAddressNotAllowed",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "CORRELATED_TOKEN",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "INTERMEDIATE_ORACLE",
-          "outputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "RESILIENT_ORACLE",
-          "outputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "UNDERLYING_TOKEN",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "asset",
-              "type": "address"
-            }
-          ],
-          "name": "getPrice",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
-    "wstETHOracle": {
-      "address": "0x018bEF628f897071aC1D3247Fb305cEC718C6b55",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "correlatedToken",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "underlyingToken",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "resilientOracle",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "intermediateOracle",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "inputs": [],
-          "name": "InvalidTokenAddress",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "ZeroAddressNotAllowed",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "CORRELATED_TOKEN",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "INTERMEDIATE_ORACLE",
-          "outputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "RESILIENT_ORACLE",
-          "outputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "UNDERLYING_TOKEN",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "asset",
-              "type": "address"
-            }
-          ],
-          "name": "getPrice",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
         }
       ]
     }
