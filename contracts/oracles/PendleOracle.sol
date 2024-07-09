@@ -103,6 +103,7 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
         IPendlePtOracle underlyingPtOracle_
     ) external notNullAddress(address(underlyingPtOracle_)) {
         _checkAccessAllowed("setUnderlyingPtOracle(address)");
+        require(underlyingPtOracle_ != 0x0000000000000000000000000000000000000000, "invalid address");
         IPendlePtOracle oldOracle = underlyingPtOracle;
         underlyingPtOracle = underlyingPtOracle_;
         emit PtOracleSet(address(oldOracle), address(underlyingPtOracle));
@@ -119,6 +120,7 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
         OracleInterface intermediateOracle_
     ) external notNullAddress(address(intermediateOracle_)) {
         _checkAccessAllowed("setIntermediateOracle(address)");
+        require(intermediateOracle_ != 0x0000000000000000000000000000000000000000, "invalid address");
         OracleInterface oldOracle = intermediateOracle;
         intermediateOracle = intermediateOracle_;
         emit IntermediateOracleSet(address(oldOracle), address(intermediateOracle_));
