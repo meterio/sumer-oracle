@@ -7,6 +7,8 @@
     "BoundValidator_Implementation": "0x3b4D863Fcd1C92726dc70fb052b4d268f00FEa1A",
     "BoundValidator_Proxy": "0x1F2ca038D3dA31f852D02B6d4741Fdca31F99Ec8",
     "DefaultProxyAdmin": "0x740E842DDFAb6CDA39933f72bb6AEaA172aB12B0",
+    "OneJumpOracle_WETH_Chainlink": "0xAf752DcA034c5c8724936C31E6fe3ad20c549235",
+    "OneJumpOracle_WETH_RedStone": "0xED838C314F9102Cc16BAa9Fd11F1Ef4FCE409d50",
     "PendleOracle": "0xCFAca048f3061D75a3f74745C3D584e5e14dF482",
     "PendleOracle_Implementation": "0xdd780af50830bAE7FAE19f3a615e9E064b498F2c",
     "PendleOracle_Proxy": "0xCFAca048f3061D75a3f74745C3D584e5e14dF482",
