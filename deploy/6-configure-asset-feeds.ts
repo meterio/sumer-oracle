@@ -186,6 +186,13 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
         enableFlagsForOracles: enables,
         underlyingOracle: oneJumpOracle!,
       });
+
+      const boundValidator = await ethers.getContract("BoundValidator");
+
+      const upperBoundRatio = BigInt(1.01e18);
+      const lowerBoundRatio = BigInt(0.99e18);
+      console.log(`Set lowerBound/uppperBound with 1% for ${asset.token} ${asset.address}`);
+      await boundValidator.setValidateConfig([asset.address, upperBoundRatio, lowerBoundRatio]);
     } else if (!["pyth", "pendle", "chainlink", "redstone", "chainlinkFixed"].includes(asset.oracle)) {
       const standaloneOracle = await ethers.getContract(asset.oracle);
       await setTokenConfigOnResilientOracle(hre, asset, {

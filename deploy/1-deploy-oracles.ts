@@ -287,6 +287,13 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
     "setTokenConfig(TokenConfig)",
     deployer,
   );
+
+  await givePermission(
+    accessControlManager as AccessControlManager,
+    "BoundValidator",
+    "setValidateConfig(ValidateConfig)",
+    deployer,
+  );
 };
 
 export default func;
