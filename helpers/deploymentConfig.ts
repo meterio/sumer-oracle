@@ -101,13 +101,14 @@ export const ADDRESSES: PreconfiguredAddresses = {
     ptOracle: "0x9a9fa8338dd5e5b2188006f1cd2ef26d921650c2",
 
     // enable deploy WeETHOracle_Equivalence
-    EtherFiLiquidityPool: "0x308861A430be4cce5502d0A12724771Fc6DaF216",
-    weETH: "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee",
+    // EtherFiLiquidityPool: "0x308861A430be4cce5502d0A12724771Fc6DaF216",
+    // weETH: "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee",
 
     // used by OneJumpOracle
     WETH: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
 
     // used by WstETHOracle
+    stETH: "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84",
   },
   arbitrum: {
     nativeMarket: "0x3C752d0D78BbFddA6BF4b6000a01228B732441aE", // sdrETH
@@ -152,6 +153,8 @@ export const chainlinkFeed: Config = {
     "weETH/WETH": "0x5c9C449BbC9a6075A2c061dF312a35fd1E05fF22", // denominated by ETH
     "RETH/WETH": "0x536218f9E9Eb48863970252233c8F271f554C2d0", // denominated by ETH
     "stETH/WETH": "0x86392dC19c0b719886221c78AB11eb8Cf5c52812", // denominated by ETH
+    suBTC: "0xF4030086522a5bEEa4988F8cA5B36dbC97BeE88c",
+    suETH: "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419",
   },
   arbitrum: {
     USDC: "0x50834F3163758fcC1Df9973b6e91f0F0F0434aD3",
@@ -302,7 +305,7 @@ export const assets: Assets = {
     },
     {
       token: "stETH",
-      address: "0x15b5220024c3242f7d61177d6ff715cfac4909ed",
+      address: "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84",
       oracle: "chainlink",
       denominatedBy: "WETH",
       stalePeriod: STALE_PERIOD_26H,
@@ -382,8 +385,18 @@ export const assets: Assets = {
       oracle: "chainlinkFixed",
       price: "1000000000000000000",
     },
-    { token: "suETH", address: "0x1c22531aa9747d76fff8f0a43b37954ca67d28e0", oracle: "chainlink" },
-    { token: "suBTC", address: "0xe85411c030fb32a9d8b14bbbc6cb19417391f711", oracle: "chainlink" },
+    {
+      token: "suETH",
+      address: "0x1c22531aa9747d76fff8f0a43b37954ca67d28e0",
+      oracle: "chainlink",
+      stalePeriod: STALE_PERIOD_100M,
+    },
+    {
+      token: "suBTC",
+      address: "0xe85411c030fb32a9d8b14bbbc6cb19417391f711",
+      oracle: "chainlink",
+      stalePeriod: STALE_PERIOD_100M,
+    },
   ],
   arbitrum: [
     { token: "WBTC", address: "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f", oracle: "chainlink" },
