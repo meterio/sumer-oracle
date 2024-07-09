@@ -10,7 +10,7 @@
     "OneJumpOracle_WETH_Chainlink": "0xAf752DcA034c5c8724936C31E6fe3ad20c549235",
     "OneJumpOracle_WETH_RedStone": "0xED838C314F9102Cc16BAa9Fd11F1Ef4FCE409d50",
     "PendleOracle": "0xCFAca048f3061D75a3f74745C3D584e5e14dF482",
-    "PendleOracle_Implementation": "0xdd780af50830bAE7FAE19f3a615e9E064b498F2c",
+    "PendleOracle_Implementation": "0x0B6cc9fDEF58101b43Cd977D95e5f96D8De99638",
     "PendleOracle_Proxy": "0xCFAca048f3061D75a3f74745C3D584e5e14dF482",
     "RedStoneOracle": "0x80008f7438d7605d8df47b33A8D546F49d403E82",
     "RedStoneOracle_Implementation": "0x5375b5a36Ff0EDdDF3e25a0315dAbf68B14E2155",
