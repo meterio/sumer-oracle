@@ -189,11 +189,11 @@ export const chainlinkFeed: Config = {
 export const redstoneFeed: Config = {
   sepolia: {},
   ethereum: {
-    "weETH/WETH": "0x8751F736E94F6CD167e8C5B97E245680FbD9CC36", // denominated by ETH
-    "rsETH/WETH": "0xA736eAe8805dDeFFba40cAB8c99bCB309dEaBd9B", // denominated by ETH
-    "pufETH/WETH": "0x76A495b0bFfb53ef3F0E94ef0763e03cE410835C", // denominated by ETH
-    USDe: "0xbC5FBcf58CeAEa19D523aBc76515b9AEFb5cfd58",
-    sUSDe: "0xb99D174ED06c83588Af997c8859F93E83dD4733f",
+    // "weETH/WETH": "0x8751F736E94F6CD167e8C5B97E245680FbD9CC36", // denominated by ETH
+    // "rsETH/WETH": "0xA736eAe8805dDeFFba40cAB8c99bCB309dEaBd9B", // denominated by ETH
+    // "pufETH/WETH": "0x76A495b0bFfb53ef3F0E94ef0763e03cE410835C", // denominated by ETH
+    // USDe: "0xbC5FBcf58CeAEa19D523aBc76515b9AEFb5cfd58",
+    // sUSDe: "0xb99D174ED06c83588Af997c8859F93E83dD4733f",
   },
   arbitrum: {
     "weETH/WETH": "0xA736eAe8805dDeFFba40cAB8c99bCB309dEaBd9B", // denominated by ETH
@@ -366,18 +366,21 @@ export const assets: Assets = {
       address: "0x6c9f097e044506712B58EAC670c9a5fd4BCceF13",
       oracle: "pendle",
       twapDuration: 1800,
+      yieldToken: "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497",
     },
     {
       token: "PT_weETH_26SEP2024",
       address: "0x1c085195437738d73d75DC64bC5A3E098b7f93b1",
       oracle: "pendle",
       twapDuration: 1800,
+      yieldToken: "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee",
     },
     {
       token: "PT_rsETH_26SEP2024",
       address: "0x7bAf258049cc8B9A78097723dc19a8b103D4098F",
       oracle: "pendle",
       twapDuration: 1800,
+      yieldToken: "0xA1290d69c65A6Fe4DF752f95823fae25cB99e5A7",
     },
     {
       token: "suUSD",
@@ -434,12 +437,14 @@ export const assets: Assets = {
       address: "0xb8b0a120f6a68dd06209619f62429fb1a8e92fec",
       oracle: "pendle",
       twapDuration: 1800,
+      yieldToken: "0x35751007a407ca6FEFfE80b3cB397736D2cf4dbe",
     },
     {
       token: "PT_rsETH_25SEP2024",
       address: "0x30c98c0139b62290e26ac2a2158ac341dcaf1333",
       oracle: "pendle",
       twapDuration: 1800,
+      yieldToken: "0x4186BFC76E2E237523CBC30FD220FE055156b41F",
     },
     {
       token: "suUSD",
