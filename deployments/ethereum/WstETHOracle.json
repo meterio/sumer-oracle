@@ -1,0 +1,155 @@
+{
+  "address": "0xEBe39E3B30230cf48d4580fCF6d50285B1Fc4205",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "stETH",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "resilientOracle",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidTokenAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ZeroAddressNotAllowed",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "RESILIENT_ORACLE",
+      "outputs": [
+        {
+          "internalType": "contract OracleInterface",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "UNDERLYING_TOKEN",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "correlatedToken",
+          "type": "address"
+        }
+      ],
+      "name": "getPrice",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xc5d2a661e50056b0ee957eea759c82263a38a6bba699d8cb1c6ef1a53a2c07c2",
+  "receipt": {
+    "to": null,
+    "from": "0x5C85A7Ae2B6d29C38cdF360553F8aCBC4e684c31",
+    "contractAddress": "0xEBe39E3B30230cf48d4580fCF6d50285B1Fc4205",
+    "transactionIndex": 42,
+    "gasUsed": "226451",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0xe8d91decebde1d957a01a5edfc89393a50748350970d861ed461a5dcffd89286",
+    "transactionHash": "0xc5d2a661e50056b0ee957eea759c82263a38a6bba699d8cb1c6ef1a53a2c07c2",
+    "logs": [],
+    "blockNumber": 20281496,
+    "cumulativeGasUsed": "4191680",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84",
+    "0x9b3989dC82b344D9Df9a986Ff4CC37B895e3fB87"
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "c11a1817c3f544fec41d67932059648d",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.25+commit.b61c2a91\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"stETH\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"resilientOracle\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"InvalidTokenAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ZeroAddressNotAllowed\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"RESILIENT_ORACLE\",\"outputs\":[{\"internalType\":\"contract OracleInterface\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"UNDERLYING_TOKEN\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"correlatedToken\",\"type\":\"address\"}],\"name\":\"getPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"Venus\",\"kind\":\"dev\",\"methods\":{\"constructor\":{\"custom:oz-upgrades-unsafe-allow\":\"constructor\"},\"getPrice(address)\":{\"params\":{\"correlatedToken\":\"Address of the correlated token\"},\"returns\":{\"_0\":\"price The price of the correlated token in scaled decimal places\"}}},\"title\":\"WstETHOracle renamed from WstETHOracleV2 in venus\",\"version\":1},\"userdoc\":{\"errors\":{\"InvalidTokenAddress()\":[{\"notice\":\"Thrown if the token address is invalid\"}],\"ZeroAddressNotAllowed()\":[{\"notice\":\"Thrown if the supplied address is a zero address where it is not allowed\"}]},\"kind\":\"user\",\"methods\":{\"RESILIENT_ORACLE()\":{\"notice\":\"Address of Resilient Oracle\"},\"UNDERLYING_TOKEN()\":{\"notice\":\"Address of the underlying token\"},\"constructor\":{\"notice\":\"Constructor for the implementation contract.\"},\"getPrice(address)\":{\"notice\":\"Fetches the price of the correlated token\"}},\"notice\":\"This oracle fetches the price of wstETH\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/oracles/WstETHOracle.sol\":\"WstETHOracle\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v4.9.0) (token/ERC20/IERC20.sol)\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Interface of the ERC20 standard as defined in the EIP.\\n */\\ninterface IERC20 {\\n    /**\\n     * @dev Emitted when `value` tokens are moved from one account (`from`) to\\n     * another (`to`).\\n     *\\n     * Note that `value` may be zero.\\n     */\\n    event Transfer(address indexed from, address indexed to, uint256 value);\\n\\n    /**\\n     * @dev Emitted when the allowance of a `spender` for an `owner` is set by\\n     * a call to {approve}. `value` is the new allowance.\\n     */\\n    event Approval(address indexed owner, address indexed spender, uint256 value);\\n\\n    /**\\n     * @dev Returns the amount of tokens in existence.\\n     */\\n    function totalSupply() external view returns (uint256);\\n\\n    /**\\n     * @dev Returns the amount of tokens owned by `account`.\\n     */\\n    function balanceOf(address account) external view returns (uint256);\\n\\n    /**\\n     * @dev Moves `amount` tokens from the caller's account to `to`.\\n     *\\n     * Returns a boolean value indicating whether the operation succeeded.\\n     *\\n     * Emits a {Transfer} event.\\n     */\\n    function transfer(address to, uint256 amount) external returns (bool);\\n\\n    /**\\n     * @dev Returns the remaining number of tokens that `spender` will be\\n     * allowed to spend on behalf of `owner` through {transferFrom}. This is\\n     * zero by default.\\n     *\\n     * This value changes when {approve} or {transferFrom} are called.\\n     */\\n    function allowance(address owner, address spender) external view returns (uint256);\\n\\n    /**\\n     * @dev Sets `amount` as the allowance of `spender` over the caller's tokens.\\n     *\\n     * Returns a boolean value indicating whether the operation succeeded.\\n     *\\n     * IMPORTANT: Beware that changing an allowance with this method brings the risk\\n     * that someone may use both the old and the new allowance by unfortunate\\n     * transaction ordering. One possible solution to mitigate this race\\n     * condition is to first reduce the spender's allowance to 0 and set the\\n     * desired value afterwards:\\n     * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729\\n     *\\n     * Emits an {Approval} event.\\n     */\\n    function approve(address spender, uint256 amount) external returns (bool);\\n\\n    /**\\n     * @dev Moves `amount` tokens from `from` to `to` using the\\n     * allowance mechanism. `amount` is then deducted from the caller's\\n     * allowance.\\n     *\\n     * Returns a boolean value indicating whether the operation succeeded.\\n     *\\n     * Emits a {Transfer} event.\\n     */\\n    function transferFrom(address from, address to, uint256 amount) external returns (bool);\\n}\\n\",\"keccak256\":\"0x287b55befed2961a7eabd7d7b1b2839cbca8a5b80ef8dcbb25ed3d4c2002c305\",\"license\":\"MIT\"},\"@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts v4.4.1 (token/ERC20/extensions/IERC20Metadata.sol)\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"../IERC20.sol\\\";\\n\\n/**\\n * @dev Interface for the optional metadata functions from the ERC20 standard.\\n *\\n * _Available since v4.1._\\n */\\ninterface IERC20Metadata is IERC20 {\\n    /**\\n     * @dev Returns the name of the token.\\n     */\\n    function name() external view returns (string memory);\\n\\n    /**\\n     * @dev Returns the symbol of the token.\\n     */\\n    function symbol() external view returns (string memory);\\n\\n    /**\\n     * @dev Returns the decimals places of the token.\\n     */\\n    function decimals() external view returns (uint8);\\n}\\n\",\"keccak256\":\"0x8de418a5503946cabe331f35fe242d3201a73f67f77aaeb7110acb1f30423aca\",\"license\":\"MIT\"},\"contracts/interfaces/IStETH.sol\":{\"content\":\"// SPDX-License-Identifier: BSD-3-Clause\\npragma solidity ^0.8.25;\\n\\ninterface IStETH {\\n    function getPooledEthByShares(uint256 _sharesAmount) external view returns (uint256);\\n    function decimals() external view returns (uint8);\\n}\\n\",\"keccak256\":\"0x9e7ee12d63a84081722469719e046d6791a087f33ab40804ff1ff40ab859d4d3\",\"license\":\"BSD-3-Clause\"},\"contracts/interfaces/OracleInterface.sol\":{\"content\":\"// SPDX-License-Identifier: BSD-3-Clause\\npragma solidity ^0.8.25;\\n\\ninterface OracleInterface {\\n    function getPrice(address asset) external view returns (uint256);\\n}\\n\\ninterface ResilientOracleInterface is OracleInterface {\\n    function updatePrice(address vToken) external;\\n\\n    function updateAssetPrice(address asset) external;\\n\\n    function getUnderlyingPrice(address vToken) external view returns (uint256);\\n}\\n\\ninterface TwapInterface is OracleInterface {\\n    function updateTwap(address asset) external returns (uint256);\\n}\\n\\ninterface BoundValidatorInterface {\\n    function validatePriceWithAnchorPrice(\\n        address asset,\\n        uint256 reporterPrice,\\n        uint256 anchorPrice\\n    ) external view returns (bool);\\n}\\n\",\"keccak256\":\"0x2432799b0d824fc701beb4c30146e912b9aeecf77b5c1635dde6c5fbe6bfc3a7\",\"license\":\"BSD-3-Clause\"},\"contracts/oracles/WstETHOracle.sol\":{\"content\":\"// SPDX-License-Identifier: BSD-3-Clause\\npragma solidity 0.8.25;\\n\\nimport { IStETH } from \\\"../interfaces/IStETH.sol\\\";\\nimport { CorrelatedTokenOracle } from \\\"./common/CorrelatedTokenOracle.sol\\\";\\nimport { EXP_SCALE } from \\\"../utilities/constants.sol\\\";\\n\\n/**\\n * @title WstETHOracle renamed from WstETHOracleV2 in venus\\n * @author Venus\\n * @notice This oracle fetches the price of wstETH\\n */\\ncontract WstETHOracle is CorrelatedTokenOracle {\\n    /// @notice Constructor for the implementation contract.\\n    /// @custom:oz-upgrades-unsafe-allow constructor\\n    constructor(address stETH, address resilientOracle) CorrelatedTokenOracle(stETH, resilientOracle) {}\\n\\n    /**\\n     * @notice Gets the stETH for 1 wstETH\\n     * @return amount Amount of stETH\\n     */\\n    function _getUnderlyingAmount(address corelatedToken) internal view override returns (uint256) {\\n        return IStETH(UNDERLYING_TOKEN).getPooledEthByShares(EXP_SCALE);\\n    }\\n}\\n\",\"keccak256\":\"0x2521542311f15ee798f5d495e8334396c188e5d9dc222424b1e85b84b4a114e3\",\"license\":\"BSD-3-Clause\"},\"contracts/oracles/common/CorrelatedTokenOracle.sol\":{\"content\":\"// SPDX-License-Identifier: BSD-3-Clause\\npragma solidity 0.8.25;\\n\\nimport { OracleInterface } from \\\"../../interfaces/OracleInterface.sol\\\";\\nimport { ensureNonzeroAddress } from \\\"../../utilities/validators.sol\\\";\\nimport { IERC20Metadata } from \\\"@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol\\\";\\nimport { EXP_SCALE } from \\\"../../utilities/constants.sol\\\";\\n/**\\n * @title CorrelatedTokenOracle\\n * @notice This oracle fetches the price of a token that is correlated to another token.\\n */\\nabstract contract CorrelatedTokenOracle is OracleInterface {\\n    /// @notice Address of the underlying token\\n    /// @custom:oz-upgrades-unsafe-allow state-variable-immutable\\n    address public immutable UNDERLYING_TOKEN;\\n\\n    /// @notice Address of Resilient Oracle\\n    /// @custom:oz-upgrades-unsafe-allow state-variable-immutable\\n    OracleInterface public immutable RESILIENT_ORACLE;\\n\\n    /// @notice Thrown if the token address is invalid\\n    error InvalidTokenAddress();\\n\\n    /// @notice Constructor for the implementation contract.\\n    /// @custom:oz-upgrades-unsafe-allow constructor\\n    constructor(address underlyingToken, address resilientOracle) {\\n        ensureNonzeroAddress(underlyingToken);\\n        ensureNonzeroAddress(resilientOracle);\\n        UNDERLYING_TOKEN = underlyingToken;\\n        RESILIENT_ORACLE = OracleInterface(resilientOracle);\\n    }\\n\\n    /**\\n     * @notice Fetches the price of the correlated token\\n     * @param correlatedToken Address of the correlated token\\n     * @return price The price of the correlated token in scaled decimal places\\n     */\\n    function getPrice(address correlatedToken) external view override returns (uint256) {\\n        // get underlying token amount for 1 correlated token scaled by underlying token decimals\\n        uint256 underlyingAmount = _getUnderlyingAmount(correlatedToken);\\n\\n        // oracle returns (36 - asset decimal) scaled price\\n        uint256 underlyingUSDPrice = RESILIENT_ORACLE.getPrice(UNDERLYING_TOKEN);\\n\\n        // IERC20Metadata token = IERC20Metadata(CORRELATED_TOKEN);\\n        // uint256 decimals = token.decimals();\\n\\n        // underlyingAmount (for 1 correlated token) * underlyingUSDPrice / decimals(correlated token)\\n        return (underlyingAmount * underlyingUSDPrice) / EXP_SCALE;\\n    }\\n\\n    /**\\n     * @notice Gets the underlying amount for correlated token\\n     * @return underlyingAmount Amount of underlying token\\n     */\\n    function _getUnderlyingAmount(address asset) internal view virtual returns (uint256);\\n}\\n\",\"keccak256\":\"0x52d74eea5961e8ace297b1479171be627d0b9ff9f7d30e2d68c43e33e804103d\",\"license\":\"BSD-3-Clause\"},\"contracts/utilities/constants.sol\":{\"content\":\"// SPDX-License-Identifier: BSD-3-Clause\\npragma solidity ^0.8.25;\\n\\n/// @dev Base unit for computations, usually used in scaling (multiplications, divisions)\\nuint256 constant EXP_SCALE = 1e18;\\n\\n/// @dev A unit (literal one) in EXP_SCALE, usually used in additions/subtractions\\nuint256 constant MANTISSA_ONE = EXP_SCALE;\\n\\n/// @dev The approximate number of seconds per year\\nuint256 constant SECONDS_PER_YEAR = 31_536_000;\\n\",\"keccak256\":\"0x14de93ead464da249af31bea0e3bcfb62ec693bea3475fb4d90f055ac81dc5eb\",\"license\":\"BSD-3-Clause\"},\"contracts/utilities/validators.sol\":{\"content\":\"// SPDX-License-Identifier: BSD-3-Clause\\npragma solidity 0.8.25;\\n\\n/// @notice Thrown if the supplied address is a zero address where it is not allowed\\nerror ZeroAddressNotAllowed();\\n\\n/// @notice Thrown if the supplied value is 0 where it is not allowed\\nerror ZeroValueNotAllowed();\\n\\n/// @notice Checks if the provided address is nonzero, reverts otherwise\\n/// @param address_ Address to check\\n/// @custom:error ZeroAddressNotAllowed is thrown if the provided address is a zero address\\nfunction ensureNonzeroAddress(address address_) pure {\\n    if (address_ == address(0)) {\\n        revert ZeroAddressNotAllowed();\\n    }\\n}\\n\\n/// @notice Checks if the provided value is nonzero, reverts otherwise\\n/// @param value_ Value to check\\n/// @custom:error ZeroValueNotAllowed is thrown if the provided value is 0\\nfunction ensureNonzeroValue(uint256 value_) pure {\\n    if (value_ == 0) {\\n        revert ZeroValueNotAllowed();\\n    }\\n}\\n\",\"keccak256\":\"0xdb88e14d50dd21889ca3329d755673d022c47e8da005b6a545c7f69c2c4b7b86\",\"license\":\"BSD-3-Clause\"}},\"version\":1}",
+  "bytecode": "0x60c060405234801561001057600080fd5b5060405161042138038061042183398101604081905261002f916100a3565b818161003a8261005d565b6100438161005d565b6001600160a01b039182166080521660a052506100d69050565b6001600160a01b038116610084576040516342bcdf7f60e11b815260040160405180910390fd5b50565b80516001600160a01b038116811461009e57600080fd5b919050565b600080604083850312156100b657600080fd5b6100bf83610087565b91506100cd60208401610087565b90509250929050565b60805160a05161031461010d6000396000818160b00152610123015260008181604b0152818160f501526101d501526103146000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c806329db1be61461004657806341976e091461008a578063a4edcd4c146100ab575b600080fd5b61006d7f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b0390911681526020015b60405180910390f35b61009d61009836600461024e565b6100d2565b604051908152602001610081565b61006d7f000000000000000000000000000000000000000000000000000000000000000081565b6000806100de836101b5565b6040516341976e0960e01b81526001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000811660048301529192506000917f000000000000000000000000000000000000000000000000000000000000000016906341976e0990602401602060405180830381865afa15801561016a573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061018e919061027e565b9050670de0b6b3a76400006101a38284610297565b6101ad91906102bc565b949350505050565b604051630f451f7160e31b8152670de0b6b3a764000060048201526000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031690637a28fb8890602401602060405180830381865afa158015610224573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610248919061027e565b92915050565b60006020828403121561026057600080fd5b81356001600160a01b038116811461027757600080fd5b9392505050565b60006020828403121561029057600080fd5b5051919050565b808202811582820484141761024857634e487b7160e01b600052601160045260246000fd5b6000826102d957634e487b7160e01b600052601260045260246000fd5b50049056fea264697066735822122064f58ac7b2ac3c572d0babe6c9fc62a52fcea8d1a26401c266abd7615baee28364736f6c63430008190033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c806329db1be61461004657806341976e091461008a578063a4edcd4c146100ab575b600080fd5b61006d7f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b0390911681526020015b60405180910390f35b61009d61009836600461024e565b6100d2565b604051908152602001610081565b61006d7f000000000000000000000000000000000000000000000000000000000000000081565b6000806100de836101b5565b6040516341976e0960e01b81526001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000811660048301529192506000917f000000000000000000000000000000000000000000000000000000000000000016906341976e0990602401602060405180830381865afa15801561016a573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061018e919061027e565b9050670de0b6b3a76400006101a38284610297565b6101ad91906102bc565b949350505050565b604051630f451f7160e31b8152670de0b6b3a764000060048201526000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031690637a28fb8890602401602060405180830381865afa158015610224573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610248919061027e565b92915050565b60006020828403121561026057600080fd5b81356001600160a01b038116811461027757600080fd5b9392505050565b60006020828403121561029057600080fd5b5051919050565b808202811582820484141761024857634e487b7160e01b600052601160045260246000fd5b6000826102d957634e487b7160e01b600052601260045260246000fd5b50049056fea264697066735822122064f58ac7b2ac3c572d0babe6c9fc62a52fcea8d1a26401c266abd7615baee28364736f6c63430008190033",
+  "devdoc": {
+    "author": "Venus",
+    "kind": "dev",
+    "methods": {
+      "constructor": {
+        "custom:oz-upgrades-unsafe-allow": "constructor"
+      },
+      "getPrice(address)": {
+        "params": {
+          "correlatedToken": "Address of the correlated token"
+        },
+        "returns": {
+          "_0": "price The price of the correlated token in scaled decimal places"
+        }
+      }
+    },
+    "title": "WstETHOracle renamed from WstETHOracleV2 in venus",
+    "version": 1
+  },
+  "userdoc": {
+    "errors": {
+      "InvalidTokenAddress()": [
+        {
+          "notice": "Thrown if the token address is invalid"
+        }
+      ],
+      "ZeroAddressNotAllowed()": [
+        {
+          "notice": "Thrown if the supplied address is a zero address where it is not allowed"
+        }
+      ]
+    },
+    "kind": "user",
+    "methods": {
+      "RESILIENT_ORACLE()": {
+        "notice": "Address of Resilient Oracle"
+      },
+      "UNDERLYING_TOKEN()": {
+        "notice": "Address of the underlying token"
+      },
+      "constructor": {
+        "notice": "Constructor for the implementation contract."
+      },
+      "getPrice(address)": {
+        "notice": "Fetches the price of the correlated token"
+      }
+    },
+    "notice": "This oracle fetches the price of wstETH",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [],
+    "types": null
+  }
+}
