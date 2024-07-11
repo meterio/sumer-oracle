@@ -99,17 +99,17 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
     from: deployer,
     log: true,
     deterministicDeployment: false,
-    args: [nativeMarket, nativeAsset, boundValidator.address],
-    proxy: {
-      owner: proxyOwnerAddress,
-      proxyContract: "OptimizedTransparentProxy",
-      execute: {
-        init: {
-          methodName: "initialize",
-          args: [accessControlManagerAddress],
-        },
-      },
-    },
+    args: [nativeMarket, nativeAsset, boundValidator.address, accessControlManagerAddress],
+    // proxy: {
+    //   owner: proxyOwnerAddress,
+    //   proxyContract: "OptimizedTransparentProxy",
+    //   execute: {
+    //     init: {
+    //       methodName: "initialize",
+    //       args: [accessControlManagerAddress],
+    //     },
+    //   },
+    // },
   });
 
   const sequencer = SEQUENCER[network.name];
@@ -121,17 +121,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
     from: deployer,
     log: true,
     deterministicDeployment: false,
-    args: sequencer ? [sequencer] : [],
-    proxy: {
-      owner: proxyOwnerAddress,
-      proxyContract: "OptimizedTransparentProxy",
-      execute: {
-        init: {
-          methodName: "initialize",
-          args: [accessControlManagerAddress],
-        },
-      },
-    },
+    args: sequencer ? [sequencer, accessControlManagerAddress] : [accessControlManagerAddress],
   });
 
   await deploy("RedStoneOracle", {
@@ -139,17 +129,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
     from: deployer,
     log: true,
     deterministicDeployment: false,
-    args: sequencer ? [sequencer] : [],
-    proxy: {
-      owner: proxyOwnerAddress,
-      proxyContract: "OptimizedTransparentProxy",
-      execute: {
-        init: {
-          methodName: "initialize",
-          args: [accessControlManagerAddress],
-        },
-      },
-    },
+    args: sequencer ? [sequencer, accessControlManagerAddress] : [accessControlManagerAddress],
   });
 
   const { pythOracleAddress } = ADDRESSES[networkName];
@@ -161,17 +141,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
       from: deployer,
       log: true,
       deterministicDeployment: false,
-      args: [],
-      proxy: {
-        owner: proxyOwnerAddress,
-        proxyContract: "OptimizedTransparentProxy",
-        execute: {
-          init: {
-            methodName: "initialize",
-            args: [pythOracleAddress, accessControlManagerAddress],
-          },
-        },
-      },
+      args: [pythOracleAddress, accessControlManagerAddress],
     });
   }
 
@@ -185,17 +155,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
       from: deployer,
       log: true,
       deterministicDeployment: false,
-      args: [],
-      proxy: {
-        owner: proxyOwnerAddress,
-        proxyContract: "OptimizedTransparentProxy",
-        execute: {
-          init: {
-            methodName: "initialize",
-            args: [accessControlManagerAddress, ptOracle, resilientOracle.address],
-          },
-        },
-      },
+      args: [accessControlManagerAddress, ptOracle, resilientOracle.address],
     });
   }
 

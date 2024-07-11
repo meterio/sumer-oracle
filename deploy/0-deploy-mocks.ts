@@ -42,9 +42,9 @@ const func: DeployFunction = async function ({
           from: deployer,
           log: true,
           deterministicDeployment: false,
-          args: [`Mock${syTokenName}`, `Mock${syTokenName}`, 18],
+          args: [`Mock${syTokenName}`, `Mock${syTokenName}`, 18, asset.yieldToken],
           autoMine: true,
-          contract: "BEP20Harness",
+          contract: "MockPendleSy",
         });
 
         const syToken = await ethers.getContract(`Mock${syTokenName}`);
@@ -86,6 +86,23 @@ const func: DeployFunction = async function ({
           args: [`Mock${asset.token}`, `Mock${asset.token}`, 18],
           autoMine: true,
           contract: "BEP20Harness",
+        });
+      }
+    }
+
+    if (!asset.token.startsWith("PT")) {
+      const needSDR = await confirm({
+        message: `Deploy MockSDR${asset.token}`,
+        default: false,
+      });
+      if (needSDR) {
+        await deploy(`MockSDR${asset.token}`, {
+          from: deployer,
+          log: true,
+          deterministicDeployment: false,
+          args: [`Mock SDR ${asset.token}`, `sdr${asset.token}`, 18, asset.address],
+          autoMine: true,
+          contract: "MockSumerCToken",
         });
       }
     }
