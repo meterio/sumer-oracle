@@ -21,7 +21,10 @@ contract SequencerChainlinkOracle is ChainlinkOracle {
         @param _sequencer L2 sequencer
         @custom:oz-upgrades-unsafe-allow constructor
     */
-    constructor(AggregatorV3Interface _sequencer) ChainlinkOracle() {
+    constructor(
+        AggregatorV3Interface _sequencer,
+        address accessControlManager_
+    ) ChainlinkOracle(accessControlManager_) {
         require(address(_sequencer) != address(0), "zero address");
 
         sequencer = _sequencer;

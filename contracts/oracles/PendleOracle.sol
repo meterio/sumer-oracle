@@ -3,12 +3,12 @@ pragma solidity 0.8.25;
 
 import { IPendlePtOracle } from "../interfaces/IPendlePtOracle.sol";
 import { OracleInterface } from "../interfaces/OracleInterface.sol";
-import { ensureNonzeroAddress, ensureNonzeroValue } from "@venusprotocol/solidity-utilities/contracts/validators.sol";
-import "@venusprotocol/governance-contracts/contracts/Governance/AccessControlledV8.sol";
+import { ensureNonzeroAddress, ensureNonzeroValue } from "../utilities/validators.sol";
+import "../accessControl/AccessControlledV8.sol";
 import "../interfaces/IStandardizedYield.sol";
 import "../interfaces/IPMarket.sol";
 import "../interfaces/IPPrincipalToken.sol";
-import { EXP_SCALE } from "@venusprotocol/solidity-utilities/contracts/constants.sol";
+import { EXP_SCALE } from "../utilities/constants.sol";
 
 /**
  * @title PendleOracle
@@ -24,24 +24,21 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
         address market;
         /// @notice Twap duration for the oracle
         uint32 twapDuration;
+        /// @notice yieldToken of SY
+        address yieldToken;
     }
 
     /// @notice Address of the PT oracle
     /// @custom:oz-upgrades-unsafe-allow state-variable-immutable
-    IPendlePtOracle public underlyingPtOracle;
+    IPendlePtOracle public immutable PT_ORACLE;
 
-    OracleInterface public intermediateOracle;
+    OracleInterface public immutable RESILIENT_ORACLE;
 
     /// @notice Token config by assets
     mapping(address => TokenConfig) public tokenConfigs;
 
     /// @notice Emit when a token config is added
     event TokenConfigAdded(address indexed asset, address market, uint32 twapDuration);
-
-    /// @notice Emit when setting a new pt oracle address
-    event PtOracleSet(address indexed oldOracle, address indexed newOracle);
-
-    event IntermediateOracleSet(address indexed oldOracle, address indexed newOracle);
 
     event UnderlyingAssetSet(address indexed oldAddress, address indexed newAddress);
 
@@ -53,26 +50,17 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
         _;
     }
 
-    /// @notice Constructor for the implementation contract.
-    /// @custom:oz-upgrades-unsafe-allow constructor
-    constructor() {
-        _disableInitializers();
-    }
-
     /**
      * @notice Initializes the owner of the contract
      * @param accessControlManager_ Address of the access control manager contract
      */
-    function initialize(address accessControlManager_, address ptOracle, address resilientOracle) external initializer {
-        __AccessControlled_init(accessControlManager_);
+    constructor(address accessControlManager_, address ptOracle, address resilientOracle) {
+        _setAccessControlManager(accessControlManager_);
         ensureNonzeroAddress(ptOracle);
         ensureNonzeroAddress(resilientOracle);
 
-        underlyingPtOracle = IPendlePtOracle(ptOracle);
-        emit PtOracleSet(address(0), address(underlyingPtOracle));
-
-        intermediateOracle = OracleInterface(resilientOracle);
-        emit IntermediateOracleSet(address(0), address(intermediateOracle));
+        PT_ORACLE = IPendlePtOracle(ptOracle);
+        RESILIENT_ORACLE = OracleInterface(resilientOracle);
     }
 
     /**
@@ -93,40 +81,6 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
     }
 
     /**
-     * @notice Set the underlying Pt oracle contract address
-     * @param underlyingPtOracle_ Pt oracle contract address
-     * @custom:access Only Governance
-     * @custom:error NotNullAddress error thrown if underlyingPtOracle_ address is zero
-     * @custom:event Emits PtOracleSet event with address of Pt oracle.
-     */
-    function setUnderlyingPtOracle(
-        IPendlePtOracle underlyingPtOracle_
-    ) external notNullAddress(address(underlyingPtOracle_)) {
-        _checkAccessAllowed("setUnderlyingPtOracle(address)");
-        require(address(underlyingPtOracle_) != 0x0000000000000000000000000000000000000000, "invalid address");
-        IPendlePtOracle oldOracle = underlyingPtOracle;
-        underlyingPtOracle = underlyingPtOracle_;
-        emit PtOracleSet(address(oldOracle), address(underlyingPtOracle));
-    }
-
-    /**
-     * @notice Set the underlying Pyth oracle contract address
-     * @param intermediateOracle_ Pyth oracle contract address
-     * @custom:access Only Governance
-     * @custom:error NotNullAddress error thrown if intermediateOracle_ address is zero
-     * @custom:event Emits IntermediateOracleSet event with address of Pyth oracle.
-     */
-    function setIntermediateOracle(
-        OracleInterface intermediateOracle_
-    ) external notNullAddress(address(intermediateOracle_)) {
-        _checkAccessAllowed("setIntermediateOracle(address)");
-        require(address(intermediateOracle_) != 0x0000000000000000000000000000000000000000, "invalid address");
-        OracleInterface oldOracle = intermediateOracle;
-        intermediateOracle = intermediateOracle_;
-        emit IntermediateOracleSet(address(oldOracle), address(intermediateOracle_));
-    }
-
-    /**
      * @notice Add single token config. asset & feed cannot be null addresses and maxStalePeriod must be positive
      * @param tokenConfig Token config struct
      * @custom:access Only Governance
@@ -142,7 +96,7 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
         ensureNonzeroValue(tokenConfig.twapDuration);
 
         if (tokenConfig.twapDuration == 0) revert("twap duration can't be zero");
-        (bool increaseCardinalityRequired, , bool oldestObservationSatisfied) = underlyingPtOracle.getOracleState(
+        (bool increaseCardinalityRequired, , bool oldestObservationSatisfied) = PT_ORACLE.getOracleState(
             tokenConfig.market,
             tokenConfig.twapDuration
         );
@@ -153,6 +107,7 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
         (IStandardizedYield sy, IPPrincipalToken pt, ) = IPMarket(tokenConfig.market).readTokens();
         if (tokenConfig.asset != address(pt)) revert("pt mismatch");
         if (pt.SY() != address(sy)) revert("sy mismatch");
+        if (sy.yieldToken() != tokenConfig.yieldToken) revert("yieldToken mismatch");
 
         tokenConfigs[tokenConfig.asset] = tokenConfig;
         emit TokenConfigAdded(tokenConfig.asset, tokenConfig.market, tokenConfig.twapDuration);
@@ -166,9 +121,7 @@ contract PendleOracle is AccessControlledV8, OracleInterface {
     function getPrice(address asset) public view virtual returns (uint256) {
         TokenConfig memory tokenConfig = tokenConfigs[asset];
         if (tokenConfig.asset != asset) revert("unknown token");
-        uint256 rate = underlyingPtOracle.getPtToSyRate(tokenConfig.market, tokenConfig.twapDuration);
-
-        (IStandardizedYield sy, , ) = IPMarket(tokenConfig.market).readTokens();
-        return (intermediateOracle.getPrice(sy.yieldToken()) * rate) / EXP_SCALE;
+        uint256 rate = PT_ORACLE.getPtToSyRate(tokenConfig.market, tokenConfig.twapDuration);
+        return (RESILIENT_ORACLE.getPrice(tokenConfig.yieldToken) * rate) / EXP_SCALE;
     }
 }

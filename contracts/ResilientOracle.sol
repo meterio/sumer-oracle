@@ -2,10 +2,10 @@
 // SPDX-FileCopyrightText: 2022 Venus
 pragma solidity 0.8.25;
 
-import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
 import "./interfaces/VBep20Interface.sol";
 import "./interfaces/OracleInterface.sol";
-import "@venusprotocol/governance-contracts/contracts/Governance/AccessControlledV8.sol";
+import "./accessControl/AccessControlledV8.sol";
 
 /**
  * @title ResilientOracle
@@ -43,7 +43,7 @@ isValid = anchorRatio <= upperBoundAnchorRatio && anchorRatio >= lowerBoundAncho
  * For a fetched price to be valid it must be positive and not stagnant. If the price is invalid then we consider the
  * oracle to be stagnant and treat it like it's disabled.
  */
-contract ResilientOracle is PausableUpgradeable, AccessControlledV8, ResilientOracleInterface {
+contract ResilientOracle is Pausable, AccessControlledV8, ResilientOracleInterface {
     /**
      * @dev Oracle roles:
      * **main**: The most trustworthy price source
@@ -129,23 +129,15 @@ contract ResilientOracle is PausableUpgradeable, AccessControlledV8, ResilientOr
     constructor(
         address nativeMarketAddress,
         address nativeAssetAddress,
-        BoundValidatorInterface _boundValidator
+        BoundValidatorInterface _boundValidator,
+        address accessControlManager_
     ) notNullAddress(address(_boundValidator)) {
         nativeMarket = nativeMarketAddress;
         nativeAsset = nativeAssetAddress;
         vai = 0x0000000000000000000000000000000000000000;
         boundValidator = _boundValidator;
 
-        _disableInitializers();
-    }
-
-    /**
-     * @notice Initializes the contract admin and sets the BoundValidator contract address
-     * @param accessControlManager_ Address of the access control manager contract
-     */
-    function initialize(address accessControlManager_) external initializer {
-        __AccessControlled_init(accessControlManager_);
-        __Pausable_init();
+        _setAccessControlManager(accessControlManager_);
     }
 
     /**

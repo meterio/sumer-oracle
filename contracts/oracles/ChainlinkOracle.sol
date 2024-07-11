@@ -4,7 +4,7 @@ pragma solidity 0.8.25;
 import "../interfaces/VBep20Interface.sol";
 import "../interfaces/OracleInterface.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
-import "@venusprotocol/governance-contracts/contracts/Governance/AccessControlledV8.sol";
+import "../accessControl/AccessControlledV8.sol";
 
 /**
  * @title ChainlinkOracle
@@ -39,18 +39,12 @@ contract ChainlinkOracle is AccessControlledV8, OracleInterface {
         _;
     }
 
-    /// @notice Constructor for the implementation contract.
-    /// @custom:oz-upgrades-unsafe-allow constructor
-    constructor() {
-        _disableInitializers();
-    }
-
     /**
      * @notice Initializes the owner of the contract
      * @param accessControlManager_ Address of the access control manager contract
      */
-    function initialize(address accessControlManager_) external initializer {
-        __AccessControlled_init(accessControlManager_);
+    constructor(address accessControlManager_) {
+        _setAccessControlManager(accessControlManager_);
     }
 
     /**
@@ -110,21 +104,15 @@ contract ChainlinkOracle is AccessControlledV8, OracleInterface {
      * @return Price in USD from Chainlink or a manually set price for the asset
      */
     function getPrice(address asset) public view virtual returns (uint256) {
-        uint256 decimals;
-
-        IERC20Metadata token = IERC20Metadata(asset);
-        decimals = token.decimals();
-
-        return _getPriceInternal(asset, decimals);
+        return _getPriceInternal(asset);
     }
 
     /**
      * @notice Gets the Chainlink price for a given asset
      * @param asset address of the asset
-     * @param decimals decimals of the asset
      * @return price Asset price in USD or a manually set price of the asset
      */
-    function _getPriceInternal(address asset, uint256 decimals) internal view returns (uint256 price) {
+    function _getPriceInternal(address asset) internal view returns (uint256 price) {
         uint256 tokenPrice = prices[asset];
         if (tokenPrice != 0) {
             price = tokenPrice;

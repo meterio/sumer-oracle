@@ -6,8 +6,8 @@ import "@openzeppelin/contracts/utils/math/SignedMath.sol";
 import "../interfaces/PythInterface.sol";
 import "../interfaces/OracleInterface.sol";
 import "../interfaces/VBep20Interface.sol";
-import "@venusprotocol/governance-contracts/contracts/Governance/AccessControlledV8.sol";
-import { EXP_SCALE } from "@venusprotocol/solidity-utilities/contracts/constants.sol";
+import "../accessControl/AccessControlledV8.sol";
+import { EXP_SCALE } from "../utilities/constants.sol";
 
 /**
  * @title PythOracle
@@ -45,22 +45,14 @@ contract PythOracle is AccessControlledV8, OracleInterface {
         _;
     }
 
-    /// @notice Constructor for the implementation contract.
-    /// @custom:oz-upgrades-unsafe-allow constructor
-    constructor() {
-        _disableInitializers();
-    }
-
     /**
      * @notice Initializes the owner of the contract and sets required contracts
      * @param underlyingPythOracle_ Address of the Pyth oracle
      * @param accessControlManager_ Address of the access control manager contract
      */
-    function initialize(
-        address underlyingPythOracle_,
-        address accessControlManager_
-    ) external initializer notNullAddress(underlyingPythOracle_) {
-        __AccessControlled_init(accessControlManager_);
+    constructor(address underlyingPythOracle_, address accessControlManager_) {
+        if (underlyingPythOracle_ == address(0)) revert("can't be zero address");
+        _setAccessControlManager(accessControlManager_);
 
         underlyingPythOracle = IPyth(underlyingPythOracle_);
         emit PythOracleSet(address(0), underlyingPythOracle_);
@@ -119,15 +111,10 @@ contract PythOracle is AccessControlledV8, OracleInterface {
      * @return Price in USD
      */
     function getPrice(address asset) public view returns (uint256) {
-        uint256 decimals;
-
-        IERC20Metadata token = IERC20Metadata(asset);
-        decimals = token.decimals();
-
-        return _getPriceInternal(asset, decimals);
+        return _getPriceInternal(asset);
     }
 
-    function _getPriceInternal(address asset, uint256 decimals) internal view returns (uint256) {
+    function _getPriceInternal(address asset) internal view returns (uint256) {
         TokenConfig storage tokenConfig = tokenConfigs[asset];
         if (tokenConfig.asset == address(0)) revert("asset doesn't exist");
 

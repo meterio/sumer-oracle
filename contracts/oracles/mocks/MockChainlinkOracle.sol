@@ -7,10 +7,7 @@ import { OracleInterface } from "../../interfaces/OracleInterface.sol";
 contract MockChainlinkOracle is OwnableUpgradeable, OracleInterface {
     mapping(address => uint256) public assetPrices;
 
-    //set price in 6 decimal precision
-    constructor() {}
-
-    function initialize() public initializer {
+    constructor() {
         __Ownable_init();
     }
 

@@ -1,21 +1,19 @@
 // SPDX-License-Identifier: BSD-3-Clause
 pragma solidity 0.8.25;
 
-import { OwnableUpgradeable } from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 import { IPyth } from "../PythOracle.sol";
 import { OracleInterface } from "../../interfaces/OracleInterface.sol";
 
-contract MockPythOracle is OwnableUpgradeable {
+contract MockPythOracle is Ownable {
     mapping(address => uint256) public assetPrices;
 
     /// @notice the actual pyth oracle address fetch & store the prices
     IPyth public underlyingPythOracle;
 
     //set price in 6 decimal precision
-    constructor() {}
 
-    function initialize(address underlyingPythOracle_) public initializer {
-        __Ownable_init();
+    constructor(address underlyingPythOracle_) {
         if (underlyingPythOracle_ == address(0)) revert("pyth oracle cannot be zero address");
         underlyingPythOracle = IPyth(underlyingPythOracle_);
     }

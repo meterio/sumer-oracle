@@ -2,8 +2,8 @@
 pragma solidity 0.8.25;
 
 import { CorrelatedTokenOracle } from "./common/CorrelatedTokenOracle.sol";
-import { EXP_SCALE } from "@venusprotocol/solidity-utilities/contracts/constants.sol";
-import { ensureNonzeroAddress } from "@venusprotocol/solidity-utilities/contracts/validators.sol";
+import { EXP_SCALE } from "../utilities/constants.sol";
+import { ensureNonzeroAddress } from "../utilities/validators.sol";
 
 interface IWstMTRG {
     function stMTRGPerToken() external view returns (uint256);

@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: BSD-3-Clause
 pragma solidity 0.8.25;
 
-import { OwnableUpgradeable } from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 import { IPendlePtOracle } from "../../interfaces/IPendlePtOracle.sol";
 import { OracleInterface } from "../../interfaces/OracleInterface.sol";
 
-contract MockPtOracle is OwnableUpgradeable {
+contract MockPtOracle is Ownable {
     mapping(address => uint256) public assetPrices;
 
     /// @notice the actual Pt oracle address fetch & store the prices
@@ -13,11 +13,7 @@ contract MockPtOracle is OwnableUpgradeable {
 
     OracleInterface public intermediateOracle;
 
-    //set price in 6 decimal precision
-    constructor() {}
-
-    function initialize(address underlyingPtOracle_, address intermediateOracle_) public initializer {
-        __Ownable_init();
+    constructor(address underlyingPtOracle_, address intermediateOracle_) {
         if (underlyingPtOracle_ == address(0)) revert("Pt oracle cannot be zero address");
         underlyingPtOracle = IPendlePtOracle(underlyingPtOracle_);
 

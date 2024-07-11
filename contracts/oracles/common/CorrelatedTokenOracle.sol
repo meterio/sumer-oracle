@@ -2,9 +2,9 @@
 pragma solidity 0.8.25;
 
 import { OracleInterface } from "../../interfaces/OracleInterface.sol";
-import { ensureNonzeroAddress } from "@venusprotocol/solidity-utilities/contracts/validators.sol";
+import { ensureNonzeroAddress } from "../../utilities/validators.sol";
 import { IERC20Metadata } from "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
-import { EXP_SCALE } from "@venusprotocol/solidity-utilities/contracts/constants.sol";
+import { EXP_SCALE } from "../../utilities/constants.sol";
 /**
  * @title CorrelatedTokenOracle
  * @notice This oracle fetches the price of a token that is correlated to another token.

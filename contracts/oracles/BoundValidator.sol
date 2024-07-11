@@ -3,7 +3,7 @@ pragma solidity 0.8.25;
 
 import "../interfaces/VBep20Interface.sol";
 import "../interfaces/OracleInterface.sol";
-import "@venusprotocol/governance-contracts/contracts/Governance/AccessControlledV8.sol";
+import "../accessControl/AccessControlledV8Upgradeable.sol";
 
 /**
  * @title BoundValidator
@@ -12,7 +12,7 @@ import "@venusprotocol/governance-contracts/contracts/Governance/AccessControlle
  * Each asset has an upper and lower bound ratio set in the config. In order for a price to be valid
  * it must fall within this range of the validator price.
  */
-contract BoundValidator is AccessControlledV8, BoundValidatorInterface {
+contract BoundValidator is AccessControlledV8Upgradeable, BoundValidatorInterface {
     struct ValidateConfig {
         /// @notice asset address
         address asset;
