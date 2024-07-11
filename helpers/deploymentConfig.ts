@@ -17,6 +17,7 @@ export interface Asset {
   stalePeriod?: number;
   twapDuration?: number;
   denominatedBy?: string;
+  yieldToken?: string;
 }
 
 export interface Assets {
@@ -137,6 +138,7 @@ export const chainlinkFeed: Config = {
   metertest: {},
   metermain: {},
   sepolia: {
+    "weETH/WETH": "0xA2F78ab2355fe2f984D808B5CeE7FD0A93D5270E", // used USDC/USD to mock weETH/WETH
     WBTC: "0x1b44F3514812d835EB1BDB0acB33d3fA3351Ee43",
     WETH: "0x694AA1769357215DE4FAC081bf1f309aDC325306",
     USDC: "0xA2F78ab2355fe2f984D808B5CeE7FD0A93D5270E",
@@ -185,9 +187,7 @@ export const chainlinkFeed: Config = {
 };
 
 export const redstoneFeed: Config = {
-  sepolia: {
-    "weETH/WETH": "0x8751F736E94F6CD167e8C5B97E245680FbD9CC36", // denominated by ETH
-  },
+  sepolia: {},
   ethereum: {
     "weETH/WETH": "0x8751F736E94F6CD167e8C5B97E245680FbD9CC36", // denominated by ETH
     "rsETH/WETH": "0xA736eAe8805dDeFFba40cAB8c99bCB309dEaBd9B", // denominated by ETH
@@ -223,7 +223,7 @@ export const pythID: Config = {
 
 export const pendleMarket: Config = {
   sepolia: {
-    PT_weETH_26DEC2024: "0xB1bE063Ccbc4f67f58293C402aF8D082c0459787",
+    PT_weETH_26DEC2024: "0x60b3b1b4baCFd30712A779fb166279aA559f4405",
   },
   ethereum: {
     PT_weETH_26DEC2024: "0x7d372819240d14fb477f17b964f95f33beb4c704",
@@ -278,15 +278,15 @@ export const assets: Assets = {
     {
       token: "weETH",
       address: "0x3b8b6E96e57f0d1cD366AaCf4CcC68413aF308D0",
-      oracle: "chainlinkFixed",
-      price: "1040000000000000000",
+      oracle: "chainlink",
       denominatedBy: "WETH",
     }, // denominated by ETH
     {
       token: "PT_weETH_26DEC2024",
-      address: "0x0F0747Fe5a6B68C1149AeD0A437905b06b77b9Cb",
+      address: "0x6EF93b90F52866261c205D8c7F9dB0eDE2Ba2AFB",
       oracle: "pendle",
       twapDuration: 1800,
+      yieldToken: "0x3b8b6E96e57f0d1cD366AaCf4CcC68413aF308D0",
     },
   ],
   ethereum: [
@@ -564,6 +564,7 @@ export const getOraclesData = async (): Promise<Oracles> => {
               market: pendleMarket[name][asset.token],
               asset: asset.address,
               twapDuration: asset.twapDuration ? asset.twapDuration : DEFAULT_TWAP_DURATION,
+              yieldToken: asset.yieldToken!,
             }),
           },
         }

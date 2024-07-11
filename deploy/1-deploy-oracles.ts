@@ -41,8 +41,6 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ne
   const { deployer } = await getNamedAccounts();
 
   const networkName: string = network.name === "hardhat" ? "metertest" : network.name;
-  console.log(`assets:`, assets[networkName]);
-  console.log(`oracleData: `, (await getOraclesData())[networkName]);
 
   console.log(`Timelock: ${ADDRESSES[networkName].timelock}`);
 
