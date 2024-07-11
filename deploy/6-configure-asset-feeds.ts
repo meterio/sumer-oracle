@@ -148,7 +148,7 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
 
     // setting up on ResilientOracle
     if (asset.denominatedBy) {
-      console.log("asset.denominatedby ", asset.denominatedBy);
+      console.log(`${asset.token} is denominated by  ${asset.denominatedBy}`);
       // one jump oracle
       const oneJumps: string[] = [];
       let oneJumpOracle: Contract | null = null;
@@ -197,8 +197,14 @@ const configurePriceFeeds = async (hre: HardhatRuntimeEnvironment): Promise<void
 
       const upperBoundRatio = BigInt(1.01e18);
       const lowerBoundRatio = BigInt(0.99e18);
-      console.log(`Set lowerBound/uppperBound with 1% for ${asset.token} ${asset.address}`);
-      await boundValidator.setValidateConfig([asset.address, upperBoundRatio, lowerBoundRatio]);
+      const vconfigOnChain = await boundValidator.validateConfigs(asset.address);
+      if (
+        BigInt(vconfigOnChain.upperBoundRatio.toString()) !== BigInt(upperBoundRatio) &&
+        BigInt(vconfigOnChain.lowerBoundRatio.toString()) !== BigInt(lowerBoundRatio)
+      ) {
+        console.log(`Set lowerBound/uppperBound with 1% for ${asset.token} ${asset.address}`);
+        await boundValidator.setValidateConfig([asset.address, upperBoundRatio, lowerBoundRatio]);
+      }
     } else if (!["pyth", "pendle", "chainlink", "redstone", "chainlinkFixed"].includes(asset.oracle)) {
       const standaloneOracle = await ethers.getContract(asset.oracle);
       await setTokenConfigOnResilientOracle(hre, asset, {

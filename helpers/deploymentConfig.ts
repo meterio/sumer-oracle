@@ -226,7 +226,7 @@ export const pendleMarket: Config = {
     PT_weETH_26DEC2024: "0x60b3b1b4baCFd30712A779fb166279aA559f4405",
   },
   ethereum: {
-    PT_weETH_26DEC2024: "0x7d372819240d14fb477f17b964f95f33beb4c704",
+    PT_weETH_26SEP2024: "0xc8edd52d0502aa8b4d5c77361d4b3d300e8fc81c",
     PT_rsETH_26SEP2024: "0x6b4740722e46048874d84306b2877600abcea3ae",
     PT_sUSDe_26SEP2024: "0xd1d7d99764f8a52aff007b7831cc02748b2013b5",
   },
@@ -370,7 +370,7 @@ export const assets: Assets = {
     },
     {
       token: "PT_weETH_26SEP2024",
-      address: "0x1c085195437738d73d75DC64bC5A3E098b7f93b1",
+      address: "0x1c085195437738d73d75dc64bc5a3e098b7f93b1",
       oracle: "pendle",
       twapDuration: 1800,
       yieldToken: "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee",
