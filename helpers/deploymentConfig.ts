@@ -365,7 +365,7 @@ export const assets: Assets = {
       token: "PT_sUSDe_26SEP2024",
       address: "0x6c9f097e044506712B58EAC670c9a5fd4BCceF13",
       oracle: "pendle",
-      twapDuration: 1800,
+      twapDuration: 1320,
       yieldToken: "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497",
     },
     {
@@ -379,7 +379,7 @@ export const assets: Assets = {
       token: "PT_rsETH_26SEP2024",
       address: "0x7bAf258049cc8B9A78097723dc19a8b103D4098F",
       oracle: "pendle",
-      twapDuration: 1800,
+      twapDuration: 1320,
       yieldToken: "0xA1290d69c65A6Fe4DF752f95823fae25cB99e5A7",
     },
     {
