@@ -1,0 +1,17 @@
+{
+  "name": "ethereum",
+  "chainId": "1",
+  "addresses": {
+    "AccessControlManager": "0x5D1Da6a8af9D21c82af4411ff07A19073093788D",
+    "BoundValidator": "0x15A9e037bf8d3CeB2733A62b48Eb719B634505f3",
+    "BoundValidator_Implementation": "0x3b5f28bA91ceb604b334F8A37207EfFBd5E04d89",
+    "BoundValidator_Proxy": "0x15A9e037bf8d3CeB2733A62b48Eb719B634505f3",
+    "ChainlinkOracle": "0xad8fB6E4769dc9f3Ca4589163F3F59cd08D394Ff",
+    "DefaultProxyAdmin": "0x7FaeB1dD9E35603dfE427149B809271ea845d579",
+    "OneJumpOracle_WETH_Chainlink": "0x317d30411A6F120e1aed55099474Cc8f6F98D69e",
+    "PendleOracle": "0x2a1449D328c629EE3B51A5Dc948B7Cc2C708ADA0",
+    "RedStoneOracle": "0x35C840655D3a2E77d79f179C34e547726B963314",
+    "ResilientOracle": "0x9b3989dC82b344D9Df9a986Ff4CC37B895e3fB87",
+    "WstETHOracle": "0xEBe39E3B30230cf48d4580fCF6d50285B1Fc4205"
+  }
+}
