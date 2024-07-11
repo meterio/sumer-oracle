@@ -3810,7 +3810,7 @@
       ]
     },
     "PendleOracle": {
-      "address": "0x44e831189B6aF0E8E1979595C499515024275D28",
+      "address": "0xe703A7B9dDbB05Ef630Db11121017596EF52d2ac",
       "abi": [
         {
           "inputs": [
@@ -3868,25 +3868,6 @@
           "inputs": [],
           "name": "ZeroValueNotAllowed",
           "type": "error"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "oldOracle",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "newOracle",
-              "type": "address"
-            }
-          ],
-          "name": "IntermediateOracleSet",
-          "type": "event"
         },
         {
           "anonymous": false,
@@ -3951,25 +3932,6 @@
             {
               "indexed": true,
               "internalType": "address",
-              "name": "oldOracle",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "newOracle",
-              "type": "address"
-            }
-          ],
-          "name": "PtOracleSet",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
               "name": "asset",
               "type": "address"
             },
@@ -4010,6 +3972,32 @@
         },
         {
           "inputs": [],
+          "name": "PT_ORACLE",
+          "outputs": [
+            {
+              "internalType": "contract IPendlePtOracle",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "RESILIENT_ORACLE",
+          "outputs": [
+            {
+              "internalType": "contract OracleInterface",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
           "name": "acceptOwnership",
           "outputs": [],
           "stateMutability": "nonpayable",
@@ -4042,19 +4030,6 @@
               "internalType": "uint256",
               "name": "",
               "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "intermediateOracle",
-          "outputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "",
-              "type": "address"
             }
           ],
           "stateMutability": "view",
@@ -4102,19 +4077,6 @@
             }
           ],
           "name": "setAccessControlManager",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "contract OracleInterface",
-              "name": "intermediateOracle_",
-              "type": "address"
-            }
-          ],
-          "name": "setIntermediateOracle",
           "outputs": [],
           "stateMutability": "nonpayable",
           "type": "function"
@@ -4192,19 +4154,6 @@
         {
           "inputs": [
             {
-              "internalType": "contract IPendlePtOracle",
-              "name": "underlyingPtOracle_",
-              "type": "address"
-            }
-          ],
-          "name": "setUnderlyingPtOracle",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
               "internalType": "address",
               "name": "",
               "type": "address"
@@ -4247,19 +4196,6 @@
           "name": "transferOwnership",
           "outputs": [],
           "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "underlyingPtOracle",
-          "outputs": [
-            {
-              "internalType": "contract IPendlePtOracle",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
           "type": "function"
         }
       ]
