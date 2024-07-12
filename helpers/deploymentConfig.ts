@@ -96,7 +96,10 @@ export const ADDRESSES: PreconfiguredAddresses = {
     nativeMarket: "0x42778d0962884510b85d4D1B30DFe9e9Dd270446", // FIXME: sdrETH
     nativeAsset: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", // WETH
     acm: "0x5D1Da6a8af9D21c82af4411ff07A19073093788D", // FIXME: replace this with correct address
-    timelock: "0xe04Cd8884098Ac5f8237642B8e999269468092aA", // FIXME:Ethereum Multisig
+
+    // empty timelock so no `transferOwnership` will be called
+    timelock: "", // FIXME:Ethereum Multisig
+    // timelock: "0xe04Cd8884098Ac5f8237642B8e999269468092aA",
 
     // enable deploy PendleOracle
     ptOracle: "0x9a9fa8338dd5e5b2188006f1cd2ef26d921650c2",
@@ -229,6 +232,7 @@ export const pendleMarket: Config = {
     PT_weETH_26SEP2024: "0xc8edd52d0502aa8b4d5c77361d4b3d300e8fc81c",
     PT_rsETH_26SEP2024: "0x6b4740722e46048874d84306b2877600abcea3ae",
     PT_sUSDe_26SEP2024: "0xd1d7d99764f8a52aff007b7831cc02748b2013b5",
+    PT_pufETH_26SEP2024: "0xa54fc268101c8b97de19ef3141d34751a11996b2",
   },
   arbitrum: {
     PT_weETH_26SEP2024: "0xf9f9779d8ff604732eba9ad345e6a27ef5c2a9d6",
@@ -387,6 +391,13 @@ export const assets: Assets = {
       address: "0xD9A442856C234a39a81a089C06451EBAa4306a72",
       oracle: "redstone",
       denominatedBy: "WETH",
+    },
+    {
+      token: "PT_pufETH_26SEP2024",
+      address: "0xd4e75971eaf78a8d93d96df530f1fff5f9f53288",
+      oracle: "pendle",
+      twapDuration: 1320,
+      yieldToken: "0xD9A442856C234a39a81a089C06451EBAa4306a72",
     },
     {
       token: "suUSD",
