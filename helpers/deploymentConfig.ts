@@ -191,7 +191,7 @@ export const redstoneFeed: Config = {
   ethereum: {
     // "weETH/WETH": "0x8751F736E94F6CD167e8C5B97E245680FbD9CC36", // denominated by ETH
     // "rsETH/WETH": "0xA736eAe8805dDeFFba40cAB8c99bCB309dEaBd9B", // denominated by ETH
-    // "pufETH/WETH": "0x76A495b0bFfb53ef3F0E94ef0763e03cE410835C", // denominated by ETH
+    "pufETH/WETH": "0x76A495b0bFfb53ef3F0E94ef0763e03cE410835C", // denominated by ETH
     // USDe: "0xbC5FBcf58CeAEa19D523aBc76515b9AEFb5cfd58",
     // sUSDe: "0xb99D174ED06c83588Af997c8859F93E83dD4733f",
   },
@@ -382,6 +382,7 @@ export const assets: Assets = {
       twapDuration: 1320,
       yieldToken: "0xA1290d69c65A6Fe4DF752f95823fae25cB99e5A7",
     },
+    { token: "pufETH", address: "0xD9A442856C234a39a81a089C06451EBAa4306a72", oracle: "redstone" },
     {
       token: "suUSD",
       address: "0x8bf591eae535f93a242d5a954d3cde648b48a5a8",
