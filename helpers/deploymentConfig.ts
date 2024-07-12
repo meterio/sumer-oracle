@@ -382,7 +382,12 @@ export const assets: Assets = {
       twapDuration: 1320,
       yieldToken: "0xA1290d69c65A6Fe4DF752f95823fae25cB99e5A7",
     },
-    { token: "pufETH", address: "0xD9A442856C234a39a81a089C06451EBAa4306a72", oracle: "redstone" },
+    {
+      token: "pufETH",
+      address: "0xD9A442856C234a39a81a089C06451EBAa4306a72",
+      oracle: "redstone",
+      denominatedBy: "WETH",
+    },
     {
       token: "suUSD",
       address: "0x8bf591eae535f93a242d5a954d3cde648b48a5a8",
